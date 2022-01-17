@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/nodes/PlayerCamera.gd" type="Script" id=1]
+
+[node name="HRotation" type="Position3D"]
+
+[node name="VRotation" type="Position3D" parent="."]
+
+[node name="DRoate" type="Position3D" parent="VRotation"]
+
+[node name="Camera" type="Camera" parent="VRotation/DRoate"]
+current = true
+script = ExtResource( 1 )
+H_Rotate = NodePath("../../..")
+V_Rotate = NodePath("../..")
+D_Rotate = NodePath("..")

@@ -1,0 +1,135 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "VelocityMoveNode",
+"class": "AccelerationMoveNode",
+"language": "GDScript",
+"path": "res://assets/scripts/nodes/generic/acceleration_move_node.gd"
+}, {
+"base": "CameraMoveNode",
+"class": "CameraFPSMoveNode",
+"language": "GDScript",
+"path": "res://assets/scripts/nodes/generic/camera_fps_node.gd"
+}, {
+"base": "MovementNode",
+"class": "CameraMoveNode",
+"language": "GDScript",
+"path": "res://assets/scripts/nodes/generic/camera_movement.gd"
+}, {
+"base": "VelocityMoveNode",
+"class": "JumpMoveNode",
+"language": "GDScript",
+"path": "res://assets/scripts/nodes/jump_movment_node.gd"
+}, {
+"base": "Node",
+"class": "MovementNode",
+"language": "GDScript",
+"path": "res://assets/scripts/nodes/generic/movement_node.gd"
+}, {
+"base": "VelocityMoveNode",
+"class": "PlanarMoveNode",
+"language": "GDScript",
+"path": "res://assets/scripts/nodes/planar_movment_node.gd"
+}, {
+"base": "KinematicBody",
+"class": "Player",
+"language": "GDScript",
+"path": "res://assets/scripts/nodes/player.gd"
+}, {
+"base": "Camera",
+"class": "PlayerCamera",
+"language": "GDScript",
+"path": "res://assets/nodes/PlayerCamera.gd"
+}, {
+"base": "MovementNode",
+"class": "PositionMoveNode",
+"language": "GDScript",
+"path": "res://assets/scripts/nodes/generic/position_movement.gd"
+}, {
+"base": "MovementNode",
+"class": "VelocityMoveNode",
+"language": "GDScript",
+"path": "res://assets/scripts/nodes/generic/velocity_mov_node.gd"
+} ]
+_global_script_class_icons={
+"AccelerationMoveNode": "",
+"CameraFPSMoveNode": "",
+"CameraMoveNode": "",
+"JumpMoveNode": "",
+"MovementNode": "",
+"PlanarMoveNode": "",
+"Player": "",
+"PlayerCamera": "",
+"PositionMoveNode": "",
+"VelocityMoveNode": ""
+}
+
+[application]
+
+config/name="kinetickinesis"
+run/main_scene="res://assets/nodes/Player.tscn"
+config/icon="res://icon.png"
+
+[input]
+
+move_forward={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+move_left={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+move_back={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+move_right={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+jump={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+look_up={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":3,"axis_value":-1.0,"script":null)
+ ]
+}
+look_down={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":3,"axis_value":1.0,"script":null)
+ ]
+}
+look_left={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":2,"axis_value":-1.0,"script":null)
+ ]
+}
+look_right={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":2,"axis_value":1.0,"script":null)
+ ]
+}
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
