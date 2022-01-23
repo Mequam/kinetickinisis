@@ -78,6 +78,10 @@ config/name="kinetickinesis"
 run/main_scene="res://assets/nodes/movement nodes/mian lol.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+GameConsole="*res://assets/scripts/Global.gd"
+
 [input]
 
 move_forward={

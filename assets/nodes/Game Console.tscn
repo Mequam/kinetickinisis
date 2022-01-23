@@ -1,0 +1,60 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/nodes/Game Console.gd" type="Script" id=1]
+
+[node name="Game Console UI" type="CanvasLayer"]
+pause_mode = 2
+script = ExtResource( 1 )
+output_textbox_path = NodePath("Control/VBoxContainer/Output")
+input_textbox_path = NodePath("Control/VBoxContainer/Input")
+
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Output" type="TextEdit" parent="Control/VBoxContainer"]
+margin_right = 1024.0
+margin_bottom = 518.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 6.69
+text = "test
+test
+testasetasdf
+eatrasdf
+asfd'ashjf
+['paskg
+ajsdgf'lhjasdf'lkj 10.0.5xccccccccccccccccccccccvzxvc
+asdfcafac
+fasdfas
+dfasdf
+ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+readonly = true
+syntax_highlighting = true
+show_line_numbers = true
+draw_tabs = true
+breakpoint_gutter = true
+
+[node name="Input" type="TextEdit" parent="Control/VBoxContainer"]
+margin_top = 522.0
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_vertical = 3
+text = "hi yes i would like to input text thank you very much"
+highlight_current_line = true
+syntax_highlighting = true
+caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="gui_input" from="Control/VBoxContainer/Input" to="." method="_on_Input_gui_input"]

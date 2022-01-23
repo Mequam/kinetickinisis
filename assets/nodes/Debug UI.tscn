@@ -6,10 +6,14 @@
 script = ExtResource( 1 )
 velocity_label = NodePath("Control/VBoxContainer/Velocity Label")
 colliion_label = NodePath("Control/VBoxContainer/Collision Label")
+framerate_label = NodePath("Control/VBoxContainer/Framerate Label")
+memoryuse_label = NodePath("Control/VBoxContainer/Memory Useage")
+happyface_label = NodePath("Control/VBoxContainer/Happy Face")
 
 [node name="Control" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -22,9 +26,49 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Velocity Label" type="Label" parent="Control/VBoxContainer"]
-margin_right = 55.0
+[node name="Framerate Label" type="Label" parent="Control/VBoxContainer"]
+margin_right = 86.0
 margin_bottom = 14.0
+text = "Framerate: "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/VBoxContainer/Framerate Label"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ColorRect" type="ColorRect" parent="Control/VBoxContainer/Framerate Label"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.76 )
+
+[node name="Memory Useage" type="Label" parent="Control/VBoxContainer"]
+margin_top = 18.0
+margin_right = 86.0
+margin_bottom = 32.0
+text = "Memory Use:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/VBoxContainer/Memory Useage"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ColorRect" type="ColorRect" parent="Control/VBoxContainer/Memory Useage"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.76 )
+
+[node name="Velocity Label" type="Label" parent="Control/VBoxContainer"]
+margin_top = 36.0
+margin_right = 86.0
+margin_bottom = 50.0
 text = "Velocity"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -42,9 +86,9 @@ anchor_bottom = 1.0
 color = Color( 0, 0, 0, 0.76 )
 
 [node name="Collision Label" type="Label" parent="Control/VBoxContainer"]
-margin_top = 18.0
-margin_right = 55.0
-margin_bottom = 32.0
+margin_top = 54.0
+margin_right = 86.0
+margin_bottom = 68.0
 text = "Collision"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -56,6 +100,30 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="ColorRect" type="ColorRect" parent="Control/VBoxContainer/Collision Label"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.76 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Happy Face" type="Label" parent="Control/VBoxContainer"]
+visible = false
+margin_top = 72.0
+margin_right = 86.0
+margin_bottom = 86.0
+text = ":)"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/VBoxContainer/Happy Face"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ColorRect" type="ColorRect" parent="Control/VBoxContainer/Happy Face"]
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
