@@ -13,3 +13,7 @@ export(Vector3) var acceleration : Vector3 = Vector3(0,0,0)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	velocity += acceleration*delta
+
+#called when the player collides
+#func player_collided(col):
+#	velocity = Vector3(0,0,0)

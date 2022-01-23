@@ -1,117 +1,800 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/nodes/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/nodes/Debug UI.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/debug_texture.png" type="Texture" id=3]
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 1, 0, 0, 1 )
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 2.60276, 1, 2.53163 )
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_texture = ExtResource( 3 )
+
+[sub_resource type="PlaneMesh" id=3]
+material = SubResource( 2 )
+size = Vector2( 5, 5 )
 
 [node name="mian lol" type="Spatial"]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7139, 0 )
 
-[node name="CSGBox" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0182772, -1, 0.0262451 )
+[node name="colBox" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0175972, -1.03592, 0.0240202 )
 width = 4.95184
 depth = 4.16636
+material = SubResource( 4 )
 
-[node name="CSGBox2" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.11788, 0.28458, -3.04927 )
-width = 4.95184
-depth = 4.16636
+[node name="RigidBody" type="StaticBody" parent="colBox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
 
-[node name="CSGBox3" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5818, -3.1354, -2.26635 )
-width = 4.95184
-depth = 4.16636
-
-[node name="CSGBox4" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.87678, 0.234532, 1.34939 )
-width = 4.95184
-depth = 4.16636
-
-[node name="CSGBox5" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0182772, -1, -10.4959 )
-width = 4.95184
-depth = 4.16636
-
-[node name="CSGBox6" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.11788, 0.28458, -13.5714 )
-width = 4.95184
-depth = 4.16636
-
-[node name="CSGBox7" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5818, -3.1354, -12.7885 )
-width = 4.95184
-depth = 4.16636
-
-[node name="CSGBox8" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.87678, 0.234532, -9.17274 )
-width = 4.95184
-depth = 4.16636
-
-[node name="CSGBox9" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0182772, -1, -26.0707 )
-width = 4.95184
-depth = 4.16636
-
-[node name="CSGBox10" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.11788, 0.28458, -29.1462 )
-width = 4.95184
-depth = 4.16636
-
-[node name="CSGBox11" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5818, -3.1354, -28.3633 )
-width = 4.95184
-depth = 4.16636
-
-[node name="CSGBox12" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.87678, 0.234532, -24.7476 )
-width = 4.95184
-depth = 4.16636
-
-[node name="CSGBox13" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0182772, 10.5436, -26.0707 )
-width = 4.95184
-depth = 4.16636
-
-[node name="CSGBox14" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.11788, 11.8282, -29.1462 )
-width = 4.95184
-depth = 4.16636
-
-[node name="CSGBox15" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5818, 8.40818, -28.3633 )
-width = 4.95184
-depth = 4.16636
-
-[node name="CSGBox16" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.87678, 11.7781, -24.7476 )
-width = 4.95184
-depth = 4.16636
-
-[node name="CSGBox17" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0182772, 10.5436, -15.3708 )
-width = 4.95184
-depth = 4.16636
-
-[node name="CSGBox18" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.11788, 11.8282, -18.4463 )
-width = 4.95184
-depth = 4.16636
-
-[node name="CSGBox19" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5818, 8.40818, -17.6634 )
-width = 4.95184
-depth = 4.16636
-
-[node name="CSGBox20" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.87678, 11.7781, -14.0477 )
-width = 4.95184
-depth = 4.16636
-
-[node name="RigidBody" type="StaticBody" parent="."]
-
-[node name="CollisionShape" type="CollisionShape" parent="RigidBody"]
+[node name="CollisionShape" type="CollisionShape" parent="colBox/RigidBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox2" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2395, 0.689615, -1.77778 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox2/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox3" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.87029, -2.61242, 0.0262451 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox3/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox4" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.04645, 0.356452, 2.47876 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox4/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox5" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.98368, 2.12027, -1.57016 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox5"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox5/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox6" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.07544, 1.24021, -16.5855 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox6"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox6/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox7" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.81767, 2.92983, -18.3895 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox7"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox7/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox8" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.07544, 1.24021, -16.5855 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox8"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox8/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox9" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.1036, 2.59666, -14.1329 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox9"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox9/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox10" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.0408, 4.36049, -18.2696 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox10"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox10/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox11" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2914, 4.70236, 13.8608 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox11"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox11/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox12" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.54917, 6.39197, 12.0567 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox12"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox12/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox13" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2914, 4.70236, 13.8608 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox13"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox13/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox14" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.263228, 6.05881, 16.3133 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox14"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox14/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox15" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.67401, 7.82263, 12.1766 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox15"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox15/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox26" type="CSGBox" parent="."]
+transform = Transform( -0.206921, 0, 0.978358, 0.505617, 0.856105, 0.106937, -0.837577, 0.516802, -0.177146, 0.826568, -3.04843, 6.39946 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox26"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox26/RigidBody"]
+transform = Transform( 1, 0, 1.49012e-08, 2.98023e-08, 1, 7.45058e-09, 0, -7.45058e-09, 1, 0, -1.07727, 1.19209e-07 )
+shape = SubResource( 1 )
+
+[node name="colBox27" type="CSGBox" parent="."]
+transform = Transform( -0.206921, 0, 0.978358, 0.505617, 0.856105, 0.106937, -0.837577, 0.516802, -0.177146, 3.47257, -6.4548, 8.7729 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox27"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox27/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox28" type="CSGBox" parent="."]
+transform = Transform( -0.206921, 0, 0.978358, 0.505617, 0.856105, 0.106937, -0.837577, 0.516802, -0.177146, 6.70552, -7.06798, 12.4134 )
+width = 4.95184
+depth = 11.5828
+
+[node name="RigidBody" type="StaticBody" parent="colBox28"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox28/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox29" type="CSGBox" parent="."]
+transform = Transform( -0.206921, 0, 0.978358, 0.505617, 0.856105, 0.106937, -0.837577, 0.516802, -0.177146, 3.05922, -6.97983, 15.6803 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox29"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox29/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox34" type="CSGBox" parent="."]
+transform = Transform( -0.206921, 0, 0.978358, 0.109209, 0.993751, 0.0230974, -0.972243, 0.111625, -0.205628, 4.73428, -5.17218, 5.98422 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox34"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox34/RigidBody"]
+transform = Transform( 1, 0, 1.49012e-08, 2.98023e-08, 1, 7.45058e-09, 0, -7.45058e-09, 1, 0, -1.07727, 1.19209e-07 )
+shape = SubResource( 1 )
+
+[node name="colBox35" type="CSGBox" parent="."]
+transform = Transform( -0.206921, 0, 0.978358, 0.109209, 0.993751, 0.0230974, -0.972243, 0.111625, -0.205628, 7.38028, -7.27455, 9.56425 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox35"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox35/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox36" type="CSGBox" parent="."]
+transform = Transform( -0.206921, 0, 0.978358, 0.109209, 0.993751, 0.0230974, -0.972243, 0.111625, -0.205628, 10.6132, -6.30983, 13.1277 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox36"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox36/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox37" type="CSGBox" parent="."]
+transform = Transform( -0.206921, 0, 0.978358, 0.109209, 0.993751, 0.0230974, -0.972243, 0.111625, -0.205628, 6.96693, -4.86415, 16.0587 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox37"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox37/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox38" type="CSGBox" parent="."]
+transform = Transform( -0.206921, 0, 0.978358, -0.0663906, 0.997695, -0.0140415, -0.976103, -0.0678589, -0.206444, 8.86947, -6.08731, 5.90498 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox38"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox38/RigidBody"]
+transform = Transform( 1, 0, 1.49012e-08, 2.98023e-08, 1, 7.45058e-09, 0, -7.45058e-09, 1, 0, -1.07727, 1.19209e-07 )
+shape = SubResource( 1 )
+
+[node name="colBox39" type="CSGBox" parent="."]
+transform = Transform( -0.206921, 0, 0.978358, -0.0663906, 0.997695, -0.0140415, -0.976103, -0.0678589, -0.206444, 11.5155, -7.51568, 9.80322 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox39"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox39/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox40" type="CSGBox" parent="."]
+transform = Transform( -0.206921, 0, 0.978358, -0.0663906, 0.997695, -0.0140415, -0.976103, -0.0678589, -0.206444, 14.7484, -5.92934, 13.1368 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox40"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox40/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox41" type="CSGBox" parent="."]
+transform = Transform( -0.206921, 0, 0.978358, -0.0663906, 0.997695, -0.0140415, -0.976103, -0.0678589, -0.206444, 11.1021, -3.9829, 15.762 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox41"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox41/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox42" type="CSGBox" parent="."]
+transform = Transform( -0.206921, 0, 0.978358, -0.281534, 0.957702, -0.0595441, -0.936975, -0.287762, -0.198168, 13.4928, -7.17354, 6.10316 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox42"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox42/RigidBody"]
+transform = Transform( 1, 0, 1.49012e-08, 2.98023e-08, 1, 7.45058e-09, 0, -7.45058e-09, 1, 0, -1.07727, 1.19209e-07 )
+shape = SubResource( 1 )
+
+[node name="colBox43" type="CSGBox" parent="."]
+transform = Transform( -0.206921, 0, 0.978358, -0.281534, 0.957702, -0.0595441, -0.936975, -0.287762, -0.198168, 16.1388, -7.70039, 10.2213 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox43"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox43/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox44" type="CSGBox" parent="."]
+transform = Transform( -0.206921, 0, 0.978358, -0.281534, 0.957702, -0.0595441, -0.936975, -0.287762, -0.198168, 19.3718, -5.41326, 13.1193 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox44"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox44/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox45" type="CSGBox" parent="."]
+transform = Transform( -0.206921, 0, 0.978358, -0.281534, 0.957702, -0.0595441, -0.936975, -0.287762, -0.198168, 15.7255, -2.93235, 15.2466 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox45"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox45/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox46" type="CSGBox" parent="."]
+transform = Transform( -0.206921, 0, 0.978358, -0.522658, 0.845346, -0.110541, -0.82705, -0.53422, -0.17492, 20.6906, -8.33579, 6.75777 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox46"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox46/RigidBody"]
+transform = Transform( 1, 0, 1.49012e-08, 2.98023e-08, 1, 7.45058e-09, 0, -7.45058e-09, 1, 0, -1.07727, 1.19209e-07 )
+shape = SubResource( 1 )
+
+[node name="colBox47" type="CSGBox" parent="."]
+transform = Transform( -0.206921, 0, 0.978358, -0.522658, 0.845346, -0.110541, -0.82705, -0.53422, -0.17492, 23.3366, -7.73815, 10.8662 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox47"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox47/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox48" type="CSGBox" parent="."]
+transform = Transform( -0.206921, 0, 0.978358, -0.522658, 0.845346, -0.110541, -0.82705, -0.53422, -0.17492, 26.5696, -4.7572, 13.0441 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox48"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox48/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox49" type="CSGBox" parent="."]
+transform = Transform( -0.206921, 0, 0.978358, -0.522658, 0.845346, -0.110541, -0.82705, -0.53422, -0.17492, 22.9233, -1.7964, 14.4276 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox49"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox49/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox50" type="CSGBox" parent="."]
+transform = Transform( -0.206921, 0, 0.978358, -0.76549, 0.622747, -0.1619, -0.609269, -0.782424, -0.128859, 27.4471, -9.41474, 8.04577 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox50"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox50/RigidBody"]
+transform = Transform( 1, 0, 1.49012e-08, 2.98023e-08, 1, 7.45058e-09, 0, -7.45058e-09, 1, 0, -1.07727, 1.19209e-07 )
+shape = SubResource( 1 )
+
+[node name="colBox51" type="CSGBox" parent="."]
+transform = Transform( -0.206921, 0, 0.978358, -0.76549, 0.622747, -0.1619, -0.609269, -0.782424, -0.128859, 30.0931, -7.49973, 11.7294 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox51"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox51/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox52" type="CSGBox" parent="."]
+transform = Transform( -0.206921, 0, 0.978358, -0.76549, 0.622747, -0.1619, -0.609269, -0.782424, -0.128859, 33.326, -3.9685, 12.8063 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox52"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox52/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox53" type="CSGBox" parent="."]
+transform = Transform( -0.206921, 0, 0.978358, -0.76549, 0.622747, -0.1619, -0.609269, -0.782424, -0.128859, 29.6797, -0.717453, 13.1396 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox53"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox53/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox54" type="CSGBox" parent="."]
+transform = Transform( -0.206921, 0, 0.978358, -0.953859, 0.222382, -0.201739, -0.217569, -0.97496, -0.0460154, 32.4258, -10.0888, 10.1807 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox54"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox54/RigidBody"]
+transform = Transform( 1, 0, 1.49012e-08, 2.98023e-08, 1, 7.45058e-09, 0, -7.45058e-09, 1, 0, -1.07727, 1.19209e-07 )
+shape = SubResource( 1 )
+
+[node name="colBox55" type="CSGBox" parent="."]
+transform = Transform( -0.206921, 0, 0.978358, -0.953859, 0.222382, -0.201739, -0.217569, -0.97496, -0.0460154, 35.0718, -6.76719, 12.6714 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox55"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox55/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox56" type="CSGBox" parent="."]
+transform = Transform( -0.206921, 0, 0.978358, -0.953859, 0.222382, -0.201739, -0.217569, -0.97496, -0.0460154, 38.3048, -3.11797, 12.1124 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox56"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox56/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox57" type="CSGBox" parent="."]
+transform = Transform( -0.206921, 0, 0.978358, -0.953859, 0.222382, -0.201739, -0.217569, -0.97496, -0.0460154, 34.6585, -0.0433688, 11.0046 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox57"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox57/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox58" type="CSGBox" parent="."]
+transform = Transform( -0.206921, 0, 0.978358, -0.975124, -0.081243, -0.206237, 0.079485, -0.996695, 0.016811, 40.4639, -10.2308, 11.7495 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox58"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox58/RigidBody"]
+transform = Transform( 1, 0, 1.49012e-08, 2.98023e-08, 1, 7.45058e-09, 0, -7.45058e-09, 1, 0, -1.07727, 1.19209e-07 )
+shape = SubResource( 1 )
+
+[node name="colBox59" type="CSGBox" parent="."]
+transform = Transform( -0.206921, 0, 0.978358, -0.975124, -0.081243, -0.206237, 0.079485, -0.996695, 0.016811, 43.1099, -6.31371, 13.1255 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox59"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox59/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox60" type="CSGBox" parent="."]
+transform = Transform( -0.206921, 0, 0.978358, -0.975124, -0.081243, -0.206237, 0.079485, -0.996695, 0.016811, 46.3429, -3.00172, 11.4945 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox60"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox60/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox61" type="CSGBox" parent="."]
+transform = Transform( -0.206921, 0, 0.978358, -0.975124, -0.081243, -0.206237, 0.079485, -0.996695, 0.016811, 42.6966, -0.402863, 9.51304 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox61"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox61/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox30" type="CSGBox" parent="."]
+transform = Transform( -0.206921, 0, 0.978358, 0.505617, 0.856105, 0.106937, -0.837577, 0.516802, -0.177146, 0.297676, 7.2471, -17.049 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox30"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox30/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox31" type="CSGBox" parent="."]
+transform = Transform( -0.206921, 0, 0.978358, 0.505617, 0.856105, 0.106937, -0.837577, 0.516802, -0.177146, 2.94368, 3.84072, -14.6756 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox31"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox31/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox32" type="CSGBox" parent="."]
+transform = Transform( -0.206921, 0, 0.978358, 0.505617, 0.856105, 0.106937, -0.837577, 0.516802, -0.177146, 6.17663, 3.22754, -11.0351 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox32"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox32/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox33" type="CSGBox" parent="."]
+transform = Transform( -0.206921, 0, 0.978358, 0.505617, 0.856105, 0.106937, -0.837577, 0.516802, -0.177146, 2.53033, 3.31569, -7.76816 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox33"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox33/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox16" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.1956, -6.20181, -6.8343 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox16"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox16/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox17" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.4534, -4.51219, -8.63832 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox17"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox17/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox18" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.1956, -6.20181, -6.8343 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox18"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox18/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox19" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.1674, -4.84536, -4.38178 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox19"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox19/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox20" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2302, -3.08154, -8.51847 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox20"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox20/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox21" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -37.755, 2.91971, -0.961908 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox21"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox21/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox22" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -33.4973, 4.60932, -2.76593 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox22"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox22/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="colBox22/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5361, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox62" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.902, 5.99169, 23193.5 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox62"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox62/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="colBox62/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5361, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox23" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -37.755, 2.91971, -0.961908 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox23"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox23/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox24" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -40.3884, 4.27616, 1.49061 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox24"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox24/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox63" type="CSGBox" parent="."]
+transform = Transform( 10.8272, -0.233225, 0, 2.59679, 0.972423, 0, 0, 0, 1, -3.19558, -8.70891, -5.59119 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox63"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox63/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="colBox25" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -43.7204, 6.03998, -2.64608 )
+width = 4.95184
+depth = 4.16636
+
+[node name="RigidBody" type="StaticBody" parent="colBox25"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182772, 1.05797, -0.0262451 )
+
+[node name="CollisionShape" type="CollisionShape" parent="colBox25/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.07727, 0 )
+shape = SubResource( 1 )
+
+[node name="CanvasLayer" parent="." instance=ExtResource( 2 )]
+
+[node name="CSGMesh" type="CSGMesh" parent="."]
+transform = Transform( 20.2517, 0, 0, 0, 20.2517, 0, 0, 0, 20.2517, 0.982984, -19.0245, 0.0859299 )
+mesh = SubResource( 3 )
+
+[node name="RigidBody" type="StaticBody" parent="CSGMesh"]
+
+[node name="CollisionShape" type="CollisionShape" parent="CSGMesh/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.874882, 0 )
 shape = SubResource( 1 )

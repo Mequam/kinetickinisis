@@ -54,11 +54,18 @@ func get_mov_name()->String:
 #in child classes
 func overload_ready()->void:
 	pass
+
+func on_player_collided(collision):
+	pass	
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	add_to_group("MovementNode")
+	player_node.connect("collided",self,"on_player_collided")
 	overload_ready()
-
+func overload_process(delta) -> void:
+	pass
+func _process(delta):
+	overload_process(delta)
 #returns true if we are compatable with the given node
 func check_incomp(mov_node)->bool:
 	#godot makes checking if same type sad :(
@@ -75,3 +82,7 @@ func remove_if_comp(mov_node)->void:
 #removes the node from the tree and performs cleaning opeerations
 func remove_movement():
 	queue_free()
+
+#to be overriden
+func player_collided(col):
+	pass
