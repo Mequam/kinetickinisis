@@ -9,6 +9,7 @@ output_textbox_path = NodePath("Control/VBoxContainer/Output")
 input_textbox_path = NodePath("Control/VBoxContainer/Input")
 
 [node name="Control" type="Control" parent="."]
+modulate = Color( 1, 1, 1, 0.670588 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -27,6 +28,9 @@ margin_right = 1024.0
 margin_bottom = 518.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 6.69
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/background_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_readonly = Color( 1, 1, 1, 1 )
 text = "test
 test
 testasetasdf
@@ -49,6 +53,9 @@ margin_top = 522.0
 margin_right = 1024.0
 margin_bottom = 600.0
 size_flags_vertical = 3
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/background_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_readonly = Color( 1, 1, 1, 1 )
 text = "hi yes i would like to input text thank you very much"
 highlight_current_line = true
 syntax_highlighting = true
