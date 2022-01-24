@@ -16,11 +16,18 @@ var function_dictionary = {
 	"pause" : "pause_scene_tree",
 	"unpause" : "unpause_scene_tree",
 	"debug" : "scene_debug",
-	"help" : "print_help"
+	"help" : "print_help",
+	"hi" : "say_hi",
+	"fullscreen" : "set_fullscreen",
+	"windowed" : "set_windowed"
 }
 # Called when the node enters the scene tree for the first time.
-
+func say_hi(args):
+	output_line("hello hooman doth thou have millet?")
 func _input(event):
+#	if event is InputEventKey:
+#		if event.scancode == KEY_ESCAPE and event.pressed:
+#			input_textbox.grab_focus()
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -60,6 +67,10 @@ func pause_scene_tree(args):
 func unpause_scene_tree(args):
 	output_line("Unpausing Scene Tree...")
 	get_tree().paused = false
+
+func set_fullscreen(args):
+	OS.window_fullscreen = !OS.window_fullscreen
+	pass
 
 func scene_debug(args):
 	var debug_func_dict = {
@@ -188,6 +199,7 @@ func _on_Input_gui_input(event : InputEvent):
 
 func _ready():
 	function_dictionary["cow"] = "print_cow"
+	input_textbox.grab_focus()
 	pass # Replace with function body.
 
 

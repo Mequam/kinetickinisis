@@ -31,17 +31,6 @@ size_flags_stretch_ratio = 6.69
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/background_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_readonly = Color( 1, 1, 1, 1 )
-text = "test
-test
-testasetasdf
-eatrasdf
-asfd'ashjf
-['paskg
-ajsdgf'lhjasdf'lkj 10.0.5xccccccccccccccccccccccvzxvc
-asdfcafac
-fasdfas
-dfasdf
-ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
 readonly = true
 syntax_highlighting = true
 show_line_numbers = true

@@ -8,9 +8,6 @@ class_name PositionMoveNode
 func _ready():
 	add_to_group("PositionMoveNode")
 
-
-export(Vector3) var delta_position : Vector3 = Vector3(0,0,0)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func update_position():
-	get_player().transform.origin += delta_position
+#updates the players position, inteanded to be overloaded
+func update_position()->void:
+	pass

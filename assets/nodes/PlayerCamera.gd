@@ -27,6 +27,15 @@ func rotate_hv(vec : Vector2) -> void:
 # var a = 2
 # var b = "text"
 
+func cast_view_ray(ray_length : float = 10.0)->Dictionary:
+	var mouse_pos : Vector2 = get_viewport().get_mouse_position()
+	var from = project_ray_origin(mouse_pos)
+	var to = from + project_ray_normal(mouse_pos) * ray_length
+	var buffer = get_world().direct_space_state.intersect_ray(from,to)
+	
+	if not "collider" in buffer:
+		buffer["position"] = to
+	return buffer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

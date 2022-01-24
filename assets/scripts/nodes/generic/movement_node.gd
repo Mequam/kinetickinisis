@@ -5,7 +5,7 @@ extends Node
 class_name MovementNode
 export(NodePath) var player_node_path : NodePath
 onready var player_node : Player = get_player()
-
+onready var camera_node : PlayerCamera = get_cam()
 
 #returns the player, which serves as a data hub
 func get_player()->Player:

@@ -6,6 +6,7 @@ extends MovementNode
 class_name VelocityMoveNode
 
 export(float, -1.0, 0) var slide_threshold : float = -0.001
+export(bool) var can_slide : bool = false
 
 func _ready():
 	add_to_group("VelocityMoveNode")
@@ -18,10 +19,11 @@ func get_vel()->Vector3:
 func on_player_collided(collided):
 	print("COLLISION SIGNALED!")
 	velocity = Vector3(0,0,0)
+
 func overload_process(delta)->void:
-#	print(OS.get_ticks_usec())
-	if player_node.collision and velocity.dot(player_node.collision.normal) < slide_threshold:
-		velocity = velocity - velocity.project(player_node.collision.normal)
-#		print("COLLISION")
-#	print("BOUNCE VELOCITY : [" + name + "] "  + str(velocity))
+	if  player_node.collision and velocity.dot(player_node.collision.normal) < slide_threshold:
+		if can_slide:
+			velocity = velocity - velocity.project(player_node.collision.normal)
+		else:
+			velocity = Vector3(0,0,0)
 	.overload_process(delta)
