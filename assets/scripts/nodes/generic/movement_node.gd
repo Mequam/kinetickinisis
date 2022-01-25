@@ -54,13 +54,29 @@ func get_mov_name()->String:
 #in child classes
 func overload_ready()->void:
 	pass
-
+#called when the player collides with an object
 func on_player_collided(collision):
-	pass	
+	pass
+
+
+#subscribes us to all input actions in the array and removes any other node that is 
+#also subscribed to those actions
+func demand_inputs(inputs : Array)->void:
+	for action in inputs:
+		for subscribed_nodes in player_node.get_action_subscribed_nodes(action):
+			pass
+
+#called when the node is added to the tree to subscribe
+#to inputs required by the movement node
+#this is inteanded to be overloaded by children
+func subscribe_to_inputs()->void:
+	pass
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	add_to_group("MovementNode")
 	player_node.connect("collided",self,"on_player_collided")
+	subscribe_to_inputs()
 	overload_ready()
 func overload_process(delta) -> void:
 	pass
@@ -79,10 +95,21 @@ func check_comp(mov_node)->bool:
 func remove_if_comp(mov_node)->void:
 	if check_incomp(mov_node):
 		remove_movement()
+
 #removes the node from the tree and performs cleaning opeerations
 func remove_movement():
 	queue_free()
-
 #to be overriden
 func player_collided(col):
 	pass
+#called when the player script detects an input event we registered
+#for
+func on_player_input(event):
+	pass
+
+#syntactic sugar function to get an action from our action code
+func code_to_action(code : int)->String:
+	if player_node.input_map.has(self) and (code in player_node.input_map[self]):
+		return player_node.input_map[self][code]
+	return ""
+	

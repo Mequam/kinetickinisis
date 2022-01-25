@@ -11,6 +11,12 @@ export(int) var collision_window : int = int(1e+6/15)
 
 var time_of_last_collision : int = 0
 
+#input map used by nodes that are added to the scene
+#the keys in this dictionary are references to movement nodes
+#and the values are an array of action strings for that node to reference with
+#intagers on an index basis
+var input_map : Dictionary = {}
+
 signal collided
 
 var collision setget set_col , get_col
@@ -54,11 +60,30 @@ func get_movement_velocities() -> Vector3:
 func _physics_process(delta):
 	move_and_collide(get_movement_velocities()*delta)
 	get_tree().call_group("Debug UI", "recieve_player_velocity", get_movement_velocities())
-#	print(OS.get_ticks_usec())
-#	print("PLAYER VELOCITY ", get_movement_velocities())
-#	print("PLAYER FRAME VELOCITY ", get_movement_velocities()*delta)
-#	print("PLAYER COLLISION NORMAL", collision.normal if collision else " null")
-#	if col:
-#		signal hey collided (col)
-#	move_and_slide(get_movement_velocities()*delta)
-#	move_and_slide_with_snap(get_movement_velocities()*delta, Vector3(0,0,0))
+
+
+#returs all nodes subscribed to the given action
+func get_action_subscribed_nodes(action : String)->Array:
+	var ret_val  : Array = []
+	for move_node in input_map.keys():
+		if action in input_map[move_node]:
+			ret_val.append(action)
+	return ret_val
+
+#returns the index of the action the node is subsribed to -1 if not subscribed
+func get_node_action_code(move_node : MovementNode,action : String)->int:
+	if input_map.has(move_node):
+		for i in range(0,len(input_map[move_node])):
+			if input_map[move_node][i] == "action":
+				return (i as int)
+	return -1
+
+#syntactic sugar to get the nodes that are subscribed to an action
+func get_subscribed_nodes()->Array:
+	return input_map.keys()
+
+#call the event for all movement nodes subscribed to the given input
+func _input(event):
+	if event is InputEventAction:
+		for move_node in get_action_subscribed_nodes(event.action):
+			(move_node as MovementNode).on_player_input(get_node_action_code(move_node,event.action))
