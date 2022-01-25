@@ -5,28 +5,77 @@
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
-uniform float radius_percentage = 0.25;
+uniform float radius_percentage = 0.4;
 uniform float radius_thickness = 0.01;
 uniform vec3 color = vec3(0.0,0.0,0.0);
+uniform vec3 focus_color = vec3(1.0,0.0,1.0);
+
+uniform float focus_thickness = 0.5;
+
+//mixes two float values quadratically based on a lever value
+//note that the parabala tends to speed up twoards end
+float qudratic_mixer(float start,float end,float lever) {
+	return (end-start)*lever*lever+start;
+}
+/*TODO: clean this*/
+float angle(float x,float y) {
+	float ret_val = abs(atan(-y/x));
+	
+	if (-y < 0.0 && x < 0.0) {
+		ret_val = 3.14159 + ret_val;
+	}
+	else if (x < 0.0) {
+		ret_val = 3.14159 - ret_val;
+	} 
+	else if (-y < 0.0) {
+		ret_val = 2.0*3.14159 - ret_val;
+	}
+	
+	return ret_val;
+}
+float perc_diff(float x,float y) {
+	return 2.0*abs(x-y)/(x+y);
+}
+//does fmod in the demos style :)
+float fmod_desmos(float var,float base) {
+	return var - base*floor(var/base);
+}
 void fragment() {
+	float focus_angle = 10.0;
+	focus_angle = (cos(TIME/2.0) + 1.0)*2.0*3.14159;
+	
 	float dist = distance(vec2(0.5,0.5),UV);
 	float alpha = 0.0;
 	if (dist > radius_percentage - radius_thickness && dist < radius_percentage + radius_thickness) {
 		alpha = 1.0-(1.0/radius_thickness)*((abs(dist-radius_percentage)))/(dist+radius_percentage);
-		
 		if (alpha < 0.0) {
 			alpha = 0.0;
 		}
 	}
+	
+	
+	float point_angle = angle(UV[0]-0.5,UV[1]-0.5);
+	float rotated_point_angle = fmod_desmos(point_angle + focus_thickness - focus_angle,2.0*3.14159);
 	COLOR.a = alpha;
 	COLOR.rgb = color;
+	
+	if ( rotated_point_angle < 2.0*focus_thickness) {
+	//if (point_angle < focus_thickness + focus_angle && point_angle > focus_angle - focus_thickness) {
+		//COLOR.a = 0.0;
+		float slider = abs(rotated_point_angle-focus_thickness)/focus_thickness;
+		COLOR.r = qudratic_mixer(focus_color.r,color.r,slider);
+		COLOR.g = qudratic_mixer(focus_color.g,color.g,slider);
+		COLOR.b = qudratic_mixer(focus_color.b,color.b,slider);		
+	}
 }"
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
-shader_param/radius_percentage = 0.25
+shader_param/radius_percentage = 0.4
 shader_param/radius_thickness = 0.01
 shader_param/color = Vector3( 0, 0, 0 )
+shader_param/focus_color = Vector3( 1, 0, 1 )
+shader_param/focus_thickness = 0.5
 
 [node name="CircleSelect" type="Control"]
 anchor_right = 1.0
