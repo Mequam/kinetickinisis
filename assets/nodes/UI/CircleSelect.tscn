@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/scripts/CircleSelect.gd" type="Script" id=1]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float radius_percentage = 0.25;
+uniform float radius_thickness = 0.01;
+uniform vec3 color = vec3(0.0,0.0,0.0);
+void fragment() {
+	float dist = distance(vec2(0.5,0.5),UV);
+	float alpha = 0.0;
+	if (dist > radius_percentage - radius_thickness && dist < radius_percentage + radius_thickness) {
+		alpha = 1.0-(1.0/radius_thickness)*((abs(dist-radius_percentage)))/(dist+radius_percentage);
+		
+		if (alpha < 0.0) {
+			alpha = 0.0;
+		}
+	}
+	COLOR.a = alpha;
+	COLOR.rgb = color;
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/radius_percentage = 0.25
+shader_param/radius_thickness = 0.01
+shader_param/color = Vector3( 0, 0, 0 )
+
+[node name="CircleSelect" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="CenterContainer"]
+material = SubResource( 2 )
+margin_left = 362.0
+margin_top = 150.0
+margin_right = 662.0
+margin_bottom = 450.0
+rect_min_size = Vector2( 300, 300 )
+color = Color( 0, 0, 0, 1 )
