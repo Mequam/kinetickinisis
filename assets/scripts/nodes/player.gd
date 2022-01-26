@@ -70,20 +70,6 @@ func get_action_subscribed_nodes(action : String)->Array:
 			ret_val.append(action)
 	return ret_val
 
-#returns the index of the action the node is subsribed to -1 if not subscribed
-func get_node_action_code(move_node : MovementNode,action : String)->int:
-	if input_map.has(move_node):
-		for i in range(0,len(input_map[move_node])):
-			if input_map[move_node][i] == "action":
-				return (i as int)
-	return -1
-
 #syntactic sugar to get the nodes that are subscribed to an action
 func get_subscribed_nodes()->Array:
 	return input_map.keys()
-
-#call the event for all movement nodes subscribed to the given input
-func _input(event):
-	if event is InputEventAction:
-		for move_node in get_action_subscribed_nodes(event.action):
-			(move_node as MovementNode).on_player_input(get_node_action_code(move_node,event.action))

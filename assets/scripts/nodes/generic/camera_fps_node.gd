@@ -12,7 +12,6 @@ export(Vector2) var sensitivity : Vector2 = Vector2(1,1)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	add_to_group("CameraFPSMoveNode")
-	pass # Replace with function body.
 
 func _input(event):
 	var l_vec = Vector2(0,0)

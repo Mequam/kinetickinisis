@@ -5,11 +5,11 @@
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
-uniform float radius_percentage = 0.4;
+uniform float radius_percentage = 0.3;
 uniform float radius_thickness = 0.01;
 uniform vec3 color = vec3(0.0,0.0,0.0);
-uniform vec3 focus_color = vec3(1.0,0.0,1.0);
-
+uniform vec3 focus_color = vec3(1.0,0.0,0.0);
+uniform float focus_angle = 0.0;
 uniform float focus_thickness = 0.5;
 
 //mixes two float values quadratically based on a lever value
@@ -41,9 +41,6 @@ float fmod_desmos(float var,float base) {
 	return var - base*floor(var/base);
 }
 void fragment() {
-	float focus_angle = 10.0;
-	focus_angle = (cos(TIME/2.0) + 1.0)*2.0*3.14159;
-	
 	float dist = distance(vec2(0.5,0.5),UV);
 	float alpha = 0.0;
 	if (dist > radius_percentage - radius_thickness && dist < radius_percentage + radius_thickness) {
@@ -71,10 +68,11 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
-shader_param/radius_percentage = 0.4
+shader_param/radius_percentage = 0.3
 shader_param/radius_thickness = 0.01
 shader_param/color = Vector3( 0, 0, 0 )
-shader_param/focus_color = Vector3( 1, 0, 1 )
+shader_param/focus_color = Vector3( 1, 0, 0 )
+shader_param/focus_angle = 0.0
 shader_param/focus_thickness = 0.5
 
 [node name="CircleSelect" type="Control"]
@@ -84,19 +82,43 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+circle_path = NodePath("CircleContainer/Circle")
+circle_container_path = NodePath("CircleContainer")
+center_text = NodePath("CircleContainer/Circle/CenterText")
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="CircleContainer" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
-"_edit_use_anchors_": true
+"_edit_use_anchors_": false
 }
 
-[node name="ColorRect" type="ColorRect" parent="CenterContainer"]
+[node name="Circle" type="ColorRect" parent="CircleContainer"]
 material = SubResource( 2 )
-margin_left = 362.0
-margin_top = 150.0
-margin_right = 662.0
-margin_bottom = 450.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -150.0
+margin_top = -150.0
+margin_right = 150.0
+margin_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
 rect_min_size = Vector2( 300, 300 )
 color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterText" type="Label" parent="CircleContainer/Circle"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "IT WORKS :D"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="selected_option" from="." to="." method="_on_CircleSelect_selected_option"]
