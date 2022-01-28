@@ -20,7 +20,7 @@ func overload_process(delta):
 	.overload_process(delta)
 
 func _input(event):
-	if event.is_action_pressed("action_1"):
+	if input_action != "" and event.is_action_pressed(input_action):
 		timer_node.start() 
 		
 func _ready():

@@ -17,7 +17,7 @@ func set_vel(val : Vector3)->void:
 func get_vel()->Vector3:
 	return velocity
 func on_player_collided(collided):
-	print("COLLISION SIGNALED!")
+#	print("COLLISION SIGNALED!")
 	velocity = Vector3(0,0,0)
 
 func overload_process(delta)->void:

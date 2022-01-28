@@ -5,10 +5,14 @@ class_name MovementUI
 export(NodePath) var player_node
 export(NodePath) var movement_node_container
 export(NodePath) var movement_inventory_container
+export(NodePath) var movement_input_action_container
 export(PackedScene) var movement_button_node
+export(PackedScene) var input_action_button_node
+export(NodePath) var control_input_ui
 var previous_mouse_mode = Input.MOUSE_MODE_VISIBLE
 var movement_buttons = []
 var inventory_buttons = []
+var action_buttons = []
 #onready var movement_button : Node = movement_button_node.instance()
 
 # Declare member variables here. Examples:
@@ -36,6 +40,17 @@ func place_inventory_node_buttons():
 		inventory_buttons.append(move_button)
 	pass
 
+func place_action_buttons():
+	for node in get_node(player_node).get_movement_nodes():
+		var action_button = input_action_button_node.instance()
+		action_button.action_name = node.input_action
+		get_node(movement_input_action_container).add_child(action_button)
+		action_button.connect("mouse_over", self, "_on_action_mouse_over")
+		if action_button.action_name == "":
+			action_button.modulate = Color.transparent
+		action_buttons.append(action_button)
+	pass
+
 func refresh_buttons():
 	for button in inventory_buttons:
 		button.queue_free()
@@ -43,8 +58,12 @@ func refresh_buttons():
 	for button in movement_buttons:
 		button.queue_free()
 	movement_buttons = []
+	for button in action_buttons:
+		button.queue_free()
+	action_buttons = []
 	place_movement_node_buttons()
 	place_inventory_node_buttons()
+	place_action_buttons()
 
 func open():
 	previous_mouse_mode = Input.get_mouse_mode()
@@ -63,9 +82,17 @@ func toggle():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	place_movement_node_buttons()
 	
+	place_movement_node_buttons()
+#	close()
 	pass # Replace with function body.
+
+func _on_action_mouse_over(action_button):
+	if action_button.action_name != "" and action_button.is_mouse_over:
+		get_node(control_input_ui).highlight_action_inputs(action_button.action_name)
+	else:
+		get_node(control_input_ui).clear_inputs()
+	pass
 
 func _on_button_selected(button):
 	print(button)

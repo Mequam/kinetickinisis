@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/nodes/PlayerCamera.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/scripts/nodes/player.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/scripts/nodes/ray_cast_teleport.gd" type="Script" id=7]
 [ext_resource path="res://assets/scripts/nodes/planar_dash_node.gd" type="Script" id=8]
 [ext_resource path="res://assets/nodes/Movement UI.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/scripts/nodes/cool epic/gravity_flip.gd" type="Script" id=10]
 
 [sub_resource type="CapsuleShape" id=1]
 
@@ -24,14 +25,8 @@ movement_ui = NodePath("Movement UI")
 [node name="Jump" type="Node" parent="Movement Nodes"]
 script = ExtResource( 5 )
 player_node_path = NodePath("../..")
-input_action = "Jump"
+input_action = "jump"
 max_jumps = 5
-
-[node name="Gravity" type="Node" parent="Movement Nodes"]
-script = ExtResource( 3 )
-player_node_path = NodePath("../..")
-can_slide = true
-acceleration = Vector3( 0, -9.813, 0 )
 
 [node name="Directional Movement" type="Node" parent="Movement Nodes"]
 script = ExtResource( 4 )
@@ -43,12 +38,25 @@ sensitivity = Vector2( 20, 20 )
 
 [node name="RayCastTeleportMove" type="Node" parent="Movement Nodes"]
 script = ExtResource( 7 )
+input_action = "action_0"
 
 [node name="PlanarDashMoveNode" type="Node" parent="Movement Nodes"]
 script = ExtResource( 8 )
+input_action = "action_1"
 movement_speed = 50.0
 
+[node name="GravityFlipMove" type="Node" parent="Movement Nodes"]
+script = ExtResource( 10 )
+input_action = "action_2"
+acceleration = Vector3( 0, -9.8, 0 )
+
 [node name="Movement Inventory" type="Node" parent="."]
+
+[node name="Gravity" type="Node" parent="Movement Inventory"]
+script = ExtResource( 3 )
+player_node_path = NodePath("../..")
+can_slide = true
+acceleration = Vector3( 0, -9.813, 0 )
 
 [node name="HRotation" parent="." instance=ExtResource( 1 )]
 

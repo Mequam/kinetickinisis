@@ -1,14 +1,19 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/nodes/Movement UI.gd" type="Script" id=1]
 [ext_resource path="res://assets/nodes/MovementButtonNode.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/nodes/cooltheme.tres" type="Theme" id=3]
+[ext_resource path="res://assets/nodes/Control Input UI.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/nodes/InputActionButton.tscn" type="PackedScene" id=5]
 
 [node name="Movement UI" type="CanvasLayer"]
 script = ExtResource( 1 )
 movement_node_container = NodePath("Control/CenterContainer/HBoxContainer/VBoxContainer")
 movement_inventory_container = NodePath("Control/CenterContainer/HBoxContainer/VBoxContainer2")
+movement_input_action_container = NodePath("Control/CenterContainer/HBoxContainer/Actionssss")
 movement_button_node = ExtResource( 2 )
+input_action_button_node = ExtResource( 5 )
+control_input_ui = NodePath("Control/Control Input UI")
 
 [node name="Control" type="Control" parent="."]
 visible = false
@@ -29,25 +34,74 @@ __meta__ = {
 [node name="CenterContainer" type="CenterContainer" parent="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_bottom = -306.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/CenterContainer"]
-margin_left = 348.0
-margin_top = 277.0
-margin_right = 675.0
-margin_bottom = 323.0
+margin_left = 312.0
+margin_top = 136.0
+margin_right = 711.0
+margin_bottom = 158.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/CenterContainer/HBoxContainer"]
+[node name="Actionssss" type="VBoxContainer" parent="Control/CenterContainer/HBoxContainer"]
+margin_right = 101.0
+margin_bottom = 22.0
+
+[node name="Label" type="Label" parent="Control/CenterContainer/HBoxContainer/Actionssss"]
+margin_right = 101.0
+margin_bottom = 14.0
+text = "INPUT ACTIONS"
+align = 1
+
+[node name="Button" type="Button" parent="Control/CenterContainer/HBoxContainer/Actionssss"]
+visible = false
+margin_right = 119.0
+margin_bottom = 20.0
+theme = ExtResource( 3 )
+text = "Planar Movment"
+
+[node name="Dash Movement" type="Button" parent="Control/CenterContainer/HBoxContainer/Actionssss"]
+visible = false
+margin_top = 18.0
+margin_right = 123.0
+margin_bottom = 38.0
+theme = ExtResource( 3 )
+text = "Dash Movement"
+
+[node name="HSeparator" type="HSeparator" parent="Control/CenterContainer/HBoxContainer/Actionssss"]
+margin_top = 18.0
+margin_right = 101.0
+margin_bottom = 22.0
+
+[node name="Button" parent="Control/CenterContainer/HBoxContainer/Actionssss/HSeparator" instance=ExtResource( 5 )]
+visible = false
+
+[node name="Button2" parent="Control/CenterContainer/HBoxContainer/Actionssss" instance=ExtResource( 2 )]
+visible = false
 margin_right = 164.0
-margin_bottom = 46.0
+
+[node name="VSeparator2" type="VSeparator" parent="Control/CenterContainer/HBoxContainer"]
+margin_left = 105.0
+margin_right = 109.0
+margin_bottom = 22.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/CenterContainer/HBoxContainer"]
+margin_left = 113.0
+margin_right = 236.0
+margin_bottom = 22.0
 
 [node name="Label" type="Label" parent="Control/CenterContainer/HBoxContainer/VBoxContainer"]
-margin_right = 164.0
+margin_right = 123.0
 margin_bottom = 14.0
 text = "MOVEMENT NODES"
 align = 1
@@ -69,7 +123,7 @@ text = "Dash Movement"
 
 [node name="HSeparator" type="HSeparator" parent="Control/CenterContainer/HBoxContainer/VBoxContainer"]
 margin_top = 18.0
-margin_right = 164.0
+margin_right = 123.0
 margin_bottom = 22.0
 
 [node name="Button2" parent="Control/CenterContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 2 )]
@@ -77,14 +131,14 @@ visible = false
 margin_right = 164.0
 
 [node name="VSeparator" type="VSeparator" parent="Control/CenterContainer/HBoxContainer"]
-margin_left = 168.0
-margin_right = 172.0
-margin_bottom = 46.0
+margin_left = 240.0
+margin_right = 244.0
+margin_bottom = 22.0
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Control/CenterContainer/HBoxContainer"]
-margin_left = 176.0
-margin_right = 327.0
-margin_bottom = 46.0
+margin_left = 248.0
+margin_right = 399.0
+margin_bottom = 22.0
 
 [node name="Button" type="Button" parent="Control/CenterContainer/HBoxContainer/VBoxContainer2"]
 visible = false
@@ -109,3 +163,29 @@ text = "MOVEMENT INVENTORY"
 margin_top = 18.0
 margin_right = 151.0
 margin_bottom = 22.0
+
+[node name="yeah" type="Control" parent="Control"]
+visible = false
+margin_left = 262.0
+margin_top = 50.0
+margin_right = 762.0
+margin_bottom = 550.0
+rect_min_size = Vector2( 500, 500 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Control Input UI" parent="Control" instance=ExtResource( 4 )]
+anchor_top = 0.459
+size_flags_vertical = 3
+
+[node name="vbox" type="VBoxContainer" parent="Control"]
+visible = false
+margin_left = 369.0
+margin_top = 289.0
+margin_right = 655.0
+margin_bottom = 311.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
