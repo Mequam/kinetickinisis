@@ -817,7 +817,8 @@ margin_left = 99.0
 margin_right = 139.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
-text = "esc"
+text = "Z"
+scancode = 90
 
 [node name="3" parent="Main Keys/key grid 3/HBoxContainer4" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -826,7 +827,8 @@ margin_left = 143.0
 margin_right = 183.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
-text = "esc"
+text = "X"
+scancode = 88
 
 [node name="4" parent="Main Keys/key grid 3/HBoxContainer4" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -835,7 +837,8 @@ margin_left = 187.0
 margin_right = 226.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
-text = "esc"
+text = "C"
+scancode = 67
 
 [node name="5" parent="Main Keys/key grid 3/HBoxContainer4" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -844,7 +847,8 @@ margin_left = 230.0
 margin_right = 270.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
-text = "esc"
+text = "V"
+scancode = 86
 
 [node name="6" parent="Main Keys/key grid 3/HBoxContainer4" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -853,7 +857,8 @@ margin_left = 274.0
 margin_right = 314.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
-text = "esc"
+text = "B"
+scancode = 66
 
 [node name="7" parent="Main Keys/key grid 3/HBoxContainer4" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -862,7 +867,8 @@ margin_left = 318.0
 margin_right = 357.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
-text = "esc"
+text = "N"
+scancode = 78
 
 [node name="8" parent="Main Keys/key grid 3/HBoxContainer4" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -871,7 +877,8 @@ margin_left = 361.0
 margin_right = 401.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
-text = "esc"
+text = "M"
+scancode = 77
 
 [node name="9" parent="Main Keys/key grid 3/HBoxContainer4" instance=ExtResource( 2 )]
 anchor_right = 0.0
