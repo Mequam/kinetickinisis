@@ -691,7 +691,8 @@ margin_left = 122.0
 margin_right = 162.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
-text = "esc"
+text = "s"
+scancode = 83
 
 [node name="4" parent="Main Keys/key grid 3/HBoxContainer3" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -700,7 +701,8 @@ margin_left = 166.0
 margin_right = 206.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
-text = "esc"
+text = "D"
+scancode = 68
 
 [node name="5" parent="Main Keys/key grid 3/HBoxContainer3" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -709,7 +711,8 @@ margin_left = 210.0
 margin_right = 249.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
-text = "esc"
+text = "F"
+scancode = 70
 
 [node name="6" parent="Main Keys/key grid 3/HBoxContainer3" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -718,7 +721,8 @@ margin_left = 253.0
 margin_right = 293.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
-text = "esc"
+text = "G"
+scancode = 71
 
 [node name="7" parent="Main Keys/key grid 3/HBoxContainer3" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -727,7 +731,8 @@ margin_left = 297.0
 margin_right = 336.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
-text = "esc"
+text = "H"
+scancode = 72
 
 [node name="8" parent="Main Keys/key grid 3/HBoxContainer3" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -736,7 +741,8 @@ margin_left = 340.0
 margin_right = 380.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
-text = "esc"
+text = "J"
+scancode = 74
 
 [node name="9" parent="Main Keys/key grid 3/HBoxContainer3" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -745,7 +751,8 @@ margin_left = 384.0
 margin_right = 424.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
-text = "esc"
+text = "K"
+scancode = 75
 
 [node name="10" parent="Main Keys/key grid 3/HBoxContainer3" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -754,7 +761,8 @@ margin_left = 428.0
 margin_right = 467.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
-text = "esc"
+text = "L"
+scancode = 76
 
 [node name="11" parent="Main Keys/key grid 3/HBoxContainer3" instance=ExtResource( 2 )]
 anchor_right = 0.0
