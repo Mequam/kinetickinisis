@@ -381,7 +381,8 @@ anchor_bottom = 0.0
 margin_right = 39.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
-text = "esc"
+text = "`"
+scancode = 96
 
 [node name="F5" parent="Main Keys/key grid 3/HBoxContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -490,7 +491,8 @@ margin_left = 482.0
 margin_right = 522.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
-text = "esc"
+text = "-"
+scancode = 45
 
 [node name="F16" parent="Main Keys/key grid 3/HBoxContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -499,7 +501,8 @@ margin_left = 526.0
 margin_right = 566.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
-text = "esc"
+text = "="
+scancode = 61
 
 [node name="Back" parent="Main Keys/key grid 3/HBoxContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -636,7 +639,8 @@ margin_left = 503.0
 margin_right = 542.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
-text = "esc"
+text = "["
+scancode = 123
 
 [node name="13" parent="Main Keys/key grid 3/HBoxContainer2" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -645,7 +649,8 @@ margin_left = 546.0
 margin_right = 586.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
-text = "esc"
+text = "]"
+scancode = 125
 
 [node name="14" parent="Main Keys/key grid 3/HBoxContainer2" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -655,7 +660,8 @@ margin_right = 653.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 1.59
-text = "esc"
+text = "\\"
+scancode = 92
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="Main Keys/key grid 3"]
 margin_top = 88.0
@@ -771,7 +777,8 @@ margin_left = 471.0
 margin_right = 511.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
-text = "esc"
+text = ";"
+scancode = 59
 
 [node name="12" parent="Main Keys/key grid 3/HBoxContainer3" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -780,7 +787,8 @@ margin_left = 515.0
 margin_right = 555.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
-text = "esc"
+text = "'"
+scancode = 39
 
 [node name="13" parent="Main Keys/key grid 3/HBoxContainer3" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -887,7 +895,8 @@ margin_left = 405.0
 margin_right = 445.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
-text = "esc"
+text = ","
+scancode = 44
 
 [node name="10" parent="Main Keys/key grid 3/HBoxContainer4" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -896,7 +905,8 @@ margin_left = 449.0
 margin_right = 488.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
-text = "esc"
+text = "."
+scancode = 46
 
 [node name="11" parent="Main Keys/key grid 3/HBoxContainer4" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -905,7 +915,8 @@ margin_left = 492.0
 margin_right = 532.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
-text = "esc"
+text = "/"
+scancode = 47
 
 [node name="12" parent="Main Keys/key grid 3/HBoxContainer4" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -990,7 +1001,8 @@ margin_left = 546.0
 margin_right = 597.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
-text = "esc"
+text = "MENU"
+scancode = 16777262
 
 [node name="8" parent="Main Keys/key grid 3/HBoxContainer5" instance=ExtResource( 2 )]
 anchor_right = 0.0
