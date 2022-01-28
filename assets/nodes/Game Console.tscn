@@ -4,6 +4,7 @@
 
 [node name="Game Console UI" type="CanvasLayer"]
 pause_mode = 2
+layer = 3
 script = ExtResource( 1 )
 output_textbox_path = NodePath("Control/VBoxContainer/Output")
 input_textbox_path = NodePath("Control/VBoxContainer/Input")

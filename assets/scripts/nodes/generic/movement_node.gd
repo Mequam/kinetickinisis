@@ -4,6 +4,8 @@ extends Node
 
 class_name MovementNode
 export(NodePath) var player_node_path : NodePath
+export(String) var input_action
+export(Dictionary) var multi_input_actions
 onready var player_node : Player = get_player()
 onready var camera_node : PlayerCamera = get_cam()
 
@@ -62,6 +64,7 @@ func _ready():
 	add_to_group("MovementNode")
 	player_node.connect("collided",self,"on_player_collided")
 	overload_ready()
+	print(name.capitalize())
 func overload_process(delta) -> void:
 	pass
 func _process(delta):
