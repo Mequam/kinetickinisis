@@ -41,28 +41,32 @@ anchor_left = 0.101563
 anchor_top = 0.0743034
 anchor_right = 0.141602
 anchor_bottom = 0.201238
-text = "esc"
+text = "F1"
+scancode = 16777244
 
 [node name="F2" parent="Main Keys" instance=ExtResource( 2 )]
 anchor_left = 0.145508
 anchor_top = 0.0743034
 anchor_right = 0.185547
 anchor_bottom = 0.201238
-text = "esc"
+text = "F2"
+scancode = 16777245
 
 [node name="F3" parent="Main Keys" instance=ExtResource( 2 )]
 anchor_left = 0.186523
 anchor_top = 0.0743034
 anchor_right = 0.226563
 anchor_bottom = 0.201238
-text = "esc"
+text = "F3"
+scancode = 16777246
 
 [node name="F4" parent="Main Keys" instance=ExtResource( 2 )]
 anchor_left = 0.229492
 anchor_top = 0.0743034
 anchor_right = 0.269531
 anchor_bottom = 0.201238
-text = "esc"
+text = "F4"
+scancode = 16777247
 
 [node name="function keys lol" type="HBoxContainer" parent="Main Keys"]
 anchor_left = 0.292969
@@ -79,6 +83,8 @@ anchor_bottom = 0.0
 margin_right = 40.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
+text = "F5"
+scancode = 16777248
 
 [node name="Keyboard Input Key UI2" parent="Main Keys/function keys lol" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -87,6 +93,8 @@ margin_left = 44.0
 margin_right = 85.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
+text = "F6"
+scancode = 16777249
 
 [node name="Keyboard Input Key UI3" parent="Main Keys/function keys lol" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -95,6 +103,8 @@ margin_left = 89.0
 margin_right = 129.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
+text = "F7"
+scancode = 16777250
 
 [node name="Keyboard Input Key UI4" parent="Main Keys/function keys lol" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -103,6 +113,8 @@ margin_left = 133.0
 margin_right = 174.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
+text = "F8"
+scancode = 16777251
 
 [node name="function keys lol2" type="HBoxContainer" parent="Main Keys"]
 anchor_left = 0.481445
@@ -119,6 +131,8 @@ anchor_bottom = 0.0
 margin_right = 40.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
+text = "F9"
+scancode = 16777252
 
 [node name="Keyboard Input Key UI2" parent="Main Keys/function keys lol2" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -127,6 +141,8 @@ margin_left = 44.0
 margin_right = 85.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
+text = "F10"
+scancode = 16777253
 
 [node name="Keyboard Input Key UI3" parent="Main Keys/function keys lol2" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -135,6 +151,8 @@ margin_left = 89.0
 margin_right = 129.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
+text = "F11"
+scancode = 16777254
 
 [node name="Keyboard Input Key UI4" parent="Main Keys/function keys lol2" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -143,6 +161,8 @@ margin_left = 133.0
 margin_right = 174.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
+text = "F12"
+scancode = 16777255
 
 [node name="function keys lol3" type="HBoxContainer" parent="Main Keys"]
 anchor_left = 0.672852
@@ -159,6 +179,8 @@ anchor_bottom = 0.0
 margin_right = 39.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
+text = "PRT SC"
+scancode = 16777226
 
 [node name="Keyboard Input Key UI2" parent="Main Keys/function keys lol3" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -167,6 +189,8 @@ margin_left = 43.0
 margin_right = 82.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
+text = "SCR LK"
+scancode = 16777243
 
 [node name="Keyboard Input Key UI3" parent="Main Keys/function keys lol3" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -175,6 +199,8 @@ margin_left = 86.0
 margin_right = 126.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
+text = "PAUSE"
+scancode = 16777225
 
 [node name="key grid 1" type="VBoxContainer" parent="Main Keys"]
 anchor_left = 0.816406
@@ -199,7 +225,8 @@ anchor_bottom = 0.0
 margin_right = 40.0
 margin_bottom = 39.0
 size_flags_horizontal = 3
-text = "esc"
+text = "NUM"
+scancode = 16777242
 
 [node name="F5" parent="Main Keys/key grid 1/HBoxContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -208,7 +235,8 @@ margin_left = 44.0
 margin_right = 84.0
 margin_bottom = 39.0
 size_flags_horizontal = 3
-text = "esc"
+text = "/"
+scancode = 16777346
 
 [node name="F6" parent="Main Keys/key grid 1/HBoxContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -217,7 +245,8 @@ margin_left = 88.0
 margin_right = 128.0
 margin_bottom = 39.0
 size_flags_horizontal = 3
-text = "esc"
+text = "*"
+scancode = 16777345
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Main Keys/key grid 1"]
 margin_top = 43.0
@@ -232,7 +261,8 @@ anchor_bottom = 0.0
 margin_right = 40.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
-text = "esc"
+text = "7"
+scancode = 16777357
 
 [node name="F5" parent="Main Keys/key grid 1/HBoxContainer2" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -241,7 +271,8 @@ margin_left = 44.0
 margin_right = 84.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
-text = "esc"
+text = "8"
+scancode = 16777358
 
 [node name="F6" parent="Main Keys/key grid 1/HBoxContainer2" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -250,7 +281,8 @@ margin_left = 88.0
 margin_right = 128.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
-text = "esc"
+text = "9"
+scancode = 16777359
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="Main Keys/key grid 1"]
 margin_top = 87.0
@@ -265,7 +297,8 @@ anchor_bottom = 0.0
 margin_right = 40.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
-text = "esc"
+text = "4"
+scancode = 16777354
 
 [node name="F5" parent="Main Keys/key grid 1/HBoxContainer3" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -274,7 +307,8 @@ margin_left = 44.0
 margin_right = 84.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
-text = "esc"
+text = "5"
+scancode = 16777355
 
 [node name="F6" parent="Main Keys/key grid 1/HBoxContainer3" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -283,7 +317,8 @@ margin_left = 88.0
 margin_right = 128.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
-text = "esc"
+text = "6"
+scancode = 16777356
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="Main Keys/key grid 1"]
 margin_top = 131.0
@@ -298,7 +333,8 @@ anchor_bottom = 0.0
 margin_right = 40.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
-text = "esc"
+text = "1"
+scancode = 16777351
 
 [node name="F5" parent="Main Keys/key grid 1/HBoxContainer4" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -307,7 +343,8 @@ margin_left = 44.0
 margin_right = 84.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
-text = "esc"
+text = "2"
+scancode = 16777352
 
 [node name="F6" parent="Main Keys/key grid 1/HBoxContainer4" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -316,7 +353,8 @@ margin_left = 88.0
 margin_right = 128.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
-text = "esc"
+text = "3"
+scancode = 16777353
 
 [node name="key grid 3" type="VBoxContainer" parent="Main Keys"]
 anchor_left = 0.0166016
@@ -611,7 +649,8 @@ margin_right = 75.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 1.9
-text = "esc"
+text = "CAPS"
+scancode = 16777241
 
 [node name="2" parent="Main Keys/key grid 3/HBoxContainer3" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -737,7 +776,8 @@ margin_right = 95.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.41
-text = "esc"
+text = "SHIFT"
+scancode = 16777237
 
 [node name="2" parent="Main Keys/key grid 3/HBoxContainer4" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -837,7 +877,8 @@ margin_right = 653.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.93
-text = "esc"
+text = "SHIFT"
+scancode = 16777237
 
 [node name="HBoxContainer5" type="HBoxContainer" parent="Main Keys/key grid 3"]
 margin_top = 176.0
@@ -852,7 +893,8 @@ anchor_bottom = 0.0
 margin_right = 51.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
-text = "esc"
+text = "CTRL"
+scancode = 16777238
 
 [node name="2" parent="Main Keys/key grid 3/HBoxContainer5" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -861,7 +903,8 @@ margin_left = 55.0
 margin_right = 106.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
-text = "esc"
+text = "WIN"
+scancode = 16777260
 
 [node name="3" parent="Main Keys/key grid 3/HBoxContainer5" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -870,7 +913,8 @@ margin_left = 110.0
 margin_right = 161.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
-text = "esc"
+text = "ALT"
+scancode = 16777240
 
 [node name="4" parent="Main Keys/key grid 3/HBoxContainer5" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -880,7 +924,8 @@ margin_right = 432.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.24
-text = "esc"
+text = "SPACE"
+scancode = 32
 
 [node name="5" parent="Main Keys/key grid 3/HBoxContainer5" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -951,7 +996,8 @@ margin_left = 44.0
 margin_right = 84.0
 margin_bottom = 41.0
 size_flags_horizontal = 3
-text = "esc"
+text = "HOME"
+scancode = 16777229
 
 [node name="F6" parent="Main Keys/key grid 2/HBoxContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -960,7 +1006,8 @@ margin_left = 88.0
 margin_right = 128.0
 margin_bottom = 41.0
 size_flags_horizontal = 3
-text = "esc"
+text = "PG UP"
+scancode = 16777235
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Main Keys/key grid 2"]
 margin_top = 45.0
@@ -975,7 +1022,8 @@ anchor_bottom = 0.0
 margin_right = 40.0
 margin_bottom = 42.0
 size_flags_horizontal = 3
-text = "esc"
+text = "DEL"
+scancode = 16777224
 
 [node name="F5" parent="Main Keys/key grid 2/HBoxContainer2" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -984,7 +1032,8 @@ margin_left = 44.0
 margin_right = 84.0
 margin_bottom = 42.0
 size_flags_horizontal = 3
-text = "esc"
+text = "END"
+scancode = 16777230
 
 [node name="F6" parent="Main Keys/key grid 2/HBoxContainer2" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -993,4 +1042,5 @@ margin_left = 88.0
 margin_right = 128.0
 margin_bottom = 42.0
 size_flags_horizontal = 3
-text = "esc"
+text = "PG DN"
+scancode = 16777236
