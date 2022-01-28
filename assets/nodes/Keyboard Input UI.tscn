@@ -46,6 +46,14 @@ anchor_bottom = 0.201238
 text = "F1"
 scancode = 16777244
 
+[node name="F6" parent="Main Keys" instance=ExtResource( 2 )]
+anchor_left = 0.714844
+anchor_top = 0.659443
+anchor_right = 0.754883
+anchor_bottom = 0.786378
+text = "UP"
+scancode = 16777232
+
 [node name="F2" parent="Main Keys" instance=ExtResource( 2 )]
 anchor_left = 0.145508
 anchor_top = 0.0743034
@@ -203,6 +211,73 @@ margin_bottom = 40.0
 size_flags_horizontal = 3
 text = "PAUSE"
 scancode = 16777225
+
+[node name="function keys lol4" type="HBoxContainer" parent="Main Keys"]
+anchor_left = 0.672852
+anchor_top = 0.79257
+anchor_right = 0.795898
+anchor_bottom = 0.916409
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Keyboard Input Key UI" parent="Main Keys/function keys lol4" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 39.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "LFT"
+scancode = 16777231
+
+[node name="Keyboard Input Key UI2" parent="Main Keys/function keys lol4" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 43.0
+margin_right = 82.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "DN"
+scancode = 16777234
+
+[node name="Keyboard Input Key UI3" parent="Main Keys/function keys lol4" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 86.0
+margin_right = 126.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "RT"
+scancode = 16777233
+
+[node name="function keys lol5" type="HBoxContainer" parent="Main Keys"]
+anchor_left = 0.81543
+anchor_top = 0.79257
+anchor_right = 0.938477
+anchor_bottom = 0.916409
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Keyboard Input Key UI" parent="Main Keys/function keys lol5" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 83.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.13
+text = "0"
+scancode = 16777350
+
+[node name="Keyboard Input Key UI2" parent="Main Keys/function keys lol5" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 87.0
+margin_right = 126.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "."
+scancode = 16777348
 
 [node name="key grid 1" type="VBoxContainer" parent="Main Keys"]
 anchor_left = 0.816406
@@ -1094,3 +1169,44 @@ margin_bottom = 42.0
 size_flags_horizontal = 3
 text = "PG DN"
 scancode = 16777236
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main Keys"]
+anchor_left = 0.944336
+anchor_top = 0.25387
+anchor_right = 0.983398
+anchor_bottom = 0.916409
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="F4" parent="Main Keys/VBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 38.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.07
+text = "-"
+scancode = 16777347
+
+[node name="F5" parent="Main Keys/VBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 42.0
+margin_right = 40.0
+margin_bottom = 128.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.35
+text = "+"
+scancode = 16777349
+
+[node name="F6" parent="Main Keys/VBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 132.0
+margin_right = 40.0
+margin_bottom = 214.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.25
+text = "ENT"
+scancode = 16777222
