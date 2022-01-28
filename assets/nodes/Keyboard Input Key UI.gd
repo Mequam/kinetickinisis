@@ -1,8 +1,13 @@
 extends Control
+class_name KeyboardInputKeyUI
 
 
 export(String) var text setget set_text
 export(int) var scancode
+export(bool) var key_pressed setget set_key_pressed
+func set_key_pressed(n_pressed):
+	key_pressed = n_pressed
+	$Button.pressed = key_pressed
 func set_text(n_text):
 	text = n_text
 	if not is_inside_tree(): yield(self,"ready")
