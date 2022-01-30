@@ -66,6 +66,9 @@ func move_and_collide(rel_vec: Vector3, infinite_inertia: bool = true, exclude_r
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	for node in get_inventory_nodes():
+		node.set_process(false)
+		node.set_process_input(false)
 	pass # Replace with function body.
 
 func _input(event):
@@ -83,6 +86,7 @@ func get_movement_velocities() -> Vector3:
 func _physics_process(delta):
 	move_and_collide(get_movement_velocities()*delta)
 	get_tree().call_group("Debug UI", "recieve_player_velocity", get_movement_velocities())
+	get_tree().call_group("Debug UI", "recieve_player_matrix", transform)
 #	print(OS.get_ticks_usec())
 #	print("PLAYER VELOCITY ", get_movement_velocities())
 #	print("PLAYER FRAME VELOCITY ", get_movement_velocities()*delta)
@@ -91,3 +95,8 @@ func _physics_process(delta):
 #		signal hey collided (col)
 #	move_and_slide(get_movement_velocities()*delta)
 #	move_and_slide_with_snap(get_movement_velocities()*delta, Vector3(0,0,0))
+
+func _process(delta):
+	get_tree().call_group("Debug UI", "recieve_player_matrix", transform)
+#	get_tree().call_group("Debug UI", "recieve_camera_view_vector", Vector3(3,14,159))
+	get_tree().call_group("Debug UI", "recieve_camera_view_vector", get_cam().global_transform.basis.z)

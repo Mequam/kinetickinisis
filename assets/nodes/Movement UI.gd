@@ -68,6 +68,7 @@ func refresh_buttons():
 func open():
 	previous_mouse_mode = Input.get_mouse_mode()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	refresh_buttons()
 	get_child(0).visible = true
 
 func close():
@@ -83,7 +84,8 @@ func toggle():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
-	place_movement_node_buttons()
+#	place_movement_node_buttons()
+	refresh_buttons()
 #	close()
 	pass # Replace with function body.
 
