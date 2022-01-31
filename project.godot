@@ -69,6 +69,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/scripts/nodes/ray_cast_teleport.gd"
 }, {
+"base": "PositionMoveNode",
+"class": "TimePortMoveNode",
+"language": "GDScript",
+"path": "res://assets/scripts/nodes/time_port.gd"
+}, {
 "base": "MovementNode",
 "class": "VelocityMoveNode",
 "language": "GDScript",
@@ -87,6 +92,7 @@ _global_script_class_icons={
 "PlayerCamera": "",
 "PositionMoveNode": "",
 "RayCastTeleportMove": "",
+"TimePortMoveNode": "",
 "VelocityMoveNode": ""
 }
 

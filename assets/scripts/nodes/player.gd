@@ -77,8 +77,12 @@ func _player_selected_option(option):
 	remove_child(selection_ui)
 	do_player_input  = true
 
+#adds a new movment node to the movment nodes bellow us
 func add_new_movement(mov_node)->void:
-	$movement.add_child(mov_node)
+	for node in get_node(movement_node_manager_node).get_children():
+		if mov_node.check_incomp(node):
+			node.queue_free()
+	get_node(movement_node_manager_node).add_child(mov_node)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass

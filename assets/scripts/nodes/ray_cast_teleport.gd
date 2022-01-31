@@ -8,7 +8,8 @@ var max_tele : int = 2
 
 func get_display_name()->String:
 	return "Teleport"
-	
+func get_class_relations()->Array:
+	return ["PlanarMoveNode"]
 func on_player_collided(col):
 	tele_count = 0
 	.on_player_collided(col)

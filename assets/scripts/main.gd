@@ -11,3 +11,4 @@ func _ready():
 	var c : CameraFPSMoveNode = CameraFPSMoveNode.new()
 	$Player.node_inventory.append(t)
 	$Player.node_inventory.append(c)
+	$Player.node_inventory.append(TimePortMoveNode.new())

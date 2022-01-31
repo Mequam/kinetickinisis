@@ -7,6 +7,19 @@ export(NodePath) var player_node_path : NodePath
 onready var player_node : Player = get_player()
 onready var camera_node : PlayerCamera = get_cam()
 
+#this returns a list of other movement nodes that we can use as a black list or white list depending on
+#the context we need it in
+
+func get_class_relations()->Array:
+	return []
+#returns a list of required controls, when we are bieng added to the
+#player if any other node has required controls they get rejected
+
+#TODO: this could be a saved array, and we could use integers to map plyer
+#actions for a more dynamic form of input
+func get_required_controls()->Array:
+	return []
+
 #gets the display name for the UI
 #we use a function so godot doesnt keep strings in memory
 #and so it is NON setable from outside sources
@@ -34,11 +47,6 @@ func set_position(pos : Vector3)->void:
 	get_player().transform.origin = pos
 func apply_cam_transform(vec : Vector3) -> Vector3:
 	return get_cam().global_transform*vec-get_cam().global_transform.origin
-
-#if another movement node (or node class) is incompatable with this one
-#the class and the name of the node should be listed here
-var _class_comp : Array = []
-var _node_comp : Array = []
 
 #returns true if the two rays have a non null intersection
 func array_intersects(arr1 : Array, arr2 : Array)->bool:
@@ -73,30 +81,21 @@ func overload_process(delta) -> void:
 	pass
 func _process(delta):
 	overload_process(delta)
+
 #returns true if we are compatable with the given node
-func check_incomp(mov_node)->bool:
+func check_incomp(mov_node,black_list : bool = true)->bool:
 	#godot makes checking if same type sad :(
 	if mov_node.is_in_group("MovementNode"):
-		return array_intersects(_class_comp,(mov_node as Node).get_groups()) or _node_comp.has((mov_node).get_movement_type)
+		return   (black_list == array_intersects(get_class_relations() ,(mov_node).get_groups()) or array_intersects(get_required_controls(),(mov_node).get_required_controls()))
 	return false
-func check_comp(mov_node)->bool:
-	return not check_incomp(mov_node)
-		
-#convinence function that removes the node from the tree if the given node is incompatable
-func remove_if_comp(mov_node)->void:
-	if check_incomp(mov_node):
-		remove_movement()
+func check_comp(mov_node,black_list : bool = true)->bool:
+	return not check_incomp(mov_node,black_list)
 #removes the node from the tree and performs cleaning opeerations
 func remove_movement():
 	queue_free()
 #to be overriden called when the player collides
 func player_collided(col):
 	pass
-#syntactic sugar function to get an action from our action code
-func code_to_action(code : int)->String:
-	if player_node.input_map.has(self) and (code in player_node.input_map[self]):
-		return player_node.input_map[self][code]
-	return ""
 #this works EXACTLY like the normal input function, but we only run it
 #when the player signals, giving the player a global input toggle
 func _on_player_input_recived(event):

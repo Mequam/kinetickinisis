@@ -4,10 +4,11 @@ class_name JumpMoveNode
 
 func _ready():
 	add_to_group("JumpMoveNode")
-
 func get_display_name()->String:
 	return "Jump"
-	
+func get_required_controls()->Array:
+	return ["jump"]
+
 var jump_dir : Vector3 = Vector3(0,10,0)
 
 var jumps : int = 0
