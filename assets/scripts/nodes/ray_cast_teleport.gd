@@ -22,5 +22,5 @@ func update_position():
 		tele_count += 1
 
 func _input(event):
-	if event.is_action_pressed("action_0"):
+	if input_action != "" and event.is_action_pressed(input_action):
 		update_position()

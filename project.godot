@@ -29,15 +29,30 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/scripts/CircleSelect.gd"
 }, {
+"base": "AccelerationMoveNode",
+"class": "GravityFlipMove",
+"language": "GDScript",
+"path": "res://assets/scripts/nodes/cool epic/gravity_flip.gd"
+}, {
 "base": "VelocityMoveNode",
 "class": "JumpMoveNode",
 "language": "GDScript",
 "path": "res://assets/scripts/nodes/jump_movment_node.gd"
 }, {
+"base": "Control",
+"class": "KeyboardInputKeyUI",
+"language": "GDScript",
+"path": "res://assets/nodes/Keyboard Input Key UI.gd"
+}, {
 "base": "Node",
 "class": "MovementNode",
 "language": "GDScript",
 "path": "res://assets/scripts/nodes/generic/movement_node.gd"
+}, {
+"base": "CanvasLayer",
+"class": "MovementUI",
+"language": "GDScript",
+"path": "res://assets/nodes/Movement UI.gd"
 }, {
 "base": "PlanarMoveNode",
 "class": "PlanarDashMoveNode",
@@ -79,8 +94,11 @@ _global_script_class_icons={
 "CameraFPSMoveNode": "",
 "CameraMoveNode": "",
 "CircleSelectControl": "",
+"GravityFlipMove": "",
 "JumpMoveNode": "",
+"KeyboardInputKeyUI": "",
 "MovementNode": "",
+"MovementUI": "",
 "PlanarDashMoveNode": "",
 "PlanarMoveNode": "",
 "Player": "",

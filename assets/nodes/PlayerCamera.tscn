@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/nodes/PlayerCamera.gd" type="Script" id=1]
+
+[sub_resource type="QuadMesh" id=1]
+
+[sub_resource type="SpatialMaterial" id=2]
+
+[sub_resource type="QuadMesh" id=3]
 
 [node name="HRotation" type="Position3D"]
 
@@ -14,3 +20,13 @@ script = ExtResource( 1 )
 H_Rotate = NodePath("../../..")
 V_Rotate = NodePath("../..")
 D_Rotate = NodePath("..")
+
+[node name="CSGMesh" type="CSGMesh" parent="VRotation/DRoate/Camera"]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, -0.835523 )
+mesh = SubResource( 1 )
+material = SubResource( 2 )
+
+[node name="CSGMesh2" type="CSGMesh" parent="VRotation/DRoate/Camera"]
+transform = Transform( 0.305944, 0.305944, -2.67464e-08, 0.305944, -0.305944, 2.67464e-08, 0, -3.78252e-08, -0.43267, 0, 0.52201, -0.786814 )
+mesh = SubResource( 3 )
+material = SubResource( 2 )

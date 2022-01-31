@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/nodes/PlayerCamera.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/scripts/nodes/player.gd" type="Script" id=2]
@@ -8,40 +8,73 @@
 [ext_resource path="res://assets/scripts/nodes/generic/camera_fps_node.gd" type="Script" id=6]
 [ext_resource path="res://assets/scripts/nodes/ray_cast_teleport.gd" type="Script" id=7]
 [ext_resource path="res://assets/scripts/nodes/planar_dash_node.gd" type="Script" id=8]
+[ext_resource path="res://assets/nodes/Movement UI.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/scripts/nodes/cool epic/gravity_flip.gd" type="Script" id=10]
 
 [sub_resource type="CapsuleShape" id=1]
+
+[sub_resource type="CubeMesh" id=2]
+size = Vector3( 0.1, 0.1, 2 )
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 0, 0, 1, 1 )
+
+[sub_resource type="CubeMesh" id=4]
+size = Vector3( 0.1, 2, 0.1 )
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_color = Color( 0, 1, 0, 1 )
+
+[sub_resource type="CubeMesh" id=6]
+size = Vector3( 2, 0.1, 0.1 )
+
+[sub_resource type="SpatialMaterial" id=7]
+albedo_color = Color( 1, 0, 0, 1 )
 
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 2 )
 camera = NodePath("HRotation/VRotation/DRoate/Camera")
-movement_node_manager_node = NodePath("movement")
+movement_node_manager_node = NodePath("Movement Nodes")
+movement_inventory_manager_node = NodePath("Movement Inventory")
+movement_ui = NodePath("Movement UI")
 
-[node name="movement" type="Node" parent="."]
+[node name="Movement Nodes" type="Node" parent="."]
 
-[node name="JumpMoveNode" type="Node" parent="movement"]
+[node name="Jump" type="Node" parent="Movement Nodes"]
 script = ExtResource( 5 )
 player_node_path = NodePath("../..")
+input_action = "jump"
 max_jumps = 5
 
-[node name="AccelerationMoveNode" type="Node" parent="movement"]
+[node name="Directional Movement" type="Node" parent="Movement Nodes"]
+script = ExtResource( 4 )
+movement_speed = 10.0
+
+[node name="CameraFPSMoveNode" type="Node" parent="Movement Nodes"]
+script = ExtResource( 6 )
+sensitivity = Vector2( 20, 20 )
+
+[node name="GravityFlipMove" type="Node" parent="Movement Nodes"]
+script = ExtResource( 10 )
+input_action = "action_2"
+slide_threshold = -0.127
+can_slide = true
+
+[node name="Movement Inventory" type="Node" parent="."]
+
+[node name="Gravity" type="Node" parent="Movement Inventory"]
 script = ExtResource( 3 )
 player_node_path = NodePath("../..")
 can_slide = true
 acceleration = Vector3( 0, -9.813, 0 )
 
-[node name="PlanarMoveNode" type="Node" parent="movement"]
-script = ExtResource( 4 )
-movement_speed = 10.0
-
-[node name="CameraFPSMoveNode" type="Node" parent="movement"]
-script = ExtResource( 6 )
-sensitivity = Vector2( 20, 20 )
-
-[node name="RayCastTeleportMove" type="Node" parent="movement"]
+[node name="RayCastTeleportMove" type="Node" parent="Movement Inventory"]
 script = ExtResource( 7 )
+input_action = "action_0"
 
-[node name="PlanarDashMoveNode" type="Node" parent="movement"]
+[node name="PlanarDashMoveNode" type="Node" parent="Movement Inventory"]
 script = ExtResource( 8 )
+input_action = "action_1"
 movement_speed = 50.0
 
 [node name="HRotation" parent="." instance=ExtResource( 1 )]
@@ -49,3 +82,21 @@ movement_speed = 50.0
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
 shape = SubResource( 1 )
+
+[node name="Movement UI" parent="." instance=ExtResource( 9 )]
+player_node = NodePath("..")
+
+[node name="Z" type="CSGMesh" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1 )
+mesh = SubResource( 2 )
+material = SubResource( 3 )
+
+[node name="Y" type="CSGMesh" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+mesh = SubResource( 4 )
+material = SubResource( 5 )
+
+[node name="X" type="CSGMesh" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
+mesh = SubResource( 6 )
+material = SubResource( 7 )

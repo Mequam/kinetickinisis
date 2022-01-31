@@ -199,7 +199,7 @@ func _on_Input_gui_input(event : InputEvent):
 
 func _ready():
 	function_dictionary["cow"] = "print_cow"
-	input_textbox.grab_focus()
+#	input_textbox.grab_focus()
 	pass # Replace with function body.
 
 

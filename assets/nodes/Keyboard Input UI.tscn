@@ -1,0 +1,1211 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/images/keyboard ref.jpg" type="Texture" id=1]
+[ext_resource path="res://assets/nodes/Keyboard Input Key UI.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/nodes/Keyboard Input UI.gd" type="Script" id=3]
+
+[node name="Keyboard Input UI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 0.538333
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Position2D" type="Position2D" parent="."]
+visible = false
+scale = Vector2( 1.1388, 1.1388 )
+
+[node name="KeyboardRef" type="Sprite" parent="Position2D"]
+visible = false
+position = Vector2( 446, 231 )
+scale = Vector2( 0.916587, 0.916587 )
+texture = ExtResource( 1 )
+
+[node name="Main Keys" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Escape" parent="Main Keys" instance=ExtResource( 2 )]
+anchor_left = 0.0166016
+anchor_top = 0.0743034
+anchor_right = 0.0566406
+anchor_bottom = 0.201238
+text = "ESC"
+scancode = 16777217
+
+[node name="F1" parent="Main Keys" instance=ExtResource( 2 )]
+anchor_left = 0.101563
+anchor_top = 0.0743034
+anchor_right = 0.141602
+anchor_bottom = 0.201238
+text = "F1"
+scancode = 16777244
+
+[node name="F6" parent="Main Keys" instance=ExtResource( 2 )]
+anchor_left = 0.714844
+anchor_top = 0.659443
+anchor_right = 0.754883
+anchor_bottom = 0.786378
+text = "UP"
+scancode = 16777232
+
+[node name="F2" parent="Main Keys" instance=ExtResource( 2 )]
+anchor_left = 0.145508
+anchor_top = 0.0743034
+anchor_right = 0.185547
+anchor_bottom = 0.201238
+text = "F2"
+scancode = 16777245
+
+[node name="F3" parent="Main Keys" instance=ExtResource( 2 )]
+anchor_left = 0.186523
+anchor_top = 0.0743034
+anchor_right = 0.226563
+anchor_bottom = 0.201238
+text = "F3"
+scancode = 16777246
+
+[node name="F4" parent="Main Keys" instance=ExtResource( 2 )]
+anchor_left = 0.229492
+anchor_top = 0.0743034
+anchor_right = 0.269531
+anchor_bottom = 0.201238
+text = "F4"
+scancode = 16777247
+
+[node name="function keys lol" type="HBoxContainer" parent="Main Keys"]
+anchor_left = 0.292969
+anchor_top = 0.0743034
+anchor_right = 0.462891
+anchor_bottom = 0.198142
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Keyboard Input Key UI" parent="Main Keys/function keys lol" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "F5"
+scancode = 16777248
+
+[node name="Keyboard Input Key UI2" parent="Main Keys/function keys lol" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 44.0
+margin_right = 85.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "F6"
+scancode = 16777249
+
+[node name="Keyboard Input Key UI3" parent="Main Keys/function keys lol" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 89.0
+margin_right = 129.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "F7"
+scancode = 16777250
+
+[node name="Keyboard Input Key UI4" parent="Main Keys/function keys lol" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 133.0
+margin_right = 174.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "F8"
+scancode = 16777251
+
+[node name="function keys lol2" type="HBoxContainer" parent="Main Keys"]
+anchor_left = 0.481445
+anchor_top = 0.0743034
+anchor_right = 0.651367
+anchor_bottom = 0.198142
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Keyboard Input Key UI" parent="Main Keys/function keys lol2" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "F9"
+scancode = 16777252
+
+[node name="Keyboard Input Key UI2" parent="Main Keys/function keys lol2" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 44.0
+margin_right = 85.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "F10"
+scancode = 16777253
+
+[node name="Keyboard Input Key UI3" parent="Main Keys/function keys lol2" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 89.0
+margin_right = 129.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "F11"
+scancode = 16777254
+
+[node name="Keyboard Input Key UI4" parent="Main Keys/function keys lol2" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 133.0
+margin_right = 174.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "F12"
+scancode = 16777255
+
+[node name="function keys lol3" type="HBoxContainer" parent="Main Keys"]
+anchor_left = 0.672852
+anchor_top = 0.0743034
+anchor_right = 0.795898
+anchor_bottom = 0.198142
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Keyboard Input Key UI" parent="Main Keys/function keys lol3" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 39.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "PRT SC"
+scancode = 16777226
+
+[node name="Keyboard Input Key UI2" parent="Main Keys/function keys lol3" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 43.0
+margin_right = 82.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "SCR LK"
+scancode = 16777243
+
+[node name="Keyboard Input Key UI3" parent="Main Keys/function keys lol3" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 86.0
+margin_right = 126.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "PAUSE"
+scancode = 16777225
+
+[node name="function keys lol4" type="HBoxContainer" parent="Main Keys"]
+anchor_left = 0.672852
+anchor_top = 0.79257
+anchor_right = 0.795898
+anchor_bottom = 0.916409
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Keyboard Input Key UI" parent="Main Keys/function keys lol4" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 39.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "LFT"
+scancode = 16777231
+
+[node name="Keyboard Input Key UI2" parent="Main Keys/function keys lol4" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 43.0
+margin_right = 82.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "DN"
+scancode = 16777234
+
+[node name="Keyboard Input Key UI3" parent="Main Keys/function keys lol4" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 86.0
+margin_right = 126.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "RT"
+scancode = 16777233
+
+[node name="function keys lol5" type="HBoxContainer" parent="Main Keys"]
+anchor_left = 0.81543
+anchor_top = 0.79257
+anchor_right = 0.938477
+anchor_bottom = 0.916409
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Keyboard Input Key UI" parent="Main Keys/function keys lol5" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 83.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.13
+text = "0"
+scancode = 16777350
+
+[node name="Keyboard Input Key UI2" parent="Main Keys/function keys lol5" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 87.0
+margin_right = 126.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "."
+scancode = 16777348
+
+[node name="key grid 1" type="VBoxContainer" parent="Main Keys"]
+anchor_left = 0.816406
+anchor_top = 0.256966
+anchor_right = 0.902344
+anchor_bottom = 0.662539
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Main Keys/key grid 1"]
+margin_right = 128.0
+margin_bottom = 39.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="F4" parent="Main Keys/key grid 1/HBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 39.0
+size_flags_horizontal = 3
+text = "NUM"
+scancode = 16777242
+
+[node name="F5" parent="Main Keys/key grid 1/HBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 44.0
+margin_right = 84.0
+margin_bottom = 39.0
+size_flags_horizontal = 3
+text = "/"
+scancode = 16777346
+
+[node name="F6" parent="Main Keys/key grid 1/HBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 88.0
+margin_right = 128.0
+margin_bottom = 39.0
+size_flags_horizontal = 3
+text = "*"
+scancode = 16777345
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Main Keys/key grid 1"]
+margin_top = 43.0
+margin_right = 128.0
+margin_bottom = 83.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="F4" parent="Main Keys/key grid 1/HBoxContainer2" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "7"
+scancode = 16777357
+
+[node name="F5" parent="Main Keys/key grid 1/HBoxContainer2" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 44.0
+margin_right = 84.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "8"
+scancode = 16777358
+
+[node name="F6" parent="Main Keys/key grid 1/HBoxContainer2" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 88.0
+margin_right = 128.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "9"
+scancode = 16777359
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Main Keys/key grid 1"]
+margin_top = 87.0
+margin_right = 128.0
+margin_bottom = 127.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="F4" parent="Main Keys/key grid 1/HBoxContainer3" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "4"
+scancode = 16777354
+
+[node name="F5" parent="Main Keys/key grid 1/HBoxContainer3" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 44.0
+margin_right = 84.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "5"
+scancode = 16777355
+
+[node name="F6" parent="Main Keys/key grid 1/HBoxContainer3" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 88.0
+margin_right = 128.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "6"
+scancode = 16777356
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Main Keys/key grid 1"]
+margin_top = 131.0
+margin_right = 128.0
+margin_bottom = 171.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="F4" parent="Main Keys/key grid 1/HBoxContainer4" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "1"
+scancode = 16777351
+
+[node name="F5" parent="Main Keys/key grid 1/HBoxContainer4" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 44.0
+margin_right = 84.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "2"
+scancode = 16777352
+
+[node name="F6" parent="Main Keys/key grid 1/HBoxContainer4" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 88.0
+margin_right = 128.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "3"
+scancode = 16777353
+
+[node name="key grid 3" type="VBoxContainer" parent="Main Keys"]
+anchor_left = 0.0166016
+anchor_top = 0.256966
+anchor_right = 0.615234
+anchor_bottom = 0.801858
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Main Keys/key grid 3"]
+margin_right = 653.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="F4" parent="Main Keys/key grid 3/HBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 39.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "`"
+scancode = 96
+
+[node name="F5" parent="Main Keys/key grid 3/HBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 43.0
+margin_right = 83.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "1"
+scancode = 49
+
+[node name="F6" parent="Main Keys/key grid 3/HBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 87.0
+margin_right = 127.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "2"
+scancode = 50
+
+[node name="F7" parent="Main Keys/key grid 3/HBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 131.0
+margin_right = 171.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "3"
+scancode = 51
+
+[node name="F8" parent="Main Keys/key grid 3/HBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 175.0
+margin_right = 215.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "4"
+scancode = 52
+
+[node name="F9" parent="Main Keys/key grid 3/HBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 219.0
+margin_right = 259.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "5"
+scancode = 53
+
+[node name="F10" parent="Main Keys/key grid 3/HBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 263.0
+margin_right = 302.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "6"
+scancode = 54
+
+[node name="F11" parent="Main Keys/key grid 3/HBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 306.0
+margin_right = 346.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "7"
+scancode = 55
+
+[node name="F12" parent="Main Keys/key grid 3/HBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 350.0
+margin_right = 390.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "8"
+scancode = 56
+
+[node name="F13" parent="Main Keys/key grid 3/HBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 394.0
+margin_right = 434.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "9"
+scancode = 57
+
+[node name="F14" parent="Main Keys/key grid 3/HBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 438.0
+margin_right = 478.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "0"
+scancode = 48
+
+[node name="F15" parent="Main Keys/key grid 3/HBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 482.0
+margin_right = 522.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "-"
+scancode = 45
+
+[node name="F16" parent="Main Keys/key grid 3/HBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 526.0
+margin_right = 566.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "="
+scancode = 61
+
+[node name="Back" parent="Main Keys/key grid 3/HBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 570.0
+margin_right = 653.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.08
+text = "BACK"
+scancode = 16777220
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Main Keys/key grid 3"]
+margin_top = 44.0
+margin_right = 653.0
+margin_bottom = 84.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Tab" parent="Main Keys/key grid 3/HBoxContainer2" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 65.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.65
+text = "TAB"
+scancode = 16777218
+
+[node name="2" parent="Main Keys/key grid 3/HBoxContainer2" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 69.0
+margin_right = 108.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "Q"
+scancode = 81
+
+[node name="3" parent="Main Keys/key grid 3/HBoxContainer2" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 112.0
+margin_right = 151.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "W"
+scancode = 87
+
+[node name="4" parent="Main Keys/key grid 3/HBoxContainer2" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 155.0
+margin_right = 195.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "E"
+scancode = 69
+
+[node name="5" parent="Main Keys/key grid 3/HBoxContainer2" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 199.0
+margin_right = 238.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "R"
+scancode = 82
+
+[node name="6" parent="Main Keys/key grid 3/HBoxContainer2" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 242.0
+margin_right = 282.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "T"
+scancode = 84
+
+[node name="7" parent="Main Keys/key grid 3/HBoxContainer2" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 286.0
+margin_right = 325.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "Y"
+scancode = 89
+
+[node name="8" parent="Main Keys/key grid 3/HBoxContainer2" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 329.0
+margin_right = 369.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "U"
+scancode = 85
+
+[node name="9" parent="Main Keys/key grid 3/HBoxContainer2" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 373.0
+margin_right = 412.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "I"
+scancode = 73
+
+[node name="10" parent="Main Keys/key grid 3/HBoxContainer2" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 416.0
+margin_right = 455.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "O"
+scancode = 79
+
+[node name="11" parent="Main Keys/key grid 3/HBoxContainer2" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 459.0
+margin_right = 499.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "P"
+scancode = 80
+
+[node name="12" parent="Main Keys/key grid 3/HBoxContainer2" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 503.0
+margin_right = 542.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "["
+scancode = 123
+
+[node name="13" parent="Main Keys/key grid 3/HBoxContainer2" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 546.0
+margin_right = 586.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "]"
+scancode = 125
+
+[node name="14" parent="Main Keys/key grid 3/HBoxContainer2" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 590.0
+margin_right = 653.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.59
+text = "\\"
+scancode = 92
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Main Keys/key grid 3"]
+margin_top = 88.0
+margin_right = 653.0
+margin_bottom = 128.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="1" parent="Main Keys/key grid 3/HBoxContainer3" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 75.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.9
+text = "CAPS"
+scancode = 16777241
+
+[node name="2" parent="Main Keys/key grid 3/HBoxContainer3" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 79.0
+margin_right = 118.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "A"
+scancode = 65
+
+[node name="3" parent="Main Keys/key grid 3/HBoxContainer3" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 122.0
+margin_right = 162.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "s"
+scancode = 83
+
+[node name="4" parent="Main Keys/key grid 3/HBoxContainer3" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 166.0
+margin_right = 206.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "D"
+scancode = 68
+
+[node name="5" parent="Main Keys/key grid 3/HBoxContainer3" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 210.0
+margin_right = 249.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "F"
+scancode = 70
+
+[node name="6" parent="Main Keys/key grid 3/HBoxContainer3" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 253.0
+margin_right = 293.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "G"
+scancode = 71
+
+[node name="7" parent="Main Keys/key grid 3/HBoxContainer3" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 297.0
+margin_right = 336.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "H"
+scancode = 72
+
+[node name="8" parent="Main Keys/key grid 3/HBoxContainer3" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 340.0
+margin_right = 380.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "J"
+scancode = 74
+
+[node name="9" parent="Main Keys/key grid 3/HBoxContainer3" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 384.0
+margin_right = 424.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "K"
+scancode = 75
+
+[node name="10" parent="Main Keys/key grid 3/HBoxContainer3" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 428.0
+margin_right = 467.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "L"
+scancode = 76
+
+[node name="11" parent="Main Keys/key grid 3/HBoxContainer3" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 471.0
+margin_right = 511.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = ";"
+scancode = 59
+
+[node name="12" parent="Main Keys/key grid 3/HBoxContainer3" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 515.0
+margin_right = 555.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "'"
+scancode = 39
+
+[node name="13" parent="Main Keys/key grid 3/HBoxContainer3" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 559.0
+margin_right = 653.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.37
+text = "ENTER"
+scancode = 16777221
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Main Keys/key grid 3"]
+margin_top = 132.0
+margin_right = 653.0
+margin_bottom = 172.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="1" parent="Main Keys/key grid 3/HBoxContainer4" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 95.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.41
+text = "SHIFT"
+scancode = 16777237
+
+[node name="2" parent="Main Keys/key grid 3/HBoxContainer4" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 99.0
+margin_right = 139.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "Z"
+scancode = 90
+
+[node name="3" parent="Main Keys/key grid 3/HBoxContainer4" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 143.0
+margin_right = 183.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "X"
+scancode = 88
+
+[node name="4" parent="Main Keys/key grid 3/HBoxContainer4" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 187.0
+margin_right = 226.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "C"
+scancode = 67
+
+[node name="5" parent="Main Keys/key grid 3/HBoxContainer4" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 230.0
+margin_right = 270.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "V"
+scancode = 86
+
+[node name="6" parent="Main Keys/key grid 3/HBoxContainer4" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 274.0
+margin_right = 314.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "B"
+scancode = 66
+
+[node name="7" parent="Main Keys/key grid 3/HBoxContainer4" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 318.0
+margin_right = 357.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "N"
+scancode = 78
+
+[node name="8" parent="Main Keys/key grid 3/HBoxContainer4" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 361.0
+margin_right = 401.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "M"
+scancode = 77
+
+[node name="9" parent="Main Keys/key grid 3/HBoxContainer4" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 405.0
+margin_right = 445.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = ","
+scancode = 44
+
+[node name="10" parent="Main Keys/key grid 3/HBoxContainer4" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 449.0
+margin_right = 488.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "."
+scancode = 46
+
+[node name="11" parent="Main Keys/key grid 3/HBoxContainer4" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 492.0
+margin_right = 532.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "/"
+scancode = 47
+
+[node name="12" parent="Main Keys/key grid 3/HBoxContainer4" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 536.0
+margin_right = 653.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.93
+text = "SHIFT"
+scancode = 16777237
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="Main Keys/key grid 3"]
+margin_top = 176.0
+margin_right = 653.0
+margin_bottom = 216.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="1" parent="Main Keys/key grid 3/HBoxContainer5" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 51.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "CTRL"
+scancode = 16777238
+
+[node name="2" parent="Main Keys/key grid 3/HBoxContainer5" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 55.0
+margin_right = 106.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "WIN"
+scancode = 16777260
+
+[node name="3" parent="Main Keys/key grid 3/HBoxContainer5" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 110.0
+margin_right = 161.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "ALT"
+scancode = 16777240
+
+[node name="4" parent="Main Keys/key grid 3/HBoxContainer5" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 165.0
+margin_right = 432.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.24
+text = "SPACE"
+scancode = 32
+
+[node name="5" parent="Main Keys/key grid 3/HBoxContainer5" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 436.0
+margin_right = 487.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "esc"
+
+[node name="6" parent="Main Keys/key grid 3/HBoxContainer5" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 491.0
+margin_right = 542.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "esc"
+
+[node name="7" parent="Main Keys/key grid 3/HBoxContainer5" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 546.0
+margin_right = 597.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "MENU"
+scancode = 16777262
+
+[node name="8" parent="Main Keys/key grid 3/HBoxContainer5" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 601.0
+margin_right = 653.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "esc"
+
+[node name="key grid 2" type="VBoxContainer" parent="Main Keys"]
+anchor_left = 0.671875
+anchor_top = 0.25387
+anchor_right = 0.757813
+anchor_bottom = 0.399381
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Main Keys/key grid 2"]
+margin_right = 128.0
+margin_bottom = 41.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="F4" parent="Main Keys/key grid 2/HBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 41.0
+size_flags_horizontal = 3
+text = "INS"
+scancode = 16777223
+
+[node name="F5" parent="Main Keys/key grid 2/HBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 44.0
+margin_right = 84.0
+margin_bottom = 41.0
+size_flags_horizontal = 3
+text = "HOME"
+scancode = 16777229
+
+[node name="F6" parent="Main Keys/key grid 2/HBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 88.0
+margin_right = 128.0
+margin_bottom = 41.0
+size_flags_horizontal = 3
+text = "PG UP"
+scancode = 16777235
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Main Keys/key grid 2"]
+margin_top = 45.0
+margin_right = 128.0
+margin_bottom = 87.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="F4" parent="Main Keys/key grid 2/HBoxContainer2" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 42.0
+size_flags_horizontal = 3
+text = "DEL"
+scancode = 16777224
+
+[node name="F5" parent="Main Keys/key grid 2/HBoxContainer2" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 44.0
+margin_right = 84.0
+margin_bottom = 42.0
+size_flags_horizontal = 3
+text = "END"
+scancode = 16777230
+
+[node name="F6" parent="Main Keys/key grid 2/HBoxContainer2" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 88.0
+margin_right = 128.0
+margin_bottom = 42.0
+size_flags_horizontal = 3
+text = "PG DN"
+scancode = 16777236
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main Keys"]
+anchor_left = 0.944336
+anchor_top = 0.25387
+anchor_right = 0.983398
+anchor_bottom = 0.916409
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="F4" parent="Main Keys/VBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 38.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.07
+text = "-"
+scancode = 16777347
+
+[node name="F5" parent="Main Keys/VBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 42.0
+margin_right = 40.0
+margin_bottom = 128.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.35
+text = "+"
+scancode = 16777349
+
+[node name="F6" parent="Main Keys/VBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 132.0
+margin_right = 40.0
+margin_bottom = 214.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.25
+text = "ENT"
+scancode = 16777222
