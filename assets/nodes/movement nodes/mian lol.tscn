@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/nodes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/nodes/Debug UI.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/debug_texture.png" type="Texture" id=3]
+[ext_resource path="res://assets/nodes/Movement Item.tscn" type="PackedScene" id=4]
 
 [sub_resource type="SpatialMaterial" id=4]
 albedo_color = Color( 1, 0, 0, 1 )
@@ -823,3 +824,6 @@ width = 1.0
 rotation = -1.57079
 points = PoolVector2Array( -10, 0, 10, 0 )
 width = 1.0
+
+[node name="Movement Item" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.2854, -8.75103, -3.88628 )
