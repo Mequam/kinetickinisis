@@ -19,7 +19,7 @@ func get_vel()->Vector3:
 func overload_process(delta):
 	.overload_process(delta)
 
-func _input(event):
+func _player_input(event : InputEvent):
 	if input_action != "" and event.is_action_pressed(input_action):
 		timer_node.start() 
 		

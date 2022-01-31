@@ -21,6 +21,6 @@ func update_position():
 		player_node.global_transform.origin = data["position"]+Vector3(0,10,0)*0
 		tele_count += 1
 
-func _input(event):
+func _player_input(event : InputEvent):
 	if input_action != "" and event.is_action_pressed(input_action):
 		update_position()

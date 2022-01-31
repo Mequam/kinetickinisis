@@ -10,8 +10,10 @@ export(NodePath) var movement_node_manager_node
 export(NodePath) var movement_inventory_manager_node
 export(NodePath) var movement_ui
 export(int) var collision_window : int = int(1e+6/15)
-
+export(bool) var do_the_input_thing = true
 var time_of_last_collision : int = 0
+
+var movement_inventory = []
 
 #input map used by nodes that are added to the scene
 #the keys in this dictionary are references to movement nodes
@@ -34,22 +36,25 @@ func get_movement_nodes():
 	return get_node(movement_node_manager_node).get_children()
 
 func get_inventory_nodes():
-	return get_node(movement_inventory_manager_node).get_children()
+	return movement_inventory
 
 func move_node_into_movements(node : Node):
 	if node.get_parent():
 		node.get_parent().remove_child(node)
-		node.set_process(true)
-		node.set_process_input(true)
+#		node.set_process(true)
+#		node.set_process_input(true)
+	if node in movement_inventory:
+		movement_inventory.erase(node)
 	get_node(movement_node_manager_node).add_child(node)
 	pass
 
 func move_node_into_inventory(node : Node):
 	if node.get_parent():
 		node.get_parent().remove_child(node)
-		node.set_process(false)
-		node.set_process_input(false)
-	get_node(movement_inventory_manager_node).add_child(node)
+#		node.set_process(false)
+#		node.set_process_input(false)
+#	get_node(movement_inventory_manager_node).add_child(node)
+	movement_inventory.append(node)
 	pass
 
 func move_and_collide(rel_vec: Vector3, infinite_inertia: bool = true, exclude_raycast_shapes: bool = true, test_only: bool = false)->KinematicCollision:
@@ -78,6 +83,9 @@ func _ready():
 	pass # Replace with function body.
 
 func _input(event):
+	if do_the_input_thing:
+		for node in get_movement_nodes():
+			node._player_input(event)
 	if event.is_action_pressed("inventory"):
 		get_node(movement_ui).toggle()
 

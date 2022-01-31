@@ -39,11 +39,21 @@ func rotate_hv(vec : Vector2) -> void:
 	pass
 
 func look_at_point(point : Vector3):
+#	look_at()
 	var relative_point = get_node(H_Rotate).global_transform.affine_inverse()*point
 #	var relative_point = point - global_transform.origin
-	var horizontal_angle = atan2(relative_point.z,relative_point.x)
+	var horizontal_angle = -atan2(relative_point.x,-relative_point.z)
 	var vertical_angle = atan2(relative_point.y,sqrt(relative_point.z*relative_point.z+relative_point.x*relative_point.x))
+	var debug_string = ""
+	debug_string += "Horizontal Rotation: %4.4f"%(get_node(H_Rotate) as Position3D).rotation_degrees.y
+#	print("h_rot_rn ", (get_node(H_Rotate) as Position3D).rotation_degrees.y)
+#	print("rot_diff ", horizontal_angle)
+	debug_string += "\nRotational Difference: %4.4f"%horizontal_angle
+	debug_string += "\nRotational Difference Degrees: %4.4f"%rad2deg(horizontal_angle)
+#	print("rot_diff_deg ", rad2deg(horizontal_angle))
 	rotate_h(rad2deg(horizontal_angle))
+#	print("h_rot_new ", (get_node(H_Rotate) as Position3D).rotation_degrees.y)
+	get_tree().call_group("thestupidrotation", "recieve_rotational_debug_data", debug_string)
 #	rotate_v(rad2deg(vertical_angle))
 #	self.gimbal_rotation_degrees.x = rad2deg(horizontal_angle)
 	self.gimbal_rotation_degrees.y = rad2deg(vertical_angle)

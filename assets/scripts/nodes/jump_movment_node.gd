@@ -20,7 +20,7 @@ func on_player_collided(collision):
 	jumps = 0
 	.on_player_collided(collision)
 
-func _input(event):
+func _player_input(event : InputEvent):
 	if jumps < max_jumps and event.is_action_pressed(input_action):
 #		velocity += player_node.global_transform*jump_dir
 		velocity += player_node.transform*jump_dir-player_node.transform.origin

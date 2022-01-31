@@ -13,7 +13,7 @@ export(Vector2) var sensitivity : Vector2 = Vector2(1,1)
 func _ready():
 	add_to_group("CameraFPSMoveNode")
 
-func _input(event):
+func _player_input(event : InputEvent):
 	var l_vec = Vector2(0,0)
 	if event is InputEventJoypadMotion:
 		l_vec += Input.get_vector("look_left","look_right","look_down","look_up")

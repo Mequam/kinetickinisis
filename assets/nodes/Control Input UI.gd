@@ -13,13 +13,19 @@ func clear_inputs():
 		keyboard_ui.clear_keys()
 	pass
 
-func highlight_action_inputs(action : String):
-	clear_inputs()
+func highlight_action_inputs(action : String, clear = true):
+	if clear: clear_inputs()
 	if InputMap.has_action(action):
 		for event in InputMap.get_action_list(action):
 			if event is InputEventKey:
 				get_node(keyboard_ui_node_path).press_scancode(event.scancode)
 # Called when the node enters the scene tree for the first time.
+
+func highlight_multi_action_inputs(actions : Dictionary):
+	clear_inputs()
+	for key in actions.keys():
+		highlight_action_inputs(actions[key], false)
+
 func _ready():
 	pass # Replace with function body.
 

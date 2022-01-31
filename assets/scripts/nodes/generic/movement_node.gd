@@ -4,10 +4,19 @@ extends Node
 
 class_name MovementNode
 export(NodePath) var player_node_path : NodePath
-export(String) var input_action
-export(Dictionary) var multi_input_actions
+export(String) var input_action setget set_input_action
+export(Dictionary) var multi_input_actions = {"input_action":input_action} setget set_multi_input_actions
 onready var player_node : Player = get_player()
 onready var camera_node : PlayerCamera = get_cam()
+
+
+func set_input_action(n_action):
+	input_action = n_action
+	multi_input_actions[multi_input_actions.keys()[0]] = input_action
+	
+func set_multi_input_actions(n_actions):
+	multi_input_actions = n_actions
+	input_action = multi_input_actions.values()[0]
 
 #returns the player, which serves as a data hub
 func get_player()->Player:
@@ -86,6 +95,10 @@ func overload_process(delta) -> void:
 func _process(delta):
 	overload_process(delta)
 #returns true if we are compatable with the given node
+
+func _player_input(event : InputEvent):
+	pass
+
 func check_incomp(mov_node)->bool:
 	#godot makes checking if same type sad :(
 	if mov_node.is_in_group("MovementNode"):
