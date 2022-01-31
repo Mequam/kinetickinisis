@@ -1,0 +1,45 @@
+The AlgolRevived Font Package
+--------------------------
+
+AlgolRevived is a geometric serifed typeface reviving the Algol font designed by Adrian Frutiger in 1963 for typesetting the code portions of a manual on ALGOL. Two weights are provided: regular and medium, with both upright and slanted versions. Though the font is designed for typesetting code, it is not monospaced, and in my opinion, it doesnt look too bad if you have a fondness for text with a typewritten appearance with few typeset frills like f-ligatures, small caps and old-style figures.
+
+The fonts are provided in OpenType and PostScript formats,are released under SIL's OFL, details of which are spelled out in the file OFL.txt accompanying the package.
+
+The TeX font metrics, font definition files and other support files for AlgolRevived,
+i.e., the other files in the archive algolrevived.zip, may be distributed and/or modified
+under the conditions of the LaTeX Project Public License, either version 1.3 of
+this license or (at your option) any later version.  The latest version of this
+license is in http://www.latex-project.org/lppl.txt and version 1.3 or later is
+part of all distributions of LaTeX version 2003/12/01 or later. All files in that archive are
+
+  Copyright (c) 2017--2019 Michael Sharpe
+
+Files provided "as is", with no warranties.
+
+The support files are provided in encodings OT1, T1, TS1 and LY1 for users of Western scripts.
+
+Current version: 1.041 2019-11-12
+
+Changes in version 1.041
+Corrections to the fd files.
+
+Changes in version 1.04
+1. Added missing zalts1.enc so that textcomp works as expected.
+2. Changed mb to sb in all fd files, so that medium weight is mapped to a valid NFSS code.
+
+Changes in version 1.03
+Changed \let\zal@typewriter\@empty to \global\let\zal@typewriter\@empty in all fd files to prevent later problems if the fd file is called from within a group. (Thanks to Frank Mittelbach.)
+
+Changes in version 1.02
+1. Documentation correction.
+2. Corrected fd files. (Thanks to Frank Mittelbach for spotting the problem.)
+
+Changes in version 1.01
+1. Added overlooked typewriter support (.sty and .fd files) for LaTeX.
+2. Small documentation changes.
+
+It is a pleasure to record my gratitude to Chuck Bigelow who provided a detailed critique of an earlier version of these fonts, which was most helpful in refining the glyph shapes and spacing. 
+
+Please send comments and bug reports or suggestions for improvement to
+
+msharpe at ucsd dot edu

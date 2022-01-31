@@ -5,6 +5,9 @@ class_name JumpMoveNode
 func _ready():
 	add_to_group("JumpMoveNode")
 
+func get_display_name()->String:
+	return "Jump"
+	
 var jump_dir : Vector3 = Vector3(0,10,0)
 
 var jumps : int = 0
@@ -19,7 +22,7 @@ func on_player_collided(collision):
 	jumps = 0
 	.on_player_collided(collision)
 
-func _input(event):
+func _on_player_input_recived(event):
 	if jumps < max_jumps and event.is_action_pressed("jump"):
 		velocity += jump_dir
 		jumps += 1

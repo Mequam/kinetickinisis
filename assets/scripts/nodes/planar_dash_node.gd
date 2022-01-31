@@ -5,7 +5,9 @@ extends PlanarMoveNode
 
 class_name PlanarDashMoveNode
 
-
+func get_display_name()->String:
+	return "WASD"
+	
 export(float) var wait_time : float = 0.5
 var timer_node : Timer
 func on_player_collided(col):

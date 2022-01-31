@@ -4,9 +4,9 @@ extends Control
 
 class_name CircleSelectControl
 
-export(NodePath) var circle_path : NodePath
-export(NodePath) var circle_container_path : NodePath
-export(NodePath) var center_text : NodePath
+export(NodePath) var circle_path : NodePath = NodePath("CircleContainer/Circle")
+export(NodePath) var circle_container_path : NodePath = NodePath("CircleContainer")
+export(NodePath) var center_text : NodePath = NodePath("CircleContainer/Circle/CenterText")
 
 #the angle that the options start at
 export(float) var start_angle : float = -PI/2
@@ -18,7 +18,7 @@ onready var circleMaterial : ShaderMaterial  = circle.get_material()
 onready var centerText : Label = get_node(center_text)
 
 #CHANGE ME I DARE YOU
-var options : Array = ["Yes","No","Mabye?"]
+var options : Array = []
 
 signal selected_option 
 
@@ -33,7 +33,10 @@ func get_focus_angle()->float:
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	display_options()
-
+func clear_labels():
+	for lbl in circle.get_children():
+		if lbl != centerText:
+			lbl.queue_free()
 func angle2vec(angle : float,radius : float)->Vector2:
 	return Vector2(cos(angle),sin(angle))*radius
 
@@ -67,9 +70,14 @@ func add_label_position(pos : Vector2, text : String):
 	circle.add_child(lbl)
 
 func display_options():
-	var delta_angle = 2*PI/len(options)
-	for i in range(0,len(options)):
-		add_label_angle_delta(start_angle+delta_angle*i,100,options[i])
+	#clear the existing options
+	clear_labels()
+	
+	var o_len = len(options)
+	if o_len != 0:
+		var delta_angle = 2*PI/len(options)
+		for i in range(0,len(options)):
+			add_label_angle_delta(start_angle+delta_angle*i,200,options[i])
 
 func vec2Angl(vec : Vector2)->float:
 	return -atan2(vec.y,vec.x)
@@ -78,10 +86,12 @@ func _input(event):
 	if event is InputEventMouseMotion:
 		self.focus_angle = vec2Angl(event.relative/(100*event.relative.length_squared()))
 	if event.is_action_pressed("ui_accept"):
-		emit_signal("selected_option",options[get_selection()])
+		emit_signal("selected_option",get_selection())
 
 func get_selection()->int:
 	var modulus = len(options)
+	if modulus == 0:
+		return -1
 	var delta = 2*PI/(2*modulus)
 	
 	var angle = self.focus_angle - start_angle
@@ -89,8 +99,3 @@ func get_selection()->int:
 	if code < 0:
 		return modulus + code
 	return code
-
-
-func _on_CircleSelect_selected_option(option):
-	centerText.text = option
-	print("selected "  + str(option))
