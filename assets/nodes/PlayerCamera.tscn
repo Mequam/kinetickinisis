@@ -16,6 +16,7 @@
 
 [node name="Camera" type="Camera" parent="VRotation/DRoate"]
 current = true
+far = 368.2
 script = ExtResource( 1 )
 H_Rotate = NodePath("../../..")
 V_Rotate = NodePath("../..")
