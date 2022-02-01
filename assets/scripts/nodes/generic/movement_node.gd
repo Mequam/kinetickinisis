@@ -9,6 +9,8 @@ export(Dictionary) var multi_input_actions = {"input_action":input_action} setge
 onready var player_node : Player = get_player()
 onready var camera_node : PlayerCamera = get_cam()
 
+func get_display_name()->String:
+	return "Movement Node"
 
 func set_input_action(n_action):
 	input_action = n_action

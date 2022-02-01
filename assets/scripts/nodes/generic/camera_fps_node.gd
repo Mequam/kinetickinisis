@@ -16,13 +16,7 @@ func _ready():
 func _player_input(event : InputEvent):
 	var l_vec = Vector2(0,0)
 	if event is InputEventJoypadMotion:
-		l_vec += Input.get_vector("look_left","look_right","look_down","look_up")
+		l_vec += player_node.get_vector("look_left","look_right","look_down","look_up")
 	if event is InputEventMouseMotion:
 		l_vec += event.relative/100
 	rotate_cam(-l_vec*sensitivity)
-	
-	pass
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass

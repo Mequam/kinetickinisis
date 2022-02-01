@@ -7,8 +7,8 @@ code = "shader_type canvas_item;
 
 uniform float radius_percentage = 0.3;
 uniform float radius_thickness = 0.01;
-uniform vec3 color = vec3(0.0,0.0,0.0);
-uniform vec3 focus_color = vec3(1.0,0.0,0.0);
+uniform vec4 color = vec4(0.0,0.0,0.0,1.0);
+uniform vec4 focus_color = vec4(1.0,0.0,0.0,1.0);
 uniform float focus_angle = 0.0;
 uniform float focus_thickness = 0.5;
 
@@ -54,7 +54,7 @@ void fragment() {
 	float point_angle = angle(UV[0]-0.5,UV[1]-0.5);
 	float rotated_point_angle = fmod_desmos(point_angle + focus_thickness - focus_angle,2.0*3.14159);
 	COLOR.a = alpha;
-	COLOR.rgb = color;
+	COLOR.rgb = color.rgb;
 	
 	if ( rotated_point_angle < 2.0*focus_thickness) {
 	//if (point_angle < focus_thickness + focus_angle && point_angle > focus_angle - focus_thickness) {
@@ -62,7 +62,7 @@ void fragment() {
 		float slider = abs(rotated_point_angle-focus_thickness)/focus_thickness;
 		COLOR.r = qudratic_mixer(focus_color.r,color.r,slider);
 		COLOR.g = qudratic_mixer(focus_color.g,color.g,slider);
-		COLOR.b = qudratic_mixer(focus_color.b,color.b,slider);		
+		COLOR.b = qudratic_mixer(focus_color.b,color.b,slider);
 	}
 }"
 
@@ -71,7 +71,7 @@ shader = SubResource( 1 )
 shader_param/radius_percentage = 0.3
 shader_param/radius_thickness = 0.01
 shader_param/color = Vector3( 0, 0, 0 )
-shader_param/focus_color = Vector3( 1, 0, 0 )
+shader_param/focus_color = Plane( 1, 0, 0, 0 )
 shader_param/focus_angle = 0.0
 shader_param/focus_thickness = 0.5
 

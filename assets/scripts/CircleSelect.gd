@@ -8,6 +8,25 @@ export(NodePath) var circle_path : NodePath
 export(NodePath) var circle_container_path : NodePath
 export(NodePath) var center_text : NodePath
 
+export(Color) var focus_color : Color = Color.red setget set_focus_color,get_focus_color
+func set_focus_color(val : Color)->void:
+	#if not is_inside_tree(): 
+	#	yield(self, "ready")
+	circleMaterial.set_shader_param("focus_color",val)
+func get_focus_color()->Color:
+	#if not is_inside_tree(): 
+	#	yield(self, "ready")
+	return circleMaterial.get_shader_param("focus_color")
+
+export(Color) var shader_color : Color = Color.red setget set_shader_color,get_shader_color
+func set_shader_color(val : Color)->void:
+	#if not is_inside_tree(): 
+	#	yield(self, "ready")
+	circleMaterial.set_shader_param("color",val)
+func get_shader_color()->Color:
+	#if not is_inside_tree(): 
+	#	yield(self, "ready")
+	return circleMaterial.get_shader_param("color")
 #the angle that the options start at
 export(float) var start_angle : float = -PI/2
 
@@ -32,7 +51,7 @@ func get_focus_angle()->float:
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	display_options()
+	sync_options()
 
 func angle2vec(angle : float,radius : float)->Vector2:
 	return Vector2(cos(angle),sin(angle))*radius
@@ -66,7 +85,14 @@ func add_label_position(pos : Vector2, text : String):
 	
 	circle.add_child(lbl)
 
-func display_options():
+#clear out exiting labels
+func clear_options()->void:
+	for node in circle.get_children():
+		if node != centerText:
+			node.queue_free()
+#display the current labels
+func sync_options()->void:
+	clear_options()
 	var delta_angle = 2*PI/len(options)
 	for i in range(0,len(options)):
 		add_label_angle_delta(start_angle+delta_angle*i,100,options[i])
@@ -78,7 +104,7 @@ func _input(event):
 	if event is InputEventMouseMotion:
 		self.focus_angle = vec2Angl(event.relative/(100*event.relative.length_squared()))
 	if event.is_action_pressed("ui_accept"):
-		emit_signal("selected_option",options[get_selection()])
+		emit_signal("selected_option",get_selection())
 
 func get_selection()->int:
 	var modulus = len(options)
@@ -89,8 +115,3 @@ func get_selection()->int:
 	if code < 0:
 		return modulus + code
 	return code
-
-
-func _on_CircleSelect_selected_option(option):
-	centerText.text = option
-	print("selected "  + str(option))

@@ -9,6 +9,7 @@ export(NodePath) var movement_input_action_container
 export(PackedScene) var movement_button_node
 export(PackedScene) var input_action_button_node
 export(NodePath) var control_input_ui
+export(bool) var is_open = false
 var previous_mouse_mode = Input.MOUSE_MODE_VISIBLE
 var movement_buttons = []
 var inventory_buttons = []
