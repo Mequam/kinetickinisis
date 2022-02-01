@@ -9,6 +9,7 @@ export(NodePath) var circle_container_path : NodePath
 export(NodePath) var center_text : NodePath
 
 export(Color) var focus_color : Color = Color.red setget set_focus_color,get_focus_color
+export(Dictionary) var flags : Dictionary = {}
 func set_focus_color(val : Color)->void:
 	#if not is_inside_tree(): 
 	#	yield(self, "ready")
@@ -40,12 +41,19 @@ onready var centerText : Label = get_node(center_text)
 var options : Array = ["Yes","No","Mabye?"]
 
 signal selected_option 
+signal option_hover_changed
 
+var last_option : int = 0
 
 #the focus angle that the shader uses and we use for selection
 var focus_angle : float setget set_focus_angle, get_focus_angle
 func set_focus_angle(val : float)->void:
 	circleMaterial.set_shader_param("focus_angle",val)
+	
+	var hover_select = get_selection()
+	if hover_select != last_option:
+		last_option = hover_select
+		emit_signal("option_hover_changed",last_option)
 func get_focus_angle()->float:
 	return circleMaterial.get_shader_param("focus_angle")
 # Called when the node enters the scene tree for the first time.
@@ -107,6 +115,11 @@ func _input(event):
 		emit_signal("selected_option",get_selection())
 
 func get_selection()->int:
+	var selecton = get_selection_danger()
+	if selecton >= len(options):
+		return 0
+	return selecton
+func get_selection_danger()->int:
 	var modulus = len(options)
 	var delta = 2*PI/(2*modulus)
 	

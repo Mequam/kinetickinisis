@@ -6,6 +6,8 @@ class_name GravityFlipMove
 # var a = 2
 # var b = "text"
 
+func get_display_name()->String:
+	return "Grav Flip"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

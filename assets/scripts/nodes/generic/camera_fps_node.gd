@@ -7,6 +7,8 @@ export(Vector2) var sensitivity : Vector2 = Vector2(1,1)
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
+func get_display_name()->String:
+	return "FPS Camera"
 
 
 # Called when the node enters the scene tree for the first time.

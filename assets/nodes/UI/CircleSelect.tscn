@@ -114,11 +114,11 @@ __meta__ = {
 [node name="CenterText" type="Label" parent="CircleContainer/Circle"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-text = "IT WORKS :D"
 align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[connection signal="option_hover_changed" from="." to="." method="_on_CircleSelect_option_hover_changed"]
 [connection signal="selected_option" from="." to="." method="_on_CircleSelect_selected_option"]

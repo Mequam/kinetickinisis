@@ -4,7 +4,8 @@ extends VelocityMoveNode
 #respect to the camera 
 
 class_name PlanarMoveNode
-
+func get_display_name()->String:
+	return "Planar Move"
 func _ready():
 	multi_input_actions = {"move_left": "move_left", "move_right": "move_right","move_forward":"move_forward", "move_back":"move_back"}
 	add_to_group("PlanarMoveNode")

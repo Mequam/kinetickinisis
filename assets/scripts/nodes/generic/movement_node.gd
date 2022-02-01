@@ -12,6 +12,19 @@ onready var camera_node : PlayerCamera = get_cam()
 func get_display_name()->String:
 	return "Movement Node"
 
+func get_input_map()->Array:
+	if not InputMap.has_action(input_action):
+		return []
+	return InputMap.get_action_list(input_action)
+func get_input_string()->String:
+	var input_maps = get_input_map()
+	if input_maps == []:
+		return "Unbound"
+	var ret_val : String = ""
+	for event in input_maps:
+		ret_val += event.as_text() + " "
+	return ret_val
+
 func set_input_action(n_action):
 	input_action = n_action
 	multi_input_actions[multi_input_actions.keys()[0]] = input_action

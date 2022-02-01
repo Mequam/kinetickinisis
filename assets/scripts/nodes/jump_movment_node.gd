@@ -11,6 +11,9 @@ export(Vector3) var jump_dir : Vector3 = Vector3(0,10,0)
 var jumps : int = 0
 export(int) var max_jumps : int = 1
 
+func get_display_name()->String:
+	return "Jump"
+
 func overload_process(delta)->void:
 	if player_node.collision:
 		velocity = Vector3(0,0,0)

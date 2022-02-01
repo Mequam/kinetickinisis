@@ -6,6 +6,9 @@ export(float) var length : float = 10.0
 var tele_count : int = 0
 var max_tele : int = 2
 
+func get_display_name()->String:
+	return "Tele"
+
 func on_player_collided(col):
 	tele_count = 0
 	.on_player_collided(col)

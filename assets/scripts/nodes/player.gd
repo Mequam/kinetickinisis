@@ -15,8 +15,7 @@ export(bool) var do_player_input : bool = true setget set_do_player_input, get_d
 func set_do_player_input(val : bool):
 	do_player_input = val
 func get_do_player_input():
-	return do_player_input and not get_node(movement_ui).get_child(0).visible
-	
+	return do_player_input and not get_node(movement_ui).get_child(0).visible and circle_select.get_parent() != self
 var time_of_last_collision : int = 0
 
 var circle_select : CircleSelectControl = preload("res://assets/nodes/UI/CircleSelect.tscn").instance()
@@ -93,14 +92,38 @@ func _ready():
 		node.set_process(false)
 		node.set_process_input(false)
 	pass # Replace with function body.
-func display_circle_inventory()->void:
-	circle_select.options = ["Cancel"]
-	for node in movement_inventory:
-		circle_select.options.append(node.get_display_name())
+func display_circle(var circle_type : String)->void:
 	add_child(circle_select)
+	circle_select.flags["circle_type"] = circle_type
 	circle_select.sync_options()
+	circle_select.connect("gui_input",self,"circle_select_detected_input")
 	circle_select.connect("selected_option",self,"_player_selected_circle_option")
+	circle_select.connect("option_hover_changed",self,"_circle_hover_changed")
+	circle_select.grab_focus()
+#takes an array of movement nodes and sets the options in our circle UI to their proper values
+func set_circle_options_from_list(movement_node_list : Array,default_options : Array = ["Cancel"])->void:
+	circle_select.options = default_options
+	for node in movement_node_list:
+		circle_select.options.append(node.get_display_name())
+#displays the circle UI for node binding
+func display_circle_binds()->void:
+	set_circle_options_from_list(get_node(movement_node_manager_node).get_children())
+	display_circle("active")
+	circle_select.focus_color = Color.green
+#displays the circle UI for activating nodes
+func display_circle_inventory()->void:
+	set_circle_options_from_list(movement_inventory)
+	display_circle("inventory")
+	circle_select.focus_color = Color.red
+	
 func _input(event):
+	if circle_select.get_parent() == self and circle_select.flags["circle_type"] == "active" and (event is InputEventKey) and event.is_pressed():
+		var action = get_node(movement_node_manager_node).get_child(circle_select.last_option-1).input_action
+		if InputMap.action_has_event(action,event):
+			InputMap.action_erase_event(action,event)
+		else:
+			InputMap.action_add_event(action,event)
+		circle_select.centerText.text = get_node(movement_node_manager_node).get_child(circle_select.last_option-1).get_input_string()
 	if self.do_player_input:
 		for node in get_movement_nodes():
 			node._player_input(event)
@@ -108,10 +131,27 @@ func _input(event):
 		get_node(movement_ui).toggle()
 	elif event.is_action_pressed("quick_inventory"):
 		display_circle_inventory()
+	elif event.is_action_pressed("quick_map"):
+		display_circle_binds()
 
+
+func _circle_hover_changed(option):
+	var circle_type = circle_select.flags["circle_type"]
+	if option <= 0:
+		circle_select.centerText.text = circle_select.options[option]
+	elif circle_type == "active":
+		circle_select.centerText.text = get_node(movement_node_manager_node).get_child(option-1).get_input_string()
+	elif circle_type == "inventory":
+		circle_select.centerText.text = circle_select.options[option]
 func _player_selected_circle_option(option):
-	if option > 0:
-		move_node_into_movements(movement_inventory[option-1])
+	var circle_type = circle_select.flags["circle_type"]
+	if circle_type == "inventory":
+		if option > 0:
+			move_node_into_movements(movement_inventory[option-1])
+	remove_circle_select()
+func remove_circle_select()->void:
+	circle_select.disconnect("option_hover_changed",self,"_circle_hover_changed")
+	circle_select.disconnect("selected_option",self,"_player_selected_circle_option")
 	remove_child(circle_select)
 func get_movement_velocities() -> Vector3:
 	var ret_val : Vector3 = Vector3(0,0,0)
@@ -132,7 +172,6 @@ func _physics_process(delta):
 #		signal hey collided (col)
 #	move_and_slide(get_movement_velocities()*delta)
 #	move_and_slide_with_snap(get_movement_velocities()*delta, Vector3(0,0,0))
-
 func _process(delta):
 	get_tree().call_group("Debug UI", "recieve_player_matrix", transform)
 #	get_tree().call_group("Debug UI", "recieve_camera_view_vector", Vector3(3,14,159))
