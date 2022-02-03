@@ -9,7 +9,6 @@ export(NodePath) var circle_container_path : NodePath
 export(NodePath) var center_text : NodePath
 
 export(Color) var focus_color : Color = Color.red setget set_focus_color,get_focus_color
-export(Dictionary) var flags : Dictionary = {}
 func set_focus_color(val : Color)->void:
 	#if not is_inside_tree(): 
 	#	yield(self, "ready")
@@ -95,9 +94,11 @@ func add_label_position(pos : Vector2, text : String):
 
 #clear out exiting labels
 func clear_options()->void:
-	for node in circle.get_children():
-		if node != centerText:
-			node.queue_free()
+	var children = circle.get_children()
+	if children:
+		for node in children:
+			if node != centerText:
+				node.queue_free()
 #display the current labels
 func sync_options()->void:
 	clear_options()
