@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/scripts/PlayerCameraClient.gd" type="Script" id=1]
+
+[sub_resource type="QuadMesh" id=1]
+
+[sub_resource type="SpatialMaterial" id=2]
+
+[sub_resource type="QuadMesh" id=3]
+
+[node name="HRotation" type="Position3D"]
+
+[node name="VRotation" type="Position3D" parent="."]
+
+[node name="DRoate" type="Position3D" parent="VRotation"]
+
+[node name="Camera" type="Camera" parent="VRotation/DRoate"]
+current = true
+far = 368.2
+script = ExtResource( 1 )
+
+[node name="CSGMesh" type="CSGMesh" parent="VRotation/DRoate/Camera"]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, -0.835523 )
+mesh = SubResource( 1 )
+material = SubResource( 2 )
+
+[node name="CSGMesh2" type="CSGMesh" parent="VRotation/DRoate/Camera"]
+transform = Transform( 0.305944, 0.305944, -2.67464e-08, 0.305944, -0.305944, 2.67464e-08, 0, -3.78252e-08, -0.43267, 0, 0.52201, -0.786814 )
+mesh = SubResource( 3 )
+material = SubResource( 2 )

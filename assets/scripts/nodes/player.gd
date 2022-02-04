@@ -38,7 +38,9 @@ func get_col():
 	return collision
 
 func get_cam()->Camera:
-	return (get_node(camera) as Camera)
+	if camera:
+		return (get_node(camera) as Camera)
+	return ($HRotation/VRotation/DRoate/Camera as Camera)
 
 func get_movement_nodes():
 	return get_node(movement_node_manager_node).get_children()
@@ -87,13 +89,13 @@ func move_and_collide(rel_vec: Vector3, infinite_inertia: bool = true, exclude_r
 	return collision
 	
 #func rotate_cam(Vector2)
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
+func overload_ready():
 	for node in get_inventory_nodes():
 		node.set_process(false)
 		node.set_process_input(false)
-	pass # Replace with function body.
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	overload_ready()
 
 
 #the player decides when to add the circle to the tree 
@@ -117,7 +119,9 @@ func display_circleUI_inventory()->void:
 func get_movement_node(idx : int):
 	return get_node(movement_node_manager_node).get_child(idx)
 
-func _input(event):
+#this is the input function for the player that is inteanded
+#to be overloaded
+func overload_input(event):
 	if self.do_player_input:
 		for node in get_movement_nodes():
 			node._player_input(event)
@@ -127,26 +131,27 @@ func _input(event):
 		display_circleUI_inventory()
 	elif event.is_action_pressed("quick_map"):
 		display_circleUI_binds()
+func _input(event):
+	overload_input(event)
+
 func get_movement_velocities() -> Vector3:
 	var ret_val : Vector3 = Vector3(0,0,0)
 	for node in get_node(movement_node_manager_node).get_children():
 		if node.is_in_group("VelocityMoveNode"):
 			ret_val += node.velocity
 	return ret_val
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
+
+func overload_physics_process(delta):
 	move_and_collide(get_movement_velocities()*delta)
 	get_tree().call_group("Debug UI", "recieve_player_velocity", get_movement_velocities())
 	get_tree().call_group("Debug UI", "recieve_player_matrix", transform)
-#	print(OS.get_ticks_usec())
-#	print("PLAYER VELOCITY ", get_movement_velocities())
-#	print("PLAYER FRAME VELOCITY ", get_movement_velocities()*delta)
-#	print("PLAYER COLLISION NORMAL", collision.normal if collision else " null")
-#	if col:
-#		signal hey collided (col)
-#	move_and_slide(get_movement_velocities()*delta)
-#	move_and_slide_with_snap(get_movement_velocities()*delta, Vector3(0,0,0))
-func _process(delta):
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _physics_process(delta):
+	overload_physics_process(delta)
+
+func overload_process(delta):
 	get_tree().call_group("Debug UI", "recieve_player_matrix", transform)
-#	get_tree().call_group("Debug UI", "recieve_camera_view_vector", Vector3(3,14,159))
 	get_tree().call_group("Debug UI", "recieve_camera_view_vector", get_cam().global_transform.basis.z)
+
+func _process(delta):
+	overload_process(delta)

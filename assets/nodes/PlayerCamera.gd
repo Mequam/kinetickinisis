@@ -6,6 +6,8 @@ export(NodePath) var V_Rotate
 export(NodePath) var D_Rotate
 export(Vector3) var gimbal_rotation_degrees setget set_gimbal_rotation_degrees
 
+signal rotated_cam
+
 func set_gimbal_rotation_degrees(n_degrees : Vector3):
 #	gimbal_rotation_degrees.x = wrapf(n_degrees.x,-180,180)
 #	gimbal_rotation_degrees.y = wrapf(n_degrees.y,-180,180)
@@ -15,28 +17,22 @@ func set_gimbal_rotation_degrees(n_degrees : Vector3):
 	(get_node(H_Rotate) as Position3D).rotation_degrees.y = gimbal_rotation_degrees.x
 	(get_node(V_Rotate) as Position3D).rotation_degrees.x = gimbal_rotation_degrees.y
 	(get_node(D_Rotate) as Position3D).rotation_degrees.z = gimbal_rotation_degrees.z
+	emit_signal("rotated_cam")
 
 func rotate_h(degree : float) -> void:
 #	(get_node(H_Rotate) as Position3D).rotation_degrees.y += degree
 	self.gimbal_rotation_degrees.x += degree
-	pass
-
 func rotate_v(degree : float) -> void:
 #	(get_node(V_Rotate) as Position3D).rotation_degrees.x += degree
 	self.gimbal_rotation_degrees.y += degree
-	pass
-
 func rotate_d(degree : float) -> void:
 #	(get_node(D_Rotate) as Position3D).rotation_degrees.z += degree
 	self.gimbal_rotation_degrees.z += degree
-	pass
-
 
 
 func rotate_hv(vec : Vector2) -> void:
 	rotate_h(vec.x)
 	rotate_v(vec.y)
-	pass
 
 func look_at_point(point : Vector3):
 #	look_at()
@@ -76,11 +72,3 @@ func cast_view_ray(ray_length : float = 10.0)->Dictionary:
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	pass # Replace with function body.
-
-#func _input(event):
-#	if event is InputEventMouseMotion:
-#		rotate_hv(-event.relative)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
