@@ -13,6 +13,7 @@ var netUtils : NetworkUtils = NetworkUtils.new()
 func overload_ready():
 	udp.set_dest_address(server_ip,port)
 	udp.connect_to_host(server_ip,port)
+	last_cam_gimbal = get_cam().gimbal_rotation_degrees
 	print("setting packet addr to " + server_ip +":"+str(port))
 	(get_cam() as PlayerCamera).connect("rotated_cam",self,"_on_camera_update")
 	
@@ -39,8 +40,17 @@ func overload_physics_process(delta):
 	send_state()
 func _ready():
 	print("test")
+
+#buffered so we can tell if we want to send a network packet
+var last_cam_gimbal : Vector3
+func send_cam_packet(gimbal : Vector3)->void:
+	last_cam_gimbal = gimbal
+	udp.put_packet(netUtils.gen_packet_camera(gimbal))
 #called when the player camera updates where it looks
 func _on_camera_update()->void:
-	print("sending camera packet")
-	#alert the server that we have a new camera rotation
-	udp.put_packet(netUtils.gen_packet_camera(get_cam().gimbal_rotation_degrees))
+	#the camera update sends a LOT of packets, this ensures that
+	#we only send packets when the camera has actualy changed an amount
+	var cam_gimbal : Vector3 = get_cam().gimbal_rotation_degrees
+	if abs(last_cam_gimbal.dot(cam_gimbal)) < 0.75:
+		#alert the server that we have a new camera rotation
+		send_cam_packet(cam_gimbal)
