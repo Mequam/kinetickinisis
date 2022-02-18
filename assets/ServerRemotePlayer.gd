@@ -15,7 +15,7 @@ var netUtils : NetworkUtils = NetworkUtils.new()
 func get_vector(a : String,b : String,c: String,d:String,default_return : Vector2 = Vector2(0,0))->Vector2:
 	if not self.do_player_input:
 		return default_return
-	return Vector2(numeric_action_in_arr(a)-numeric_action_in_arr(b),numeric_action_in_arr(c)-numeric_action_in_arr(d))
+	return Vector2(numeric_action_in_arr(b)-numeric_action_in_arr(a),numeric_action_in_arr(d)-numeric_action_in_arr(c))
 
 func numeric_action_in_arr(act : String)->float:
 	if act in down_input_actions:
@@ -48,10 +48,13 @@ func overload_process(delta):
 			var pk_type : int = netUtils.get_packet_type(packet)
 			if pk_type == netUtils.PacketType.ACTION_PRESS or pk_type == netUtils.PacketType.ACTION_RELEASE:
 				var actionEvent = netUtils.get_packet_actionEvent(packet)
+				print("recived " + actionEvent.action)
+				print("presed " + str(actionEvent.is_pressed()))
 				if not actionEvent.pressed and down_input_actions.has(actionEvent.action):
 					down_input_actions.erase(actionEvent.action)
 				else:
 					down_input_actions[actionEvent.action] = true
 				.overload_input(actionEvent)
 			elif pk_type == netUtils.PacketType.CAMERA:
+				print("recived camera packet")
 				(get_cam() as PlayerCamera).gimbal_rotation_degrees = netUtils.get_packet_camera(packet)

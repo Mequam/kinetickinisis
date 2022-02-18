@@ -80,7 +80,6 @@ func move_and_collide(rel_vec: Vector3, infinite_inertia: bool = true, exclude_r
 	if col:
 		if not collision:
 			if col_time - time_of_last_collision > collision_window:
-#				print("EMITTING COLLIDED SIGNAL")
 				emit_signal("collided",collision)
 		time_of_last_collision = col_time
 	

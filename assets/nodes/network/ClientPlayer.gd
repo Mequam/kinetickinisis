@@ -20,10 +20,10 @@ func overload_ready():
 func overload_input(event):
 	if self.get_do_player_input():
 		for act in InputMap.get_actions():
-			if InputMap.action_has_event(act,event):
+			if InputMap.action_has_event(act,event) and (Input.is_action_just_pressed(act) or Input.is_action_just_released(act)):
+				print("sending action " + act + " " + str(event.is_pressed()))
 				udp.put_packet(netUtils.gen_packet_action(act,event.is_pressed()))
 	.overload_input(event)
-
 
 func send_state()->void:
 	pass
@@ -37,8 +37,10 @@ func overload_physics_process(delta):
 	#	print("Connected: %s" % udp.get_packet().get_string_from_utf8())
 	#	connected = true
 	send_state()
-
+func _ready():
+	print("test")
 #called when the player camera updates where it looks
 func _on_camera_update()->void:
+	print("sending camera packet")
 	#alert the server that we have a new camera rotation
 	udp.put_packet(netUtils.gen_packet_camera(get_cam().gimbal_rotation_degrees))

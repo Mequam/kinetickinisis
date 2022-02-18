@@ -6,26 +6,28 @@ enum PacketType {
 	ACTION_PRESS,
 	CAMERA,
 	STATE,
-	ACTION_RELEASE = 256
+	ACTION_RELEASE = 255
 }
-#REGION: Packet Syntax Functions
-#any function that gets a property of the packets themselfs
 func get_packet_type(pack : PoolByteArray)->int:
 	return pack[0]
+#work around for the above problem, if we cant beat em
+
 func get_packet_action(pack : PoolByteArray)->String:
-	return decode_action(get_packet_data(pack).subarray(1,-1))
+	return decode_action(get_packet_data(pack))
 func get_packet_action_pressed(pack : PoolByteArray)->bool:
-	return get_packet_data(pack)[1] == 1
+	return get_packet_type(pack) == PacketType.ACTION_PRESS
 func get_packet_actionEvent(packet : PoolByteArray)->InputEventAction:
 	var actionEvent : InputEventAction = InputEventAction.new()
-	actionEvent.action = get_packet_action(packet)
 	actionEvent.pressed = get_packet_action_pressed(packet)
+	actionEvent.action = get_packet_action(packet)
 	return actionEvent
 func gen_packet_action(action : String,pressed : bool)->PoolByteArray:
 	var ret_val : PoolByteArray
-	ret_val.append(PacketType.ACTION_PRESS if pressed else PacketType.ACTION_RELEASE)
+	if pressed:
+		ret_val.append(PacketType.ACTION_PRESS) 
+	else:
+		ret_val.append(PacketType.ACTION_RELEASE)
 	ret_val.append_array(encode_action(action))
-
 	return ret_val
 func gen_packet_camera(gimbal : Vector3)->PoolByteArray:
 	var ret_val : PoolByteArray
