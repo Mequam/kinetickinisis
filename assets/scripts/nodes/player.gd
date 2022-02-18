@@ -11,11 +11,40 @@ export(NodePath) var movement_inventory_manager_node
 export(NodePath) var movement_ui
 export(int) var collision_window : int = int(1e+6/15)
 
-export(bool) var do_player_input : bool = true setget set_do_player_input, get_do_player_input
+var _lock_count : int = 0 setget set_lock_count,get_lock_count
+#the only way we interact with lock count is by claiming and
+#unclaiming locks
+func set_lock_count(val : int)->void:
+	print("[WARNING] code attempting to set lock count")
+	pass
+func get_lock_count()->int:
+	return _lock_count
+
+#These functions are used to manipulate locks on
+#the player input
+
+#if a source of code calls claim_lock_input
+#it MUST at some later point call unclaim_lock_input
+#or the player will never re-gain control of their character
+#claim that we want to lock input
+func claim_lock_input()->void:
+	print("adding lock!")
+	_lock_count += 1
+#claim that we want to unlock input
+func unclaim_lock_input()->void:
+	print("removing lock!")
+	_lock_count -= 1
+	#this SHOULD never happen if these functions are used properly
+	if _lock_count < 0:
+		print("[WARNING] negative lock count detected")
+		_lock_count = 0
+
+export(bool) var do_player_input : bool = false setget set_do_player_input, get_do_player_input
 func set_do_player_input(val : bool):
 	do_player_input = val
 func get_do_player_input():
-	return do_player_input and not get_node(movement_ui).get_child(0).visible and not get_node("CircleSelectPlayer")
+	return do_player_input or _lock_count <= 0
+
 var time_of_last_collision : int = 0
 
 #saved circle select UI
@@ -103,6 +132,10 @@ func display_circleUI(var circle_type : bool)->void:
 	if get_node("CircleSelectPlayer"):
 		get_node("CircleSelectPlayer").queue_free()
 	var cs = circle_select.instance()
+	
+	cs.connect("ready",self,"claim_lock_input")
+	cs.connect("tree_exiting",self,"unclaim_lock_input")
+	
 	cs.active_circle  = circle_type
 	cs.player = self
 	add_child(cs)

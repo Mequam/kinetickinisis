@@ -71,10 +71,12 @@ func open():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	refresh_buttons()
 	get_child(0).visible = true
+	get_parent().claim_lock_input()
 
 func close():
 	Input.set_mouse_mode(previous_mouse_mode)
 	get_child(0).visible = false
+	get_parent().unclaim_lock_input()
 
 func toggle():
 	if !get_child(0).visible:

@@ -116,7 +116,6 @@ material = SubResource( 3 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 transform = Transform( 0.000750498, 0, -1, 0, 1, 0, 1, 0, 0.000750498, -4.00231, 0, 0 )
-do_player_input = false
 
 [node name="ServerNode" parent="." instance=ExtResource( 7 )]
 port = 2645
