@@ -43,7 +43,7 @@ export(bool) var do_player_input : bool = false setget set_do_player_input, get_
 func set_do_player_input(val : bool):
 	do_player_input = val
 func get_do_player_input():
-	return do_player_input or _lock_count <= 0
+	return do_player_input and _lock_count <= 0
 
 var time_of_last_collision : int = 0
 

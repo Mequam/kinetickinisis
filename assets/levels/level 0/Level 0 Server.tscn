@@ -113,6 +113,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.04025, -0.98009, -3.99076 )
 material = SubResource( 3 )
 
 [node name="remote" parent="." instance=ExtResource( 6 )]
+do_player_input = true
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 transform = Transform( 0.000750498, 0, -1, 0, 1, 0, 1, 0, 0.000750498, -4.00231, 0, 0 )

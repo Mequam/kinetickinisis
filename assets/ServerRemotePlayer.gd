@@ -56,5 +56,4 @@ func overload_process(delta):
 					down_input_actions[actionEvent.action] = true
 				.overload_input(actionEvent)
 			elif pk_type == netUtils.PacketType.CAMERA:
-				print("recived camera packet")
 				(get_cam() as PlayerCamera).gimbal_rotation_degrees = netUtils.get_packet_camera(packet)
