@@ -113,6 +113,4 @@ width = 1.0
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.04025, -0.98009, -3.99076 )
 material = SubResource( 3 )
 
-[node name="Player" parent="." instance=ExtResource( 3 )]
-server_ip = "localhost"
-port = 2645
+[node name="Player2" parent="." instance=ExtResource( 3 )]

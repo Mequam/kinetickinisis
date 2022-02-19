@@ -42,15 +42,12 @@ func _ready():
 	print("test")
 
 #buffered so we can tell if we want to send a network packet
-var last_cam_gimbal : Vector3
+var last_cam_gimbal : Vector3 = Vector3(0,0,0)
 func send_cam_packet(gimbal : Vector3)->void:
 	last_cam_gimbal = gimbal
 	udp.put_packet(netUtils.gen_packet_camera(gimbal))
-#called when the player camera updates where it looks
-func _on_camera_update()->void:
-	#the camera update sends a LOT of packets, this ensures that
-	#we only send packets when the camera has actualy changed an amount
-	var cam_gimbal : Vector3 = get_cam().gimbal_rotation_degrees
-	if abs(last_cam_gimbal.dot(cam_gimbal)) < 0.75:
-		#alert the server that we have a new camera rotation
-		send_cam_packet(cam_gimbal)
+	
+func _on_NetworkClock_timeout():
+	var gimb : Vector3 = get_cam().set_gimbal_rotation_degrees
+	if last_cam_gimbal != gimb:
+		send_cam_packet(gimb)

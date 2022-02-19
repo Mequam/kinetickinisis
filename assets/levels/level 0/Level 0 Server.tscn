@@ -111,12 +111,13 @@ width = 1.0
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.04025, -0.98009, -3.99076 )
 material = SubResource( 3 )
 
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 0.0849767, -0.442092, 0.892936, 0.0916179, 0.895847, 0.434815, -0.992162, 0.0448597, 0.11663, 3.76361, 1.75722, -1.20161 )
+current = true
+fov = 90.0
+
 [node name="remote" parent="." instance=ExtResource( 6 )]
 do_player_input = true
-
-[node name="Camera" type="Camera" parent="remote"]
-transform = Transform( 1, 0, 0, 0, 0.0316724, 0.999498, 0, -0.999498, 0.0316724, 0, 1.81739, 0 )
-current = true
 
 [node name="ServerNode" parent="." instance=ExtResource( 7 )]
 port = 2645
