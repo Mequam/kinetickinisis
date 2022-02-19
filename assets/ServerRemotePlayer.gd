@@ -39,17 +39,15 @@ func recive_networked_input(event):
 func display_circleUI(arg):
 	pass
 
-func overload_process(delta):
-	.overload_process(delta)
+func overload_physics_process(delta):
 	#if we recive a remote input turn it into a local input we can use
 	if peer and peer.get_available_packet_count() > 0:
 		var packet = peer.get_packet()
 		if peer.get_packet_error() == OK:
 			var pk_type : int = netUtils.get_packet_type(packet)
 			if pk_type == netUtils.PacketType.ACTION_PRESS or pk_type == netUtils.PacketType.ACTION_RELEASE:
+				(get_cam() as PlayerCamera).gimbal_rotation_degrees = netUtils.get_packet_camera(packet)
 				var actionEvent = netUtils.get_packet_actionEvent(packet)
-				print("recived " + actionEvent.action)
-				print("presed " + str(actionEvent.is_pressed()))
 				if not actionEvent.pressed and down_input_actions.has(actionEvent.action):
 					down_input_actions.erase(actionEvent.action)
 				else:
@@ -57,3 +55,4 @@ func overload_process(delta):
 				.overload_input(actionEvent)
 			elif pk_type == netUtils.PacketType.CAMERA:
 				(get_cam() as PlayerCamera).gimbal_rotation_degrees = netUtils.get_packet_camera(packet)
+	.overload_physics_process(delta)

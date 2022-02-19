@@ -20,13 +20,20 @@ func overload_process(delta)->void:
 	.overload_process(delta)
 
 func on_player_collided(collision):
+	print("DETECTED PLAYER COLLISION")
 	jumps = 0
 	.on_player_collided(collision)
 
 func _player_input(event : InputEvent):
+	if event.is_action_pressed("jump"):
+		print("JUMP GOT PLAYER INPUTSSSS")
 	if jumps < max_jumps and event.is_action_pressed(input_action):
-#		velocity += player_node.global_transform*jump_dir
-		velocity += player_node.transform*jump_dir-player_node.transform.origin
-#		velocity += player_node.transform
+		print()
+		print(event.is_pressed())
+		print(jump_dir)
+		print(player_node.transform.basis)
+		print(player_node.transform.basis*jump_dir)
+		velocity += player_node.transform.basis*jump_dir
 		print(velocity)
+		print()
 		jumps += 1

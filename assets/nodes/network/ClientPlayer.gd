@@ -23,7 +23,7 @@ func overload_input(event):
 		for act in InputMap.get_actions():
 			if InputMap.action_has_event(act,event) and (Input.is_action_just_pressed(act) or Input.is_action_just_released(act)):
 				print("sending action " + act + " " + str(event.is_pressed()))
-				udp.put_packet(netUtils.gen_packet_action(act,event.is_pressed()))
+				udp.put_packet(netUtils.gen_packet_action(get_cam().gimbal_rotation_degrees,act,event.is_pressed()))
 	.overload_input(event)
 
 func send_state()->void:
@@ -48,6 +48,6 @@ func send_cam_packet(gimbal : Vector3)->void:
 	udp.put_packet(netUtils.gen_packet_camera(gimbal))
 	
 func _on_NetworkClock_timeout():
-	var gimb : Vector3 = get_cam().set_gimbal_rotation_degrees
+	var gimb : Vector3 = get_cam().gimbal_rotation_degrees
 	if last_cam_gimbal != gimb:
 		send_cam_packet(gimb)

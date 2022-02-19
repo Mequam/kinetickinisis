@@ -30,6 +30,7 @@ roughness = 0.0
 script = ExtResource( 1 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
+do_player_input = true
 
 [node name="Movement Item" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 49.5159, 23.9419, 58.8212 )

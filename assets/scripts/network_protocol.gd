@@ -3,7 +3,7 @@ extends Node
 class_name NetworkUtils
 
 enum PacketType {
-	ACTION_PRESS,
+	ACTION_PRESS=0,
 	CAMERA,
 	STATE,
 	ACTION_RELEASE = 255
@@ -13,7 +13,18 @@ func get_packet_type(pack : PoolByteArray)->int:
 #work around for the above problem, if we cant beat em
 
 func get_packet_action(pack : PoolByteArray)->String:
-	return decode_action(get_packet_data(pack))
+	var data = get_packet_data(pack)
+	var s : StreamPeerBuffer = StreamPeerBuffer.new()
+	s.data_array = data
+	s.get_float()
+	s.get_float()
+	s.get_float()
+	return decode_action(s.data_array.subarray(s.get_position(),-1))
+
+#syntactic sugar to return the camera position from a packet action
+func get_packet_action_camera(pack : PoolByteArray)->Vector3:
+	return get_packet_camera(pack)
+
 func get_packet_action_pressed(pack : PoolByteArray)->bool:
 	return get_packet_type(pack) == PacketType.ACTION_PRESS
 func get_packet_actionEvent(packet : PoolByteArray)->InputEventAction:
@@ -21,19 +32,24 @@ func get_packet_actionEvent(packet : PoolByteArray)->InputEventAction:
 	actionEvent.pressed = get_packet_action_pressed(packet)
 	actionEvent.action = get_packet_action(packet)
 	return actionEvent
-func gen_packet_action(action : String,pressed : bool)->PoolByteArray:
+
+func gen_packet_action(gimbal : Vector3,action : String,pressed : bool)->PoolByteArray:
 	var ret_val : PoolByteArray
 	if pressed:
 		ret_val.append(PacketType.ACTION_PRESS) 
 	else:
 		ret_val.append(PacketType.ACTION_RELEASE)
+	
+	ret_val.append_array(encode_vec3(gimbal))
 	ret_val.append_array(encode_action(action))
 	return ret_val
+
 func gen_packet_camera(gimbal : Vector3)->PoolByteArray:
 	var ret_val : PoolByteArray
 	ret_val.append(PacketType.CAMERA)
 	ret_val.append_array(encode_vec3(gimbal))
 	return ret_val
+
 func get_packet_camera(pack : PoolByteArray)->Vector3:
 	return decode_vec3(get_packet_data(pack))
 func get_packet_data(packet : PoolByteArray)->PoolByteArray:

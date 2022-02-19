@@ -16,6 +16,7 @@ func on_player_collided(col):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
+	input_action = "Tele"
 
 func update_position():
 	if tele_count < max_tele:

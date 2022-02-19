@@ -5,13 +5,10 @@
 
 [node name="Player" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-camera = NodePath("")
-movement_node_manager_node = NodePath("")
-movement_inventory_manager_node = NodePath("")
-movement_ui = NodePath("")
+port = 2645
 
 [node name="NetworkClock" type="Timer" parent="." index="8"]
-wait_time = 0.5
+wait_time = 0.042
 autostart = true
 
 [connection signal="timeout" from="NetworkClock" to="." method="_on_NetworkClock_timeout"]
