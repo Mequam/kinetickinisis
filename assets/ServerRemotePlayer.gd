@@ -41,7 +41,7 @@ func overload_ready()->void:
 	state_timer.connect("timeout",self,"_send_state")
 	state_timer.autostart = true
 	#this is set to 1 second for the time bieng
-	state_timer.wait_time = 0.5
+	state_timer.wait_time = 0.05
 	
 	add_child(state_timer)
 	

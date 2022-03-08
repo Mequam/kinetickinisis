@@ -40,12 +40,14 @@ func overload_physics_process(delta):
 	while udp.get_available_packet_count() > 0:
 		var packet = udp.get_packet()
 		if udp.get_packet_error() == OK:
-			var pack_action : int = netUtils.get_packet_action(packet)
-			print("recived " + str(pack_action) + " from the server")
-			match pack_action:
+			var pack_type : int = netUtils.get_packet_type(packet)
+			print("recived " + str(pack_type) + " from the server")
+			match pack_type:
 				netUtils.PacketType.STATE_POSITION:
 					print("UPDATING POSITION")
-					transform.origin = netUtils.get_packet_POSITION_STATE_position(packet)
+					var new_pos : Vector3 = netUtils.get_packet_POSITION_STATE_position(packet)
+					if transform.origin.distance_squared_to(new_pos) > 0:
+						transform.origin = new_pos
 func _ready():
 	print("test")
 

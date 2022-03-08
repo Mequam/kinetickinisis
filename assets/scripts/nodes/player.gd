@@ -90,9 +90,6 @@ func move_node_into_movements(node : Node):
 func move_node_into_inventory(node : Node):
 	if node.get_parent():
 		node.get_parent().remove_child(node)
-#		node.set_process(false)
-#		node.set_process_input(false)
-#	get_node(movement_inventory_manager_node).add_child(node)
 	movement_inventory.append(node)
 	pass
 
