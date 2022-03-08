@@ -143,4 +143,18 @@ func code_to_action(code : int)->String:
 	if player_node.input_map.has(self) and (code in player_node.input_map[self]):
 		return player_node.input_map[self][code]
 	return ""
-	
+
+
+
+#generic function inteanded to be overloaded that 
+#generates any misclanious state that the nodes care about
+func gen_state()->PoolByteArray:
+	var ret_val : PoolByteArray
+	return ret_val
+
+#this is a gneric function inteanded to set the state
+#of a node from a network packet
+#we should be able to general case it here,
+#but well see in the future
+func set_state(net_state : PoolByteArray)->void:
+	pass

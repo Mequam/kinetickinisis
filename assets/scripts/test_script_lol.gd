@@ -18,6 +18,18 @@ func _ready():
 	print(encoder.get_packet_action_pressed(encoder.gen_packet_action(def,"jump no u",true)))
 	print(encoder.get_packet_actionEvent(encoder.gen_packet_action(def,"jump no u",true)))
 	print(encoder.get_packet_action_camera(encoder.gen_packet_action(def,"jump no u",true)))
+
+
+	print("\n\nnext test!")
+	
+	
+	print(encoder.decode_int_64(encoder.encode_int_64(9999)))
+	print(OS.get_unix_time())
+	var pack = encoder.gen_packet_state_position(Vector3(0,1,2))
+	print(encoder.get_packet_POSITION_STATE_time(pack))
+	print(encoder.get_packet_POSITION_STATE_position(pack))
+	 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

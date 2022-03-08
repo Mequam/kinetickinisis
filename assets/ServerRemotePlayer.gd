@@ -35,6 +35,37 @@ func overload_input(event):
 func recive_networked_input(event):
 	.overload_input(event)
 
+var state_timer : Timer
+func overload_ready()->void:
+	state_timer = Timer.new()
+	state_timer.connect("timeout",self,"_send_state")
+	state_timer.autostart = true
+	#this is set to 1 second for the time bieng
+	state_timer.wait_time = 100
+	.overload_ready()
+
+#generates the state of this client to send to the player
+#TODO: generic state stuffz with nodes is not accounted for
+func _get_state_packets():
+	var ret_val = []
+	#append the position packet to send
+	ret_val.append(netUtils.gen_packet_state_position(transform.origin))
+	
+	#append any generic states that the nodes want to send
+	#the client is not doing processing on these for the time
+	#bieng, but we have to generate them eventually so here
+	#they are
+	for node in get_movement_nodes():
+		var node_state : PoolByteArray = node.gen_state()
+		if node_state.size() != 0:
+			ret_val.append(node_state)
+	return ret_val
+
+#sends the state of the server over to the client
+func _send_state()->void:
+	for state in _get_state_packets():
+		peer.put_packet(state)
+
 #WE DO NOT do UI
 func display_circleUI(arg):
 	pass
