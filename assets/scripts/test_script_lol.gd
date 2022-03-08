@@ -29,6 +29,8 @@ func _ready():
 	print(encoder.get_packet_POSITION_STATE_time(pack))
 	print(encoder.get_packet_POSITION_STATE_position(pack))
 	 
+	var test2 = MovementNodeUtils.new()
+	print(test2.get_movement_node_paths())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

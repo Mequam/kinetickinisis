@@ -97,18 +97,13 @@ func decode_vec3(data : PoolByteArray):
 #encodes a 64 bit integer (8 byte integer)
 func encode_int_64(data : int)->PoolByteArray:
 	var ret_val : PoolByteArray
-	for i in range(0,8):
-		#get the lower bytes of the data
-		var lower_bytes = data % 256
-		#append them to the array
-		ret_val.append(lower_bytes)
-		#remove the lower bytes from the data
-		data = (data - lower_bytes)/256	
+	var sb : StreamPeerBuffer = StreamPeerBuffer.new()
+	sb.put_64(data)
+	ret_val.append_array(sb.data_array)
 	return ret_val
+
 #decodes a 64 bit integer (8 byte integer)
 func decode_int_64(pack : PoolByteArray)->int:
-	var ret_val : int
-	for i in range(0,8):
-		#TODO: I do not like that pow converts to float and then back
-		ret_val += pack[i]*pow(256,i)
-	return ret_val
+	var sb : StreamPeerBuffer = StreamPeerBuffer.new()
+	sb.data_array = pack
+	return sb.get_64()

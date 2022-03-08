@@ -41,7 +41,10 @@ func overload_ready()->void:
 	state_timer.connect("timeout",self,"_send_state")
 	state_timer.autostart = true
 	#this is set to 1 second for the time bieng
-	state_timer.wait_time = 100
+	state_timer.wait_time = 0.5
+	
+	add_child(state_timer)
+	
 	.overload_ready()
 
 #generates the state of this client to send to the player
@@ -62,9 +65,11 @@ func _get_state_packets():
 	return ret_val
 
 #sends the state of the server over to the client
-func _send_state()->void:
-	for state in _get_state_packets():
-		peer.put_packet(state)
+func _send_state():
+	print("sending state packet to the clinet!")
+	if peer:
+		for state in _get_state_packets():
+			peer.put_packet(state)
 
 #WE DO NOT do UI
 func display_circleUI(arg):

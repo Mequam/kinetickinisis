@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "CameraMoveNode",
 "class": "CameraFPSMoveNode",
 "language": "GDScript",
-"path": "res://assets/scripts/nodes/generic/camera_fps_node.gd"
+"path": "res://assets/scripts/nodes/movement_nodes/camera_fps_node.gd"
 }, {
 "base": "MovementNode",
 "class": "CameraMoveNode",
@@ -37,12 +37,12 @@ _global_script_classes=[ {
 "base": "AccelerationMoveNode",
 "class": "GravityFlipMove",
 "language": "GDScript",
-"path": "res://assets/scripts/nodes/cool epic/gravity_flip.gd"
+"path": "res://assets/scripts/nodes/movement_nodes/cool epic/gravity_flip.gd"
 }, {
 "base": "VelocityMoveNode",
 "class": "JumpMoveNode",
 "language": "GDScript",
-"path": "res://assets/scripts/nodes/jump_movment_node.gd"
+"path": "res://assets/scripts/nodes/movement_nodes/jump_movment_node.gd"
 }, {
 "base": "Control",
 "class": "KeyboardInputKeyUI",
@@ -53,6 +53,11 @@ _global_script_classes=[ {
 "class": "MovementNode",
 "language": "GDScript",
 "path": "res://assets/scripts/nodes/generic/movement_node.gd"
+}, {
+"base": "Node",
+"class": "MovementNodeUtils",
+"language": "GDScript",
+"path": "res://assets/scripts/movementNodeUtils.gd"
 }, {
 "base": "CanvasLayer",
 "class": "MovementUI",
@@ -67,12 +72,12 @@ _global_script_classes=[ {
 "base": "PlanarMoveNode",
 "class": "PlanarDashMoveNode",
 "language": "GDScript",
-"path": "res://assets/scripts/nodes/planar_dash_node.gd"
+"path": "res://assets/scripts/nodes/movement_nodes/planar_dash_node.gd"
 }, {
 "base": "VelocityMoveNode",
 "class": "PlanarMoveNode",
 "language": "GDScript",
-"path": "res://assets/scripts/nodes/planar_movment_node.gd"
+"path": "res://assets/scripts/nodes/movement_nodes/planar_movment_node.gd"
 }, {
 "base": "KinematicBody",
 "class": "Player",
@@ -92,7 +97,7 @@ _global_script_classes=[ {
 "base": "PositionMoveNode",
 "class": "RayCastTeleportMove",
 "language": "GDScript",
-"path": "res://assets/scripts/nodes/ray_cast_teleport.gd"
+"path": "res://assets/scripts/nodes/movement_nodes/ray_cast_teleport.gd"
 }, {
 "base": "Player",
 "class": "ServerRemotePlayer",
@@ -114,6 +119,7 @@ _global_script_class_icons={
 "JumpMoveNode": "",
 "KeyboardInputKeyUI": "",
 "MovementNode": "",
+"MovementNodeUtils": "",
 "MovementUI": "",
 "NetworkUtils": "",
 "PlanarDashMoveNode": "",

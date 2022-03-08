@@ -9,6 +9,12 @@ export(Dictionary) var multi_input_actions = {"input_action":input_action} setge
 onready var player_node : Player = get_player()
 onready var camera_node : PlayerCamera = get_cam()
 
+var _movement_id : int = 0 setget set_movement_id,get_movement_id
+func set_movement_id(val : int)-> void:
+	pass
+func get_movement_id()->int:
+	return _movement_id
+
 func get_display_name()->String:
 	return "Movement Node"
 
@@ -103,6 +109,9 @@ func _ready():
 	add_to_group("MovementNode")
 	player_node.connect("collided",self,"on_player_collided")
 	subscribe_to_inputs()
+	var movUtils = MovementNodeUtils.new()
+	_movement_id = movUtils.get_movement_node_paths().find(get_script().get_path())
+	print(name.capitalize() + " ID:" + str(_movement_id))
 	overload_ready()
 	print(name.capitalize())
 func overload_process(delta) -> void:
@@ -151,7 +160,6 @@ func code_to_action(code : int)->String:
 func gen_state()->PoolByteArray:
 	var ret_val : PoolByteArray
 	return ret_val
-
 #this is a gneric function inteanded to set the state
 #of a node from a network packet
 #we should be able to general case it here,
