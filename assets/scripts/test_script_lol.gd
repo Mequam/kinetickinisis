@@ -32,6 +32,16 @@ func _ready():
 	var test2 = MovementNodeUtils.new()
 	print(test2.get_movement_node_paths())
 
+
+	print(encoder.decode_data_packet(encoder.gen_data_packet(false)))
+	
+	
+	print("BEGIN STATE PACKET TEST")
+	var state_packet = encoder.gen_node_state_packet(0,"test",Vector3(0,0,-400))
+	print(encoder.get_node_state_node_id(state_packet))
+	print(encoder.get_node_state_attr(state_packet))
+	print(encoder.get_node_state_data(state_packet))
+	print("END STATE PACKET TEST")
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

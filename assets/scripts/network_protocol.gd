@@ -10,6 +10,63 @@ enum PacketType {
 	STATE_MISC #server updates client THING
 	ACTION_RELEASE = 255
 }
+#generates a packet to update the node state
+func gen_node_state_packet(node_id : int, attr : String, data)->PoolByteArray:
+	var ret_val : PoolByteArray
+	ret_val.append(PacketType.STATE_MISC)
+	ret_val.append(node_id)
+	ret_val.append(attr.length())
+	ret_val.append_array(gen_data_packet(attr))
+	ret_val.append_array(gen_data_packet(data))
+	return ret_val
+#returns the node id that a node state packet is destined for
+func get_node_state_node_id(pack : PoolByteArray)->int:
+	return pack[1]
+func get_node_state_attr(pack : PoolByteArray)->String:
+	print("string length of " + str(pack[2]))
+	print("packet lenght of " + str(pack.size()))
+	if pack[2] < pack.size():
+		return pack.subarray(3,4+pack[2]).get_string_from_ascii()
+	return ""
+func get_node_state_data(pack : PoolByteArray):
+	print("string length of " + str(pack[2]))
+	print("packet lenght of " + str(pack.size()))
+	if pack[2] < pack.size():
+		return decode_data_packet(pack.subarray(pack[2]+5,-1))
+	return null
+#returns the data from a data packet
+func decode_data_packet(pack : PoolByteArray):
+	match pack[0]:
+		TYPE_INT:
+			return decode_int_64(pack.subarray(1,8))
+		TYPE_STRING:
+			var str_len : int = pack[1]
+			if pack.size() - 2 <= str_len*4:
+				return pack.subarray(2,-1).get_string_from_ascii()
+			return ""
+		TYPE_BOOL:
+			return pack[1] == 255
+		TYPE_VECTOR3:
+			return decode_vec3(pack.subarray(1,-1))
+#generates a packet containing variable data
+func gen_data_packet(data)->PoolByteArray:
+	var ret_val : PoolByteArray
+	ret_val.append(typeof(data))
+	match typeof(data):
+		TYPE_INT:
+			ret_val.append_array(encode_int_64(data))
+		TYPE_STRING:
+			#append the length of the string for deconding
+			ret_val.append((data as String).length())
+			#append the string data for decoding
+			ret_val.append_array((data as String).to_ascii())
+		TYPE_BOOL:
+			#use 255 for network safty
+			ret_val.append(255 if data else 0)
+		TYPE_VECTOR3:
+			ret_val.append_array(encode_vec3(data))
+	return ret_val
+	
 #generates a position packet from the server
 func gen_packet_state_position(pos : Vector3)->PoolByteArray:
 	var ret_val : PoolByteArray
