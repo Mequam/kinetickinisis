@@ -13,7 +13,6 @@ player_matrix_label = NodePath("Control/VBoxContainer/Player Matrix Label")
 camera_view_vector_label = NodePath("Control/VBoxContainer/Camera View Vector")
 
 [node name="Control" type="Control" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2

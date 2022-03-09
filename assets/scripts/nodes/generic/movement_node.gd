@@ -6,6 +6,7 @@ class_name MovementNode
 export(NodePath) var player_node_path : NodePath
 export(String) var input_action setget set_input_action
 export(Dictionary) var multi_input_actions = {"input_action":input_action} setget set_multi_input_actions
+export(int, "Global", "Local", "Camera", "Custom") var coordinate_space
 onready var player_node : Player = get_player()
 onready var camera_node : PlayerCamera = get_cam()
 
