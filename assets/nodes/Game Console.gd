@@ -19,7 +19,8 @@ var function_dictionary = {
 	"help" : "print_help",
 	"hi" : "say_hi",
 	"fullscreen" : "set_fullscreen",
-	"windowed" : "set_windowed"
+	"windowed" : "set_windowed",
+	"console" : "set_console_param"
 }
 # Called when the node enters the scene tree for the first time.
 func say_hi(args):
@@ -71,6 +72,14 @@ func unpause_scene_tree(args):
 func set_fullscreen(args):
 	OS.window_fullscreen = !OS.window_fullscreen
 	pass
+
+func set_console_param(args):
+	var console_func_dict = {
+		"alpha": "alpha"
+	}
+	var console_array = ["alpha"]
+	if args[0] in console_array:
+		$Control.modulate.a = float(args[1])
 
 func scene_debug(args):
 	var debug_func_dict = {

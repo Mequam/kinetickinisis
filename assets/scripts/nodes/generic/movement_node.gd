@@ -16,6 +16,20 @@ func set_movement_id(val : int)-> void:
 func get_movement_id()->int:
 	return _movement_id
 
+#attributes that are allowed to be interacted with via the network
+var net_attr : Array = []
+#returns an array of node state dictionaries
+func get_state_dictionary_array()->Array:
+	var ret_val = []
+	for attr in net_attr:
+		ret_val.append({"node_id" : self._movement_id,"attr": attr,"val":get(attr)})
+	return ret_val
+	
+#syncs the state of the node using the give node state dictionary
+func sync_state(state_dict : Dictionary)->void:
+	if state_dict.has_all(["node_id","attr","data"]) and state_dict["node_id"] == self._movement_id and state_dict["attr"] in net_attr:
+		set(state_dict["attr"],state_dict["data"])
+
 func get_display_name()->String:
 	return "Movement Node"
 
@@ -153,17 +167,3 @@ func code_to_action(code : int)->String:
 	if player_node.input_map.has(self) and (code in player_node.input_map[self]):
 		return player_node.input_map[self][code]
 	return ""
-
-
-
-#generic function inteanded to be overloaded that 
-#generates any misclanious state that the nodes care about
-func gen_state()->PoolByteArray:
-	var ret_val : PoolByteArray
-	return ret_val
-#this is a gneric function inteanded to set the state
-#of a node from a network packet
-#we should be able to general case it here,
-#but well see in the future
-func set_state(net_state : PoolByteArray)->void:
-	pass

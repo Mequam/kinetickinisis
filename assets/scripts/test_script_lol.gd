@@ -41,6 +41,7 @@ func _ready():
 	print(encoder.get_node_state_node_id(state_packet))
 	print(encoder.get_node_state_attr(state_packet))
 	print(encoder.get_node_state_data(state_packet))
+	print(encoder.get_node_state_dict(encoder.gen_node_state_packet_from_dict({"node_id":1,"attr":"test","data":10000})))
 	print("END STATE PACKET TEST")
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

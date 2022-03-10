@@ -3,9 +3,9 @@ extends VelocityMoveNode
 class_name JumpMoveNode
 
 func _ready():
+	net_attr = ["jumps","max_jumps"]
 	add_to_group("JumpMoveNode")
 #	print(name)
-
 export(Vector3) var jump_dir : Vector3 = Vector3(0,10,0)
 
 var jumps : int = 0

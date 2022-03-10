@@ -5,15 +5,39 @@ class_name NetworkUtils
 enum PacketType {
 	ACTION_PRESS=0,
 	CAMERA,
+	STATE_START,
 	STATE_POSITION, #server updates client position
 	STATE_NODE, #server updates client node
-	STATE_MISC #server updates client THING
+	STATE_MISC, #server updates client THING
+	STATE_END,
 	ACTION_RELEASE = 255
 }
+func gen_start_state_packet()->PoolByteArray:
+	var ret_val : PoolByteArray
+	ret_val.append(PacketType.STATE_START)
+	return ret_val
+func gen_end_state_packet()->PoolByteArray:
+	var ret_val : PoolByteArray
+	ret_val.append(PacketType.STATE_END)
+	return ret_val
+#generates a node state packet from a node_state_dictionary
+func gen_node_state_packet_from_dict(node_state_dict : Dictionary)->PoolByteArray:
+	if node_state_dict.has_all(["attr","node_id","data"]):
+		return gen_node_state_packet(node_state_dict["node_id"],
+								node_state_dict["attr"],
+								node_state_dict["data"])
+	var ret_val : PoolByteArray
+	return ret_val
+func get_node_state_dict(pack : PoolByteArray)->Dictionary:
+	var ret_val = {}
+	ret_val["node_id"] = get_node_state_node_id(pack)
+	ret_val["attr"] = get_node_state_attr(pack)
+	ret_val["data"] = get_node_state_data(pack)
+	return ret_val
 #generates a packet to update the node state
 func gen_node_state_packet(node_id : int, attr : String, data)->PoolByteArray:
 	var ret_val : PoolByteArray
-	ret_val.append(PacketType.STATE_MISC)
+	ret_val.append(PacketType.STATE_NODE)
 	ret_val.append(node_id)
 	ret_val.append(attr.length())
 	ret_val.append_array(gen_data_packet(attr))
@@ -23,14 +47,10 @@ func gen_node_state_packet(node_id : int, attr : String, data)->PoolByteArray:
 func get_node_state_node_id(pack : PoolByteArray)->int:
 	return pack[1]
 func get_node_state_attr(pack : PoolByteArray)->String:
-	print("string length of " + str(pack[2]))
-	print("packet lenght of " + str(pack.size()))
 	if pack[2] < pack.size():
 		return pack.subarray(3,4+pack[2]).get_string_from_ascii()
 	return ""
 func get_node_state_data(pack : PoolByteArray):
-	print("string length of " + str(pack[2]))
-	print("packet lenght of " + str(pack.size()))
 	if pack[2] < pack.size():
 		return decode_data_packet(pack.subarray(pack[2]+5,-1))
 	return null

@@ -19,8 +19,14 @@ func overload_ready():
 	last_cam_gimbal = get_cam().gimbal_rotation_degrees
 	print("setting packet addr to " + server_ip +":"+str(port))
 	(get_cam() as PlayerCamera).connect("rotated_cam",self,"_on_camera_update")
+	
+	circular_buffer.resize(60)
+	
 	.overload_ready()
 
+#updates the circular buffer
+func update_circular_buffer()->void:
+	pass
 #sends a packet of information to the server
 func send_server_packet(data : PoolByteArray)->void:
 	udp.put_packet(data)
@@ -32,7 +38,17 @@ func overload_input(event):
 				print("sending action " + act + " " + str(event.is_pressed()))
 				send_server_packet(netUtils.gen_packet_action(get_cam().gimbal_rotation_degrees,act,event.is_pressed()))
 	.overload_input(event)
+#if this is true we are building a state packet from the server
+var appending_state : bool = false
 
+#reference to the state_dictionary that we are appending to
+var state_dict : Dictionary
+#creates a new state dictionary
+func empty_state_dict()->void:
+	state_dict = {"node_states":[]}
+#stores the state into our circular buffer
+func pop_circular_buffer()->void:
+	empty_state_dict()
 func overload_physics_process(delta):
 	.overload_physics_process(delta)
 	#this should only happen once in theory, but just in case
@@ -44,12 +60,30 @@ func overload_physics_process(delta):
 			print("recived " + str(pack_type) + " from the server")
 			match pack_type:
 				netUtils.PacketType.STATE_POSITION:
-					print("UPDATING POSITION")
-					var new_pos : Vector3 = netUtils.get_packet_POSITION_STATE_position(packet)
-					if transform.origin.distance_squared_to(new_pos) > 0:
-						transform.origin = new_pos
+					state_dict["position"] = netUtils.get_packet_POSITION_STATE_position(packet)
+				netUtils.PacketType.STATE_START:
+					if not appending_state:
+						empty_state_dict()
+					appending_state = true
+				netUtils.PacketType.STATE_END:
+					if appending_state:
+						sync_state(state_dict)
+						pop_circular_buffer()
+					appending_state = false
+				netUtils.PacketType.STATE_NODE:
+					state_dict["node_states"].append(netUtils.get_node_state_dict(packet))
 func _ready():
 	print("test")
+#test function for a checkpoint
+#this will be multithreaded in the future
+func sync_state(state_dict):
+	for state in state_dict["node_states"]:
+		for node in get_movement_nodes():
+			#theres an if statement in this function
+			#that prevents it from running if the state is not
+			#for that node
+			node.sync_state(state)
+	transform.origin = state_dict["position"]
 
 #buffered so we can tell if we want to send a network packet
 var last_cam_gimbal : Vector3 = Vector3(0,0,0)

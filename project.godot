@@ -34,6 +34,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/scripts/CircleSelectPlayerNodes.gd"
 }, {
+"base": "Node",
+"class": "CircularBuffer",
+"language": "GDScript",
+"path": "res://assets/scripts/circularBuffer.gd"
+}, {
 "base": "AccelerationMoveNode",
 "class": "GravityFlipMove",
 "language": "GDScript",
@@ -115,6 +120,7 @@ _global_script_class_icons={
 "CameraMoveNode": "",
 "CircleSelectControl": "",
 "CircleSelectPlayerControl": "",
+"CircularBuffer": "",
 "GravityFlipMove": "",
 "JumpMoveNode": "",
 "KeyboardInputKeyUI": "",

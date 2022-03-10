@@ -52,16 +52,20 @@ func overload_ready()->void:
 func _get_state_packets():
 	var ret_val = []
 	#append the position packet to send
+	for i in range(0,4):
+		ret_val.append(netUtils.gen_start_state_packet())
+	
 	ret_val.append(netUtils.gen_packet_state_position(transform.origin))
 	
-	#append any generic states that the nodes want to send
-	#the client is not doing processing on these for the time
-	#bieng, but we have to generate them eventually so here
-	#they are
+	#for each node that we have append the state of the node to a dictionary to send out
 	for node in get_movement_nodes():
-		var node_state : PoolByteArray = node.gen_state()
-		if node_state.size() != 0:
-			ret_val.append(node_state)
+		for dict in node.get_state_dictionary_array():
+			ret_val.append_array(netUtils.gen_node_state_packet_from_dict(dict))
+	
+	#append the terminating state packet 
+	for i in range(0,5):
+		ret_val.append(netUtils.gen_end_state_packet())
+	
 	return ret_val
 
 #sends the state of the server over to the client
