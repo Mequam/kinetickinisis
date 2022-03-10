@@ -30,7 +30,7 @@ func gen_start_state_packet(offset_time : int = 0)->PoolByteArray:
 func gen_end_state_packet(offset_time : int = 0)->PoolByteArray:
 	var ret_val : PoolByteArray
 	ret_val.append(PacketType.STATE_END)
-	ret_val.append_array(encode_int_64(OS.get_ticks_usec()-offset_time))
+	ret_val.append_array(encode_int_64(OS.get_ticks_usec()+offset_time))
 	return ret_val
 #generates a node state packet from a node_state_dictionary
 func gen_node_state_packet_from_dict(node_state_dict : Dictionary)->PoolByteArray:

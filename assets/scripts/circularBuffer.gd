@@ -13,9 +13,15 @@ func set_buffer_pointer(val : int)->void:
 	pass
 func get_buffer_pointer()->int:
 	return _buffer_pointer
-
+func mod(i : int):
+	while i < 0:
+		i += length()
+	return i % length()
 func read(idx : int):
-	return _buffer[idx % len(_buffer)]
+	#ensure a negative modulus
+	#a bit hacky but it works
+	#ensure positive modulus
+	return _buffer[mod(idx)]
 func read_pointed():
 	return _buffer[_buffer_pointer]
 #stores the given value into the buffer and incriments
@@ -28,3 +34,6 @@ func length()->int:
 	return len(_buffer)
 func _init(size : int):
 	_buffer.resize(size)
+#removes the reference stored in the buffer at that point
+func clear(i):
+	_buffer[mod(i)] = null

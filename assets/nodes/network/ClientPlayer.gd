@@ -11,7 +11,7 @@ var connected = false
 var netUtils : NetworkUtils = NetworkUtils.new()
 
 #circular buffer we store our state in
-var circle_buff : CircularBuffer = CircularBuffer.new(60)
+var circle_buff : CircularBuffer = CircularBuffer.new(20)
 var rewind_thread : Thread
 func overload_ready():
 	udp.set_dest_address(server_ip,port)
@@ -28,8 +28,10 @@ func overload_ready():
 
 #updates the circular buffer WITHOUT re-winding behavior
 #basically just append our position and velocity to the buffer
+var id : int = 0
 func update_circular_buffer(vel : Vector3)->void:
-	circle_buff.push([OS.get_ticks_usec(),transform.origin,vel])
+	circle_buff.push([OS.get_ticks_usec(),transform.origin,vel,id])
+	id += 1
 var rewindMutex : Mutex = Mutex.new()
 
 var error : Dictionary = {}
@@ -37,14 +39,30 @@ func call_rewind(position : Vector3,time : int):
 	error["position"] = position
 	error["time"] = time
 	emit_signal("start_rewind")
-
+func clear_circle_buff(circle : CircularBuffer,time :int)->void:
+	for i in range(0,circle.length()):
+		if circle.read(i) != null and circle.read(i)[0] < time:
+			circle.clear(i)
 func rewind_start_idx(circle : CircularBuffer,time : int)->int:
-	var i : int = circle_buff._buffer_pointer
 	var circle_len = circle_buff.length()
-	for j in range(0,circle_len):
-		#if the time of our data point is less than error time, we found our error
-		if circle_buff.read(i-j)!=null and circle_buff.read(i-j)[0] < time:
-			return i-j
+	#this is not the most efficient way to do this but it works for debugging
+	var i : int = 1
+	var min_idx : int = 0
+	var min_time : int = abs(circle_buff.read(0)[0]-time) if circle_buff.read(0) != null else 0
+	while i < circle_len:
+		if circle_buff.read(i) != null:
+			var delta : int = abs(circle_buff.read(i)[0] - time)
+			if min_time == 0 or delta < min_time:
+				min_idx = i
+				min_time = delta
+		i+=1
+	print(min_idx)
+	return min_idx
+#	for j in range(0,circle_len):
+#		#if the time of our data point is less than error time, we found our error
+#		if circle_buff.read(i-j)!=null and circle_buff.read(i-j)[0] < time:
+#			return i-j
+#	print("returning 0")
 	print("returning 0")
 	return 0
 var rewind_error = {"time":0,"position":Vector3(0,0,0)}
@@ -63,10 +81,21 @@ func _thread_rewind(data_arr):
 
 		if circle_error != null:
 			if circle.read(idx-1) != null and circle.read(idx+1) != null:
-				print(str(idx) + " "+ str(circle.read(idx-1)[0])+ " " + str(circle_error[0]) + " "+ str(circle.read(idx + 1)[0]) + " : " + str(error["time"]))
+				pass
+				#print(str(circle_buff._buffer_pointer) + " " + str(idx) + " "+ str(circle.read(idx-1)[0])+ " " + str(circle_error[0]) + " "+ str(circle.read(idx + 1)[0]) + " : " + str(error["time"]))
 			var delta_time : float = float(abs(error["time"]-circle_error[0]))/1e+6
-			error_delta = (error["position"]-circle_error[1])/16
+			
+			#print("Was: " + str(circle_error[1]) + " Should: " + str(error["position"]) + " delta " + str(error["position"]-circle_error[1]))
+			print("Was @: " + str(circle_error[0]) + " Correct @:" + str(error["time"]))
+			print("time delta: " + str(delta_time))
+			print("currently: " + str(OS.get_ticks_usec()))
+			print(float(circle_error[0]-OS.get_ticks_usec())/100000)
+			#print("velocity: " + str(circle_error[2]))
+			
+			
+			error_delta = (error["position"]-(circle_error[1]))/2.5
 			set_error_delta = true
+			clear_circle_buff(circle_buff,error["time"])
 		else:
 			print("null value")
 #sends a packet of information to the server

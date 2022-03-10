@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/levels/level 0/Level 0.gd" type="Script" id=1]
 [ext_resource path="res://assets/levels/level assets/Basic Building.tscn" type="PackedScene" id=2]
@@ -25,6 +25,19 @@ glow_enabled = true
 metallic = 1.0
 metallic_specular = 1.0
 roughness = 0.0
+
+[sub_resource type="Shader" id=4]
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = SubResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=6]
+lifetime_randomness = 0.12
+gravity = Vector3( 0, 9.8, 0 )
+initial_velocity = 10.0
+color = Color( 1, 0, 0, 1 )
+
+[sub_resource type="SphereMesh" id=7]
 
 [node name="Level 0" type="Spatial"]
 script = ExtResource( 1 )
@@ -108,3 +121,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.04025, -0.98009, -3.99076 )
 material = SubResource( 3 )
 
 [node name="Player2" parent="." instance=ExtResource( 3 )]
+
+[node name="Particles" type="Particles" parent="."]
+material_override = SubResource( 5 )
+lifetime = 2.23
+process_material = SubResource( 6 )
+draw_pass_1 = SubResource( 7 )
