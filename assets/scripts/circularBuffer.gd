@@ -15,7 +15,7 @@ func get_buffer_pointer()->int:
 	return _buffer_pointer
 
 func read(idx : int):
-	return _buffer[idx]
+	return _buffer[idx % len(_buffer)]
 func read_pointed():
 	return _buffer[_buffer_pointer]
 #stores the given value into the buffer and incriments

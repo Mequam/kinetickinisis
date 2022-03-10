@@ -10,15 +10,27 @@ enum PacketType {
 	STATE_NODE, #server updates client node
 	STATE_MISC, #server updates client THING
 	STATE_END,
+	TIME_SYNC, #syncs time between the client and the server using delta time
 	ACTION_RELEASE = 255
 }
-func gen_start_state_packet()->PoolByteArray:
+func gen_time_sync()->PoolByteArray:
+	var ret_val : PoolByteArray
+	ret_val.append(PacketType.TIME_SYNC)
+	ret_val.append_array(encode_int_64(OS.get_ticks_usec()))
+	return ret_val
+func get_time_sync(packet : PoolByteArray)->int:
+	return decode_int_64(packet.subarray(1,-1))
+func get_state_time_start_or_end(pack : PoolByteArray)->int:
+	return decode_int_64(pack.subarray(1,-1))
+func gen_start_state_packet(offset_time : int = 0)->PoolByteArray:
 	var ret_val : PoolByteArray
 	ret_val.append(PacketType.STATE_START)
+	ret_val.append_array(encode_int_64(OS.get_ticks_usec()+offset_time))
 	return ret_val
-func gen_end_state_packet()->PoolByteArray:
+func gen_end_state_packet(offset_time : int = 0)->PoolByteArray:
 	var ret_val : PoolByteArray
 	ret_val.append(PacketType.STATE_END)
+	ret_val.append_array(encode_int_64(OS.get_ticks_usec()-offset_time))
 	return ret_val
 #generates a node state packet from a node_state_dictionary
 func gen_node_state_packet_from_dict(node_state_dict : Dictionary)->PoolByteArray:

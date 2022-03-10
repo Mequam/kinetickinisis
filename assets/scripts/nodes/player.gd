@@ -170,10 +170,12 @@ func get_movement_velocities() -> Vector3:
 			ret_val += node.velocity
 	return ret_val
 
-func overload_physics_process(delta):
-	move_and_collide(get_movement_velocities()*delta)
+func overload_physics_process(delta)->Dictionary:
+	var vel : Vector3 = get_movement_velocities()
+	move_and_collide(vel*delta)
 	get_tree().call_group("Debug UI", "recieve_player_velocity", get_movement_velocities())
 	get_tree().call_group("Debug UI", "recieve_player_matrix", transform)
+	return {"vel":vel}
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	overload_physics_process(delta)

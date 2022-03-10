@@ -9,7 +9,7 @@ class_name ServerRemotePlayer
 var peer : PacketPeerUDP
 #a list of input actions that the remote player has down
 var down_input_actions : Dictionary = {}
-
+var con_time : int
 var netUtils : NetworkUtils = NetworkUtils.new()
 
 func get_vector(a : String,b : String,c: String,d:String,default_return : Vector2 = Vector2(0,0))->Vector2:
@@ -53,7 +53,7 @@ func _get_state_packets():
 	var ret_val = []
 	#append the position packet to send
 	for i in range(0,4):
-		ret_val.append(netUtils.gen_start_state_packet())
+		ret_val.append(netUtils.gen_start_state_packet(time_delta))
 	
 	ret_val.append(netUtils.gen_packet_state_position(transform.origin))
 	
@@ -64,7 +64,7 @@ func _get_state_packets():
 	
 	#append the terminating state packet 
 	for i in range(0,5):
-		ret_val.append(netUtils.gen_end_state_packet())
+		ret_val.append(netUtils.gen_end_state_packet(time_delta))
 	
 	return ret_val
 
@@ -78,7 +78,7 @@ func _send_state():
 #WE DO NOT do UI
 func display_circleUI(arg):
 	pass
-
+var time_delta : int = 0
 func overload_physics_process(delta):
 	#if we recive a remote input turn it into a local input we can use
 	if peer and peer.get_available_packet_count() > 0:
@@ -95,4 +95,6 @@ func overload_physics_process(delta):
 				.overload_input(actionEvent)
 			elif pk_type == netUtils.PacketType.CAMERA:
 				(get_cam() as PlayerCamera).gimbal_rotation_degrees = netUtils.get_packet_camera(packet)
+			elif pk_type == netUtils.PacketType.TIME_SYNC:
+				time_delta = abs(netUtils.get_time_sync(packet) - con_time)
 	.overload_physics_process(delta)
