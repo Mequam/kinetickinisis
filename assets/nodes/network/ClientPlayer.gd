@@ -93,7 +93,7 @@ func _thread_rewind(data_arr):
 			#print("velocity: " + str(circle_error[2]))
 			
 			
-			error_delta = (error["position"]-(circle_error[1]))/2.5
+			error_delta = (error["position"]-(circle_error[1]))
 			set_error_delta = true
 			clear_circle_buff(circle_buff,error["time"])
 		else:
@@ -125,11 +125,16 @@ func pop_circular_buffer()->void:
 	call_rewind(state_dict["position"],state_dict["time"])
 	empty_state_dict()
 
+var interpolation_point : Vector3
+export(float) var interpolation_speed : float = 10
+func do_interpolate()->bool:
+	return transform.origin.distance_squared_to(interpolation_point) > 2
 func overload_physics_process(delta):
 	if set_error_delta:
-		transform.origin += error_delta
+		interpolation_point = transform.origin + error_delta
 		set_error_delta = false
-
+	if do_interpolate():
+		transform.origin = transform.origin.linear_interpolate(interpolation_point,delta*interpolation_speed)
 	var data : Dictionary = .overload_physics_process(delta)
 	update_circular_buffer(data["vel"])
 	#this should only happen once in theory, but just in case

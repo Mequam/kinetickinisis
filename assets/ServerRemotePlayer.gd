@@ -53,7 +53,7 @@ func _get_state_packets():
 	var ret_val = []
 	#append the position packet to send
 	for i in range(0,4):
-		ret_val.append(netUtils.gen_start_state_packet(time_delta-con_time))
+		ret_val.append(netUtils.gen_start_state_packet(time_delta))
 	
 	ret_val.append(netUtils.gen_packet_state_position(transform.origin))
 	
@@ -64,7 +64,7 @@ func _get_state_packets():
 	
 	#append the terminating state packet 
 	for i in range(0,5):
-		ret_val.append(netUtils.gen_end_state_packet(time_delta-con_time))
+		ret_val.append(netUtils.gen_end_state_packet(time_delta))
 	
 	return ret_val
 
@@ -97,5 +97,5 @@ func overload_physics_process(delta):
 				(get_cam() as PlayerCamera).gimbal_rotation_degrees = netUtils.get_packet_camera(packet)
 			elif pk_type == netUtils.PacketType.TIME_SYNC:
 				#this is the connection delta not the time delta between games
-				time_delta = abs(con_time + netUtils.get_time_sync(packet) - OS.get_ticks_usec()+60000)
+				time_delta = abs(netUtils.get_time_sync(packet) - con_time)
 	.overload_physics_process(delta)
