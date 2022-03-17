@@ -31,6 +31,7 @@ albedo_color = Color( 1, 0, 0, 1 )
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 2 )
 movement_node_manager_node = NodePath("Movement Nodes")
+do_player_input = true
 
 [node name="Movement Nodes" type="Node" parent="."]
 

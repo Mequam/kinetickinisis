@@ -1,11 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/levels/level 0/Level 0.gd" type="Script" id=1]
 [ext_resource path="res://assets/levels/level assets/Basic Building.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/scripts/ServerNode.gd" type="Script" id=3]
 [ext_resource path="res://assets/nodes/Movement Item.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/nodes/Debug UI.tscn" type="PackedScene" id=5]
-[ext_resource path="res://assets/nodes/network/ServerRemotePlayer.tscn" type="PackedScene" id=6]
-[ext_resource path="res://assets/nodes/network/ServerNode.tscn" type="PackedScene" id=7]
 
 [sub_resource type="ProceduralSky" id=1]
 ground_bottom_color = Color( 0.647059, 0.839216, 0.945098, 1 )
@@ -95,9 +94,6 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Line2D" type="Line2D" parent="CanvasLayer2/Control/Control"]
 points = PoolVector2Array( -10, 0, 10, 0 )
@@ -119,10 +115,7 @@ transform = Transform( 0.0849767, -0.442092, 0.892936, 0.0916179, 0.895847, 0.43
 current = true
 fov = 90.0
 
-[node name="remote" parent="." instance=ExtResource( 6 )]
-do_player_input = true
-
-[node name="ServerNode" parent="." instance=ExtResource( 7 )]
+[node name="ServerConnectionNode" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 58.1303, 17.805, 3.81271 )
+script = ExtResource( 3 )
 port = 2645
-
-[connection signal="connection_available" from="ServerNode" to="." method="_on_ServerNode_connection_available"]

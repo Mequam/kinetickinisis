@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/scripts/circularBuffer.gd"
 }, {
+"base": "Player",
+"class": "ClientPlayer",
+"language": "GDScript",
+"path": "res://assets/nodes/network/ClientPlayer.gd"
+}, {
 "base": "AccelerationMoveNode",
 "class": "GravityFlipMove",
 "language": "GDScript",
@@ -104,6 +109,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/scripts/nodes/movement_nodes/ray_cast_teleport.gd"
 }, {
+"base": "Spatial",
+"class": "ServerConnectionNode",
+"language": "GDScript",
+"path": "res://assets/scripts/ServerNode.gd"
+}, {
 "base": "Player",
 "class": "ServerRemotePlayer",
 "language": "GDScript",
@@ -121,6 +131,7 @@ _global_script_class_icons={
 "CircleSelectControl": "",
 "CircleSelectPlayerControl": "",
 "CircularBuffer": "",
+"ClientPlayer": "",
 "GravityFlipMove": "",
 "JumpMoveNode": "",
 "KeyboardInputKeyUI": "",
@@ -134,6 +145,7 @@ _global_script_class_icons={
 "PlayerCamera": "",
 "PositionMoveNode": "",
 "RayCastTeleportMove": "",
+"ServerConnectionNode": "",
 "ServerRemotePlayer": "",
 "VelocityMoveNode": ""
 }

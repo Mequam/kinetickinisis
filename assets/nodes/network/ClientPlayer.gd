@@ -2,6 +2,8 @@ extends Player
 #this is a player class that sends it's inputs to a given server
 #in addition to predicting its location on the client side of the connection
 
+class_name ClientPlayer
+
 export(String) var server_ip : String = "127.0.0.1"
 export(int) var port : int = 2644
 export(int) var client_id : int = 0
