@@ -70,11 +70,12 @@ func _get_state_packets():
 
 #sends the state of the server over to the client
 func _send_state():
-	print("sending state packet to the clinet!")
 	if peer:
 		for state in _get_state_packets():
 			peer.put_packet(state)
-
+#sends the node inventory state to the player
+func _send_node_inventory():
+	pass
 #WE DO NOT do UI
 func display_circleUI(arg):
 	pass

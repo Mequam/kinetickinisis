@@ -8,11 +8,27 @@ enum PacketType {
 	STATE_START,
 	STATE_POSITION, #server updates client position
 	STATE_NODE, #server updates client node
-	STATE_MISC, #server updates client THING
+	SUPER_STATE_NODE, #server tells the client that it has (or does not have) NODE
+	SUPER_STATE_NODE_DELIMITER,
 	STATE_END,
 	TIME_SYNC, #syncs time between the client and the server using delta time
 	ACTION_RELEASE = 255
 }
+
+
+func gen_super_state_node(node_id : int, node_equiped : bool)->PoolByteArray:
+	var ret_val : PoolByteArray
+	ret_val.append(PacketType.SUPER_STATE_NODE) #we are telling you about a node
+	ret_val.append(node_id) #this is the node
+	ret_val.append_array(encode_bool(node_equiped)) #is it equipd or not?
+	return ret_val
+#generates a super state node packet
+#indicates to the client that it is about to recive node state
+func gen_super_node_state_start(start : bool)->PoolByteArray:
+	var ret_val : PoolByteArray
+	ret_val.append(PacketType.SUPER_STATE_NODE_DELIMITER)
+	ret_val.append_array(encode_bool(start))
+	return ret_val
 func gen_time_sync()->PoolByteArray:
 	var ret_val : PoolByteArray
 	ret_val.append(PacketType.TIME_SYNC)
@@ -77,7 +93,7 @@ func decode_data_packet(pack : PoolByteArray):
 				return pack.subarray(2,-1).get_string_from_ascii()
 			return ""
 		TYPE_BOOL:
-			return pack[1] == 255
+			return decode_bool(pack.subarray(1,1))
 		TYPE_VECTOR3:
 			return decode_vec3(pack.subarray(1,-1))
 #generates a packet containing variable data
@@ -196,3 +212,10 @@ func decode_int_64(pack : PoolByteArray)->int:
 	var sb : StreamPeerBuffer = StreamPeerBuffer.new()
 	sb.data_array = pack
 	return sb.get_64()
+
+func encode_bool(val : bool)->PoolByteArray:
+	var ret_val : PoolByteArray
+	ret_val.append(255 if val else 0)
+	return ret_val
+func decode_bool(pack : PoolByteArray)->bool:
+	return pack[0] == 255
