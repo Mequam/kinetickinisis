@@ -1,0 +1,3 @@
+[submodule "tools/pyproxy"]
+	path = tools/pyproxy
+	url = https://github.com/Mequam/pyproxy.git

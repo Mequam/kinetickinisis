@@ -160,6 +160,11 @@ config/icon="res://icon.png"
 
 GameConsole="*res://assets/scripts/Global.gd"
 
+[global]
+
+.git=false
+import=false
+
 [input]
 
 ui_accept={
