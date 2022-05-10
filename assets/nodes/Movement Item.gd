@@ -1,8 +1,12 @@
 extends Spatial
 
 
-#export()
-var node = RayCastTeleportMove.new()
+#this function returns a movment node to add to the player
+#if we want random node generation we should do it here
+func gen_movement_node(args=[])->MovementNode:
+	var ret_val = RayCastTeleportMove.new()
+	ret_val._movement_id = 5
+	return ret_val
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -19,9 +23,9 @@ func _ready():
 
 
 func _on_Area_body_entered(body):
+	var node : MovementNode = gen_movement_node()
+	print("giving player " + node.get_display_name() + " "  + str(node.get_movement_id()))
 	if body is Player:
-		node.name = "Raycast Teleport"
-		node.input_action = "action_1"
 		body.move_node_into_inventory(node)
 		queue_free()
 	pass # Replace with function body.

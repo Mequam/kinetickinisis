@@ -11,7 +11,42 @@ var peer : PacketPeerUDP
 var down_input_actions : Dictionary = {}
 var con_time : int
 var netUtils : NetworkUtils = NetworkUtils.new()
+func move_node_into_movements(node)->void:
+	print("adding to movements")
+	
+	var active_movement_nodes = get_node(movement_node_manager_node).get_children()
+	
+	
+	#the index of our node, default the length of the list if we are adding new
+	var node_idx : int = len(active_movement_nodes)
+	if node in active_movement_nodes:
+		node_idx = active_movement_nodes.find(node)
+		
+	#actually do the move
+	.move_node_into_movements(node)
 
+	print("sending node_idx " + str(node_idx))	
+	#alert the client of the move
+	peer.put_packet(
+		netUtils.gen_super_state_node(
+			node.get_movement_id(),
+			true,
+			node_idx
+			)
+		)
+func move_node_into_inventory(node)->void:
+
+	print("adding to inventory")
+	print("sending id " + str(node.get_movement_id()))
+	print("node " + node.get_display_name())
+	peer.put_packet(
+		netUtils.gen_super_state_node(
+			node.get_movement_id(),
+			false,
+			-1
+		)
+	)
+	.move_node_into_inventory(node)
 func get_vector(a : String,b : String,c: String,d:String,default_return : Vector2 = Vector2(0,0))->Vector2:
 	if not self.do_player_input:
 		return default_return
@@ -45,6 +80,9 @@ func overload_ready()->void:
 	
 	add_child(state_timer)
 	
+	
+	for node in get_node(movement_node_manager_node).get_children():
+		print(node.get_display_name() + " " + str(node.get_movement_id()))
 	.overload_ready()
 
 #generates the state of this client to send to the player
@@ -100,4 +138,28 @@ func overload_physics_process(delta):
 			elif pk_type == netUtils.PacketType.TIME_SYNC:
 				#this is the connection delta not the time delta between games
 				time_delta = abs(netUtils.get_time_sync(packet) - con_time)
+			elif pk_type == netUtils.PacketType.CLIENT_DEQUIP_NODE or pk_type == netUtils.PacketType.CLIENT_EQUIP_NODE:
+				
+				print("updating equiped node status with node id " + str(netUtils.get_client_node_id(packet)))
+				print("movement nodes")
+				for node in get_movement_nodes():
+					print("\t"+ node.get_display_name())
+				print("inventory nodes")
+				for node in movement_inventory:
+					print("\t"+ node.get_display_name())
+				var node_inv_state = node_inventory_state(netUtils.get_client_node_id(packet))
+				print(node_inv_state)
+				#we can only equip if we are dequiped
+				if node_inv_state is Node:
+					print("moving client node into movements")
+					move_node_into_movements(
+						node_inv_state
+						)
+				#we can only dequip if we are equiped
+				#elif node_inv_state >= 0:
+				#	print("moving client node into inventory")
+				#	move_node_into_inventory(
+				#		get_node(movement_node_manager_node).get_child(node_inv_state)
+				#		)
+				
 	.overload_physics_process(delta)

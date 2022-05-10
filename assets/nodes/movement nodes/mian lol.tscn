@@ -23,7 +23,7 @@ size = Vector2( 5, 5 )
 script = ExtResource( 5 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0040133, 1.6385, -0.0355768 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.00401, -1.3615, 13.9644 )
 
 [node name="colBox" type="CSGBox" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0175972, -1.03592, 0.0240202 )

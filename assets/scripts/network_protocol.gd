@@ -10,18 +10,41 @@ enum PacketType {
 	STATE_NODE, #server updates client node
 	SUPER_STATE_NODE, #server tells the client that it has (or does not have) NODE
 	SUPER_STATE_NODE_DELIMITER,
+	CLIENT_EQUIP_NODE,
+	CLIENT_DEQUIP_NODE,
 	STATE_END,
 	TIME_SYNC, #syncs time between the client and the server using delta time
 	ACTION_RELEASE = 255
 }
-
-
-func gen_super_state_node(node_id : int, node_equiped : bool)->PoolByteArray:
+func gen_client_dequip_node(node_id : int):
+	var ret_val : PoolByteArray
+	ret_val.append(PacketType.CLIENT_DEQUIP_NODE)
+	ret_val.append(node_id)
+#tells the server that the client wants to equip a node
+func gen_client_equip_node(node_id : int):
+	var ret_val : PoolByteArray
+	ret_val.append(PacketType.CLIENT_EQUIP_NODE)
+	ret_val.append(node_id)
+	return ret_val
+#gets the node that the client wants to equiped or dequip
+#designed for use on the server
+func get_client_node_id(pack : PoolByteArray):
+	return pack[1]
+#takes the node_id of the node type, weather the not the node is equiped 
+func gen_super_state_node(node_id : int, node_equiped : bool,idx : int)->PoolByteArray:
 	var ret_val : PoolByteArray
 	ret_val.append(PacketType.SUPER_STATE_NODE) #we are telling you about a node
 	ret_val.append(node_id) #this is the node
 	ret_val.append_array(encode_bool(node_equiped)) #is it equipd or not?
+	ret_val.append_array(encode_int_64(idx))
 	return ret_val
+func get_super_state_node_id(pack : PoolByteArray)->int:
+	return pack[1]
+func get_super_state_equiped(pack : PoolByteArray)->bool:
+	return decode_bool(pack.subarray(2,2))
+func get_super_state_idx(pack : PoolByteArray)->int:
+	return decode_int_64(pack.subarray(3,-1))
+
 #generates a super state node packet
 #indicates to the client that it is about to recive node state
 func gen_super_node_state_start(start : bool)->PoolByteArray:

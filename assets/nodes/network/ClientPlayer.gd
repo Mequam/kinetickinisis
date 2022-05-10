@@ -24,7 +24,6 @@ func overload_ready():
 	last_cam_gimbal = get_cam().gimbal_rotation_degrees
 	(get_cam() as PlayerCamera).connect("rotated_cam",self,"_on_camera_update")
 	rewind_thread = Thread.new()
-	print("STARTING THREAD")
 	rewind_thread.start(self,"_thread_rewind",[circle_buff,error])
 	.overload_ready()
 
@@ -34,7 +33,6 @@ var id : int = 0
 func update_circular_buffer(vel : Vector3)->void:
 	circle_buff.push([OS.get_ticks_usec(),transform.origin,vel,id])
 	id += 1
-var rewindMutex : Mutex = Mutex.new()
 
 var error : Dictionary = {}
 func call_rewind(position : Vector3,time : int):
@@ -58,14 +56,12 @@ func rewind_start_idx(circle : CircularBuffer,time : int)->int:
 				min_idx = i
 				min_time = delta
 		i+=1
-	print(min_idx)
 	return min_idx
 #	for j in range(0,circle_len):
 #		#if the time of our data point is less than error time, we found our error
 #		if circle_buff.read(i-j)!=null and circle_buff.read(i-j)[0] < time:
 #			return i-j
 #	print("returning 0")
-	print("returning 0")
 	return 0
 var rewind_error = {"time":0,"position":Vector3(0,0,0)}
 var error_delta : Vector3
@@ -88,10 +84,10 @@ func _thread_rewind(data_arr):
 			var delta_time : float = float(abs(error["time"]-circle_error[0]))/1e+6
 			
 			#print("Was: " + str(circle_error[1]) + " Should: " + str(error["position"]) + " delta " + str(error["position"]-circle_error[1]))
-			print("Was @: " + str(circle_error[0]) + " Correct @:" + str(error["time"]))
-			print("time delta: " + str(delta_time))
-			print("currently: " + str(OS.get_ticks_usec()))
-			print(float(circle_error[0]-OS.get_ticks_usec())/100000)
+#			print("Was @: " + str(circle_error[0]) + " Correct @:" + str(error["time"]))
+#			print("time delta: " + str(delta_time))
+#			print("currently: " + str(OS.get_ticks_usec()))
+#			print(float(circle_error[0]-OS.get_ticks_usec())/100000)
 			#print("velocity: " + str(circle_error[2]))
 			
 			
@@ -131,6 +127,30 @@ var interpolation_point : Vector3
 export(float) var interpolation_speed : float = 10
 func do_interpolate()->bool:
 	return transform.origin.distance_squared_to(interpolation_point) > 2
+
+func add_child_at(node : Node,idx : int):
+	add_child(node)
+	move_child(node,idx)
+
+##we do NOT interact with nodes ourselfs,
+#instead we ask the server to do that for us
+#ask for an equip
+func move_node_into_movements(node):
+	print("attempting to activate node!")
+	udp.put_packet(
+		netUtils.gen_client_equip_node(
+			node.get_movement_id()
+			)
+		)
+#ask for a dequip
+func move_node_into_inventory(node):
+	print("attempting to deactivate node!")
+	udp.put_packet(
+		netUtils.gen_client_dequip_node(
+			node.get_movement_id()
+			)
+	)
+
 func overload_physics_process(delta):
 	if set_error_delta:
 		interpolation_point = transform.origin + error_delta
@@ -159,10 +179,50 @@ func overload_physics_process(delta):
 					appending_state = false
 				netUtils.PacketType.STATE_NODE:
 					state_dict["node_states"].append(netUtils.get_node_state_dict(packet))
-	
+				netUtils.PacketType.SUPER_STATE_NODE:
+					
+					#TODO: clean this :)
+					
+					var movement_node_id : int = netUtils.get_super_state_node_id(packet)
+					print("recived movement_node_id " + str(movement_node_id))
+					var equip_state  = node_inventory_state(movement_node_id)
+					
+					#true indicates we go into active inventory
+					#false is inactive
+					var node_destination = netUtils.get_super_state_equiped(packet)
+					
+					if equip_state is Node: #its in the inventory, equip it
+						print("node is in the inventory")
+						if node_destination:
+							print("moving a node into movements from inventorys")
+							.move_node_into_movements(equip_state)
+							get_node(movement_node_manager_node).move_child(equip_state,netUtils.get_super_state_idx(packet))
+						#else:
+							#if we need to move the node into inactive and it is ALREADy incactive we do nothing in this case
+					elif equip_state >= 0: #it is active
+						print("node is already active")
+						if node_destination: #we want it active at a specific spot
+							.move_node_into_movements_at(
+								get_node(movement_node_manager_node).get_child(equip_state),
+								netUtils.get_super_state_idx(packet)
+								)
+						else: #we want it in the inventory
+							.move_node_into_inventory(
+								get_node(movement_node_manager_node).get_child(equip_state)
+								)
+					else: #the node is non existent
+						print("this is a new node")
+						#a new node instance to add to the child
+						var to_add : Node = MovementNodeUtils.get_movment_node_instance(movement_node_id)
+						if node_destination: #we are active
+							.move_node_into_movements_at(to_add,netUtils.get_super_state_idx(packet))
+						else: #we are inactive
+							.move_node_into_inventory(to_add)
+							
 	return data
 func _ready():
-	print("test")
+	for node in get_node(movement_node_manager_node).get_children():
+		print(node.get_display_name() + " " + str(node.get_movement_id()))
 #test function for a checkpoint
 #this will be multithreaded in the future
 func sync_state(state_dict):

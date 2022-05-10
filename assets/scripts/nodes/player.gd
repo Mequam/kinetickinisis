@@ -11,6 +11,33 @@ export(NodePath) var movement_inventory_manager_node
 export(NodePath) var movement_ui
 export(int) var collision_window : int = int(1e+6/15)
 
+
+#posotive integers indicate the node is equiped at a given 
+#index
+#A node reference indicates its in the inventory
+#-1 indicates that the node is absent
+func node_inventory_state(node_id : int):
+	var i : int = 0
+	var children = get_node(movement_node_manager_node).get_children()
+	
+	
+	#check if the node is in the inventory
+	#return its index if it is
+	while i < len(children):
+		if children[i].get_movement_id() == node_id:
+			print(children[i].get_display_name() + " is equiped")
+			return i
+		i += 1
+		
+	#return the node if its in the inventory
+	for node in movement_inventory:
+		if node.get_movement_id() == node_id:
+			print(node.get_display_name() + " is in the inventory!")
+			return node
+	
+	#return -1 if it is neither
+	return -1
+
 var _lock_count : int = 0 setget set_lock_count,get_lock_count
 #the only way we interact with lock count is by claiming and
 #unclaiming locks
@@ -76,8 +103,12 @@ func get_movement_nodes():
 
 func get_inventory_nodes():
 	return movement_inventory
-
-func move_node_into_movements(node : Node):
+#moves the node into active inventory at the given index
+func move_node_into_movements_at(node : Node, idx : int)->void:
+	move_node_into_movements(node)
+	get_node(movement_node_manager_node).move_child(node,idx)
+#moves a node into the active inventory
+func move_node_into_movements(node : Node)->void:
 	if node.get_parent():
 		node.get_parent().remove_child(node)
 #		node.set_process(true)
@@ -86,7 +117,7 @@ func move_node_into_movements(node : Node):
 		movement_inventory.erase(node)
 	get_node(movement_node_manager_node).add_child(node)
 	pass
-
+#moves the node into inactive inventory
 func move_node_into_inventory(node : Node):
 	if node.get_parent():
 		node.get_parent().remove_child(node)
@@ -120,6 +151,7 @@ func overload_ready():
 		node.set_process_input(false)
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	movement_inventory_manager_node = "Movement Inventory"
 	overload_ready()
 
 

@@ -10,9 +10,11 @@ export(int, "Global", "Local", "Camera", "Custom") var coordinate_space
 onready var player_node : Player = get_player()
 onready var camera_node : PlayerCamera = get_cam()
 
+#this is the type id of the node, and is the same for all nodes of the given type
 var _movement_id : int = 0 setget set_movement_id,get_movement_id
 func set_movement_id(val : int)-> void:
 	pass
+	_movement_id = val
 func get_movement_id()->int:
 	return _movement_id
 
@@ -119,16 +121,16 @@ func demand_inputs(inputs : Array)->void:
 func subscribe_to_inputs()->void:
 	pass
 
+func generate_movment_id()->int:
+	var movUtils = MovementNodeUtils.new()
+	return movUtils.get_movement_node_paths().find(get_script().get_path())
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	add_to_group("MovementNode")
 	player_node.connect("collided",self,"on_player_collided")
 	subscribe_to_inputs()
-	var movUtils = MovementNodeUtils.new()
-	_movement_id = movUtils.get_movement_node_paths().find(get_script().get_path())
-	print(name.capitalize() + " ID:" + str(_movement_id))
+	_movement_id = generate_movment_id()
 	overload_ready()
-	print(name.capitalize())
 func overload_process(delta) -> void:
 	pass
 func _process(delta):
