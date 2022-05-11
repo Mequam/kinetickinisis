@@ -2,6 +2,10 @@ extends Node
 #this node represents the logic utilities for our network protocol
 class_name NetworkUtils
 
+enum EntityType {
+	PLAYER
+}
+
 enum PacketType {
 	ACTION_PRESS=0,
 	CAMERA,
@@ -12,10 +16,41 @@ enum PacketType {
 	SUPER_STATE_NODE_DELIMITER,
 	CLIENT_EQUIP_NODE,
 	CLIENT_DEQUIP_NODE,
+	ENTITY_UPDATE,
+	SPAWN_ENTITY,
 	STATE_END,
 	TIME_SYNC, #syncs time between the client and the server using delta time
 	ACTION_RELEASE = 255
 }
+func gen_spawn_entity(entity_type_id : int,entity_id : int, entity_position : Vector3):
+	var ret_val : PoolByteArray
+	ret_val.append(PacketType.SPAWN_ENTITY)
+	ret_val.append(entity_type_id)
+	ret_val.append_array(encode_int_64(entity_id))
+	ret_val.append_array(encode_vec3(entity_position))
+	return ret_val
+func get_spawn_entity_type(pack : PoolByteArray)->int:
+	return pack[1]
+func get_spawn_entity_id(pack : PoolByteArray)->int:
+	return decode_int_64(pack.subarray(2,10))
+func get_spawn_entity_position(pack : PoolByteArray)->Vector3:
+	return decode_vec3(pack.subarray(10,-1))
+	
+func gen_entity_state(entity_id : int, entity_position : Vector3,entity_velocity : Vector3)->PoolByteArray:
+	var ret_val : PoolByteArray
+	ret_val.append(PacketType.ENTITY_UPDATE)
+	ret_val.append_array(encode_int_64(entity_id))
+	ret_val.append_array(encode_vec3(entity_position))
+	ret_val.append_array(encode_vec3(entity_velocity))
+	return ret_val
+
+func get_entity_state_id(pack : PoolByteArray)->int:
+	return decode_int_64(pack.subarray(1,9))
+func get_entity_state_velocity(pack : PoolByteArray)->Vector3:
+	return decode_vec3(pack.subarray(21,-1))
+func get_entity_state_position(pack : PoolByteArray)->Vector3:
+	return decode_vec3(pack.subarray(9,21))
+
 func gen_client_dequip_node(node_id : int)->PoolByteArray:
 	var ret_val : PoolByteArray
 	ret_val.append(PacketType.CLIENT_DEQUIP_NODE)

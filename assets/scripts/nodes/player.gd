@@ -1,4 +1,4 @@
-extends KinematicBody
+extends Entity
 
 #this is the player class that the player controls
 #TODO: impliment this
@@ -11,7 +11,8 @@ export(NodePath) var movement_inventory_manager_node
 export(NodePath) var movement_ui
 export(int) var collision_window : int = int(1e+6/15)
 
-
+func get_entity_type()->int:
+	return NetworkUtils.EntityType.PLAYER
 #posotive integers indicate the node is equiped at a given 
 #index
 #A node reference indicates its in the inventory

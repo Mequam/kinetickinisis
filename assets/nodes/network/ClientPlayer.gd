@@ -94,8 +94,6 @@ func _thread_rewind(data_arr):
 			error_delta = (error["position"]-(circle_error[1]))
 			set_error_delta = true
 			clear_circle_buff(circle_buff,error["time"])
-		else:
-			print("null value")
 #sends a packet of information to the server
 func send_server_packet(data : PoolByteArray)->void:
 	udp.put_packet(data)
@@ -143,12 +141,24 @@ func move_node_into_movements(node):
 		)
 #ask for a dequip
 func move_node_into_inventory(node):
-	print("attempting to deactivate node!")
 	udp.put_packet(
 		netUtils.gen_client_dequip_node(
 			node.get_movement_id()
 			)
 	)
+	
+#spawns a given entity at a given position
+func spawn_entity(type_id : int,entity_id : int,pos : Vector3):
+	print("spawning entity at " + str(pos))
+	var entity
+	match type_id:
+		netUtils.EntityType.PLAYER:
+			#add a network entity to the game
+			entity = load("res://assets/nodes/PlayerPlaceHolder.tscn").instance()
+			entity.transform.origin = pos
+			get_parent().add_child(entity)
+	print("setting entity id to " + str(entity_id))
+	entity.entity_id = entity_id
 
 func overload_physics_process(delta):
 	if set_error_delta:
@@ -165,6 +175,19 @@ func overload_physics_process(delta):
 		if udp.get_packet_error() == OK:
 			var pack_type : int = netUtils.get_packet_type(packet)
 			match pack_type:
+				netUtils.PacketType.ENTITY_UPDATE:
+					print("recived entity update!")
+					#tell all of our net entities there is an update
+					get_tree().call_group("NetworkEntity","update_entity_position_state",
+						netUtils.get_entity_state_id(packet),
+						netUtils.get_entity_state_position(packet),
+						netUtils.get_entity_state_velocity(packet)
+						)
+				netUtils.PacketType.SPAWN_ENTITY:
+					print("[client.gd] recived entity id " + str(netUtils.get_spawn_entity_id(packet)))
+					spawn_entity(netUtils.get_spawn_entity_type(packet),
+								netUtils.get_spawn_entity_id(packet),
+								netUtils.get_spawn_entity_position(packet))
 				netUtils.PacketType.STATE_POSITION:
 					state_dict["position"] = netUtils.get_packet_POSITION_STATE_position(packet)
 				netUtils.PacketType.STATE_START:
@@ -183,7 +206,6 @@ func overload_physics_process(delta):
 					#TODO: clean this :)
 					
 					var movement_node_id : int = netUtils.get_super_state_node_id(packet)
-					print("recived movement_node_id " + str(movement_node_id))
 					var equip_state  = node_inventory_state(movement_node_id)
 					
 					#true indicates we go into active inventory
@@ -191,15 +213,12 @@ func overload_physics_process(delta):
 					var node_destination = netUtils.get_super_state_equiped(packet)
 					
 					if equip_state is Node: #its in the inventory, equip it
-						print("node is in the inventory")
 						if node_destination:
-							print("moving a node into movements from inventorys")
 							.move_node_into_movements(equip_state)
 							get_node(movement_node_manager_node).move_child(equip_state,netUtils.get_super_state_idx(packet))
 						#else:
 							#if we need to move the node into inactive and it is ALREADy incactive we do nothing in this case
 					elif equip_state >= 0: #it is active
-						print("node is already active")
 						if node_destination: #we want it active at a specific spot
 							.move_node_into_movements_at(
 								get_node(movement_node_manager_node).get_child(equip_state),
@@ -210,7 +229,6 @@ func overload_physics_process(delta):
 								get_node(movement_node_manager_node).get_child(equip_state)
 								)
 					else: #the node is non existent
-						print("this is a new node")
 						#a new node instance to add to the child
 						var to_add : Node = MovementNodeUtils.get_movment_node_instance(movement_node_id)
 						if node_destination: #we are active

@@ -51,6 +51,26 @@ func _ready():
 	print(encoder.get_super_state_equiped(state_packet))
 	print(encoder.get_super_state_idx(state_packet))
 	print("END SUPER STATE PACKET TEST")
+	
+	
+	state_packet = encoder.gen_entity_state(12,Vector3(1,1,1),Vector3(2,2,2))
+	
+	print("DISPLAYING PACKET SIZE")
+	print(state_packet.size())
+	print((state_packet.size() - 9)/2)
+
+	print("DECODING ENTITY PACKET")
+	print(encoder.get_entity_state_id(state_packet))
+	print(encoder.get_entity_state_position(state_packet))
+	print(encoder.get_entity_state_velocity(state_packet))
+	
+	
+	print("TESTING SPAWN ENTITY COMMAND")
+	state_packet = encoder.gen_spawn_entity(99,2,Vector3(1,2,3))
+	print(encoder.get_spawn_entity_type(state_packet))
+	print(encoder.get_spawn_entity_id(state_packet))
+	print(encoder.get_spawn_entity_position(state_packet))
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
