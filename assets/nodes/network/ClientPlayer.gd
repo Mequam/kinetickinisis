@@ -136,7 +136,6 @@ func add_child_at(node : Node,idx : int):
 #instead we ask the server to do that for us
 #ask for an equip
 func move_node_into_movements(node):
-	print("attempting to activate node!")
 	udp.put_packet(
 		netUtils.gen_client_equip_node(
 			node.get_movement_id()

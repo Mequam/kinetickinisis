@@ -16,12 +16,13 @@ enum PacketType {
 	TIME_SYNC, #syncs time between the client and the server using delta time
 	ACTION_RELEASE = 255
 }
-func gen_client_dequip_node(node_id : int):
+func gen_client_dequip_node(node_id : int)->PoolByteArray:
 	var ret_val : PoolByteArray
 	ret_val.append(PacketType.CLIENT_DEQUIP_NODE)
 	ret_val.append(node_id)
+	return ret_val
 #tells the server that the client wants to equip a node
-func gen_client_equip_node(node_id : int):
+func gen_client_equip_node(node_id : int)->PoolByteArray:
 	var ret_val : PoolByteArray
 	ret_val.append(PacketType.CLIENT_EQUIP_NODE)
 	ret_val.append(node_id)

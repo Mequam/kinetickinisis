@@ -156,10 +156,10 @@ func overload_physics_process(delta):
 						node_inv_state
 						)
 				#we can only dequip if we are equiped
-				#elif node_inv_state >= 0:
-				#	print("moving client node into inventory")
-				#	move_node_into_inventory(
-				#		get_node(movement_node_manager_node).get_child(node_inv_state)
-				#		)
+				elif node_inv_state >= 0:
+					print("moving client node into inventory")
+					move_node_into_inventory(
+						get_node(movement_node_manager_node).get_child(node_inv_state)
+						)
 				
 	.overload_physics_process(delta)
