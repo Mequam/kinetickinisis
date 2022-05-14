@@ -71,6 +71,10 @@ func _ready():
 	print(encoder.get_spawn_entity_id(state_packet))
 	print(encoder.get_spawn_entity_position(state_packet))
 
+#			uniform vec4 color_prim_0 : hint_color;
+#			uniform vec4 color_sec_0 : hint_color;
+#			uniform vec4 color_shadow_0 : hint_color;
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
