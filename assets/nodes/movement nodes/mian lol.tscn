@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/nodes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/nodes/Debug UI.tscn" type="PackedScene" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://assets/scripts/test_script_lol.gd" type="Script" id=5]
 [ext_resource path="res://assets/shaders/three_channel.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/shaders/gameboi.gdshader" type="Shader" id=7]
+[ext_resource path="res://assets/models/greek pillars yeah.glb" type="PackedScene" id=8]
+[ext_resource path="res://assets/models/gothic window thingy yeahhhh.glb" type="PackedScene" id=9]
 
 [sub_resource type="SpatialMaterial" id=4]
 albedo_color = Color( 1, 0, 0, 1 )
@@ -24,11 +26,20 @@ size = Vector2( 5, 5 )
 [sub_resource type="ShaderMaterial" id=5]
 resource_local_to_scene = true
 shader = ExtResource( 7 )
-shader_param/color_prim_0 = Color( 1, 0, 0, 1 )
-shader_param/color_sec_0 = Color( 1, 0.984314, 0, 1 )
-shader_param/color_shadow_0 = Color( 1, 0.654902, 0, 1 )
-shader_param/pixels = 90.0
-shader_param/color_steps = 3.0
+shader_param/color_prim_0 = Color( 1, 0.584314, 0, 1 )
+shader_param/color_sec_0 = Color( 0.14902, 0, 0.619608, 1 )
+shader_param/color_shadow_0 = Color( 0.243137, 1, 0, 1 )
+shader_param/pixels = 1080.0
+shader_param/color_steps = 4.0
+
+[sub_resource type="SpatialMaterial" id=6]
+albedo_color = Color( 0, 1, 0, 1 )
+
+[sub_resource type="SpatialMaterial" id=7]
+albedo_color = Color( 0, 0, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=8]
+albedo_color = Color( 1, 0, 0, 1 )
 
 [node name="mian lol" type="Spatial"]
 script = ExtResource( 5 )
@@ -843,3 +854,64 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.0388, -11.7393, -5.30698 )
 
 [node name="TextureRect" parent="." instance=ExtResource( 6 )]
 material = SubResource( 5 )
+
+[node name="gothic window thingy yeahhhh" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.7849, -10.3123, 40.4053 )
+
+[node name="gothic window thingy yeahhhh2" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.6625, -10.3123, 40.4053 )
+
+[node name="gothic window thingy yeahhhh4" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.4922, -10.3123, 40.4053 )
+
+[node name="gothic window thingy yeahhhh5" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.3698, -10.3123, 40.4053 )
+
+[node name="gothic window thingy yeahhhh3" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.7677, -6.21121, 40.4053 )
+
+[node name="gothic window thingy yeahhhh6" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.3796, -6.21121, 40.4053 )
+
+[node name="gothic window thingy yeahhhh7" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.6481, -6.21121, 40.4053 )
+
+[node name="gothic window thingy yeahhhh8" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.8031, -1.98702, 40.4053 )
+
+[node name="gothic window thingy yeahhhh9" parent="." instance=ExtResource( 9 )]
+transform = Transform( 0.774834, 0.632165, 0, -0.632165, 0.774834, 0, 0, 0, 1, 20.8031, -1.98702, 40.4053 )
+
+[node name="greek pillars yeah" parent="." instance=ExtResource( 8 )]
+transform = Transform( 0.916006, 0.401165, 0, -0.401165, 0.916006, 0, 0, 0, 1, -12.1314, -9.38946, 36.5759 )
+
+[node name="Pillar Final" parent="greek pillars yeah" index="0"]
+material/0 = SubResource( 6 )
+
+[node name="greek pillars yeah2" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1, -0.000750512, 0, 0.000657615, 0.876222, 0.481907, -0.000361677, -0.481907, 0.876223, -18.7256, -11.527, 28.1971 )
+
+[node name="Pillar Final" parent="greek pillars yeah2" index="0"]
+material/0 = SubResource( 7 )
+
+[node name="greek pillars yeah4" parent="." instance=ExtResource( 8 )]
+transform = Transform( 0.876877, -0.447273, 0.176163, 0.33041, 0.826954, 0.454946, -0.349164, -0.340726, 0.872921, -24.4194, -13.9376, 35.2143 )
+
+[node name="greek pillars yeah5" parent="." instance=ExtResource( 8 )]
+transform = Transform( 0.876877, -0.447273, 0.176163, 0.33041, 0.826954, 0.454946, -0.349164, -0.340726, 0.872921, -24.4194, -13.9376, 42.7251 )
+
+[node name="greek pillars yeah6" parent="." instance=ExtResource( 8 )]
+transform = Transform( 0.876877, -0.447273, 0.176163, 0.33041, 0.826954, 0.454946, -0.349164, -0.340726, 0.872921, -24.4194, -13.9376, 51.1165 )
+
+[node name="greek pillars yeah7" parent="." instance=ExtResource( 8 )]
+transform = Transform( 0.876877, -0.447273, 0.176163, 0.33041, 0.826954, 0.454946, -0.349164, -0.340726, 0.872921, -24.4194, -13.9376, 60.0337 )
+
+[node name="greek pillars yeah3" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1, -0.000750512, 0, 0.000536999, 0.71551, -0.698603, 0.00052431, 0.698602, 0.71551, 6.53038, -8.84853, 38.6581 )
+
+[node name="Pillar Final" parent="greek pillars yeah3" index="0"]
+material/0 = SubResource( 8 )
+
+[editable path="greek pillars yeah"]
+[editable path="greek pillars yeah2"]
+[editable path="greek pillars yeah3"]

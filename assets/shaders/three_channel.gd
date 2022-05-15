@@ -19,7 +19,7 @@ func _input(event):
 			material.set_shader_param("color_prim_0", col1)
 			material.set_shader_param("color_sec_0", col2)
 			material.set_shader_param("color_shadow_0", col3)
-			material.set_shader_param("pixels", int(randf()*256))#*0+1080))
+			material.set_shader_param("pixels", int(randf()*256+1080))#*0+1080))
 			material.set_shader_param("color_steps", int(randf()*10))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
