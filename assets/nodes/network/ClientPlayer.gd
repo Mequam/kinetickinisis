@@ -159,6 +159,13 @@ func spawn_entity(type_id : int,entity_id : int,pos : Vector3):
 			get_parent().add_child(entity)
 	print("setting entity id to " + str(entity_id))
 	entity.entity_id = entity_id
+	
+#if this flag is toggled when the client recives a node update from the server
+#it will save the state of that node WITHOUT updating the actual node inventory
+#when the flag is set to false again the state of the node inventory will be synced
+#with the state the server sends us
+var do_node_sync : bool = false
+var sync_arr = [] #array containing data that we will sync
 
 func overload_physics_process(delta):
 	if set_error_delta:
@@ -176,67 +183,118 @@ func overload_physics_process(delta):
 			var pack_type : int = netUtils.get_packet_type(packet)
 			match pack_type:
 				netUtils.PacketType.ENTITY_UPDATE:
-					print("recived entity update!")
 					#tell all of our net entities there is an update
 					get_tree().call_group("NetworkEntity","update_entity_position_state",
 						netUtils.get_entity_state_id(packet),
 						netUtils.get_entity_state_position(packet),
 						netUtils.get_entity_state_velocity(packet)
 						)
+				
 				netUtils.PacketType.SPAWN_ENTITY:
 					print("[client.gd] recived entity id " + str(netUtils.get_spawn_entity_id(packet)))
 					spawn_entity(netUtils.get_spawn_entity_type(packet),
 								netUtils.get_spawn_entity_id(packet),
 								netUtils.get_spawn_entity_position(packet))
+				
 				netUtils.PacketType.STATE_POSITION:
 					state_dict["position"] = netUtils.get_packet_POSITION_STATE_position(packet)
+				
 				netUtils.PacketType.STATE_START:
 					if not appending_state:
 						empty_state_dict()
 					state_dict["time"] = netUtils.get_state_time_start_or_end(packet)
 					appending_state = true
+				
 				netUtils.PacketType.STATE_END:
 					if appending_state:
 						pop_circular_buffer()
 					appending_state = false
+				
 				netUtils.PacketType.STATE_NODE:
 					state_dict["node_states"].append(netUtils.get_node_state_dict(packet))
+				
+				netUtils.PacketType.SUPER_STATE_NODE_DELIMITER:
+					var server_will : bool = netUtils.get_super_node_delimiter(packet)
+					if not server_will and do_node_sync:
+						#sync the stored nodes while purging any nodes 
+						#that the server did NOT tell us we had
+						print("SUPER SYNCING NODE STATE")
+						super_sync_node_state(sync_arr)
+					do_node_sync = server_will
+				
 				netUtils.PacketType.SUPER_STATE_NODE:
 					
-					#TODO: clean this :)
-					
-					var movement_node_id : int = netUtils.get_super_state_node_id(packet)
-					var equip_state  = node_inventory_state(movement_node_id)
-					
+					#the type of node the server wants to indicate
+					var movement_node_id : int = netUtils.get_super_state_node_id(packet)	
 					#true indicates we go into active inventory
 					#false is inactive
 					var node_destination = netUtils.get_super_state_equiped(packet)
-					
-					if equip_state is Node: #its in the inventory, equip it
-						if node_destination:
-							.move_node_into_movements(equip_state)
-							get_node(movement_node_manager_node).move_child(equip_state,netUtils.get_super_state_idx(packet))
-						#else:
-							#if we need to move the node into inactive and it is ALREADy incactive we do nothing in this case
-					elif equip_state >= 0: #it is active
-						if node_destination: #we want it active at a specific spot
-							.move_node_into_movements_at(
-								get_node(movement_node_manager_node).get_child(equip_state),
-								netUtils.get_super_state_idx(packet)
-								)
-						else: #we want it in the inventory
-							.move_node_into_inventory(
-								get_node(movement_node_manager_node).get_child(equip_state)
-								)
-					else: #the node is non existent
-						#a new node instance to add to the child
-						var to_add : Node = MovementNodeUtils.get_movment_node_instance(movement_node_id)
-						if node_destination: #we are active
-							.move_node_into_movements_at(to_add,netUtils.get_super_state_idx(packet))
-						else: #we are inactive
-							.move_node_into_inventory(to_add)
-							
+					#the idx of the node
+					var node_idx : int = netUtils.get_super_state_idx(packet)
+					#we are not COMPLETELY syncing nodes, just updating
+					if not do_node_sync:
+						sync_node_state(movement_node_id,
+										node_destination,
+										node_idx)
+					else: #we are exactly syncing
+						print("APPENDING SYNC ARR DATA")
+						print("recived node id " + str(movement_node_id))
+						print("recived destination " + str(node_destination))
+						print("recived idx " + str(node_idx))
+						sync_arr.append([movement_node_id,node_destination,node_idx])
 	return data
+
+#returns true if the given node id is inside of the sync
+func node_in_sync(node_id : int,sync_arr):
+	for val in sync_arr:
+		if val[0] == node_id:
+			return [true,val]
+	return [false]
+
+#syncs the node state AND removes any nodes not mentioned in the state
+#basically a more restrictive form of sync_node_state
+func super_sync_node_state(sync_arr):
+	for node in get_movement_nodes():
+		print("in inventory " + str(node.get_movement_id()))
+		var node_inventory_state = node_in_sync(node.get_movement_id(),sync_arr)
+		if node_inventory_state[0]:
+			print("syncing inventory state")
+			sync_node_state(node_inventory_state[1][0],
+							node_inventory_state[1][1],
+							node_inventory_state[1][2])
+		else:
+			print("PURGIN NODE *^*")
+			purge_node_id(node.get_movement_id())
+
+#ensures that a node is in the inventory or active at the given idx
+func sync_node_state(movement_node_id : int,node_destination : bool,idx : int):
+	#TODO: this code could do with some good cleaning
+	
+	var equip_state  = node_inventory_state(movement_node_id)
+	if equip_state is Node: #its in the inventory, equip it
+		if node_destination:
+			.move_node_into_movements(equip_state)
+			get_node(movement_node_manager_node).move_child(equip_state,idx)
+		#else:
+			#if we need to move the node into inactive and it is ALREADy incactive we do nothing in this case
+	elif equip_state >= 0: #it is active
+		if node_destination: #we want it active at a specific spot
+			.move_node_into_movements_at(
+				get_node(movement_node_manager_node).get_child(equip_state),
+				idx
+				)
+		else: #we want it in the inventory
+			.move_node_into_inventory(
+				get_node(movement_node_manager_node).get_child(equip_state)
+				)
+	else: #the node is non existent
+		#a new node instance to add to the child
+		var to_add : Node = MovementNodeUtils.get_movment_node_instance(movement_node_id)
+		if node_destination: #we are active
+			.move_node_into_movements_at(to_add,idx)
+		else: #we are inactive
+			.move_node_into_inventory(to_add)
+
 func _ready():
 	for node in get_node(movement_node_manager_node).get_children():
 		print(node.get_display_name() + " " + str(node.get_movement_id()))

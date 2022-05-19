@@ -85,6 +85,10 @@ func overload_ready()->void:
 		print(node.get_display_name() + " " + str(node.get_movement_id()))
 	.overload_ready()
 
+func send_super_state_packets():
+	for p in _get_node_super_state_packets():
+		peer.put_packet(p)
+
 #generates the state of this client to send to the player
 #TODO: generic state stuffz with nodes is not accounted for
 func _get_state_packets():
@@ -112,8 +116,41 @@ func _send_state():
 		for state in _get_state_packets():
 			peer.put_packet(state)
 #sends the node inventory state to the player
-func _send_node_inventory():
-	pass
+#we already send updates when inventory is updated,
+#this funciton sends ALL the data over
+#re-syncing the inventory
+#it should only be called when an error is detected for bandwidth sake
+func _get_node_super_state_packets():
+	
+	var to_send = []
+	
+	#we send 3 start packets over for redundancy
+	for i in range(0,3):
+		to_send.append(netUtils.gen_super_node_state_start(true))
+	
+	#the movement node data
+	var mv_nodes = get_movement_nodes()
+	for i in range(0,len(mv_nodes)):
+		to_send.append(netUtils.gen_super_state_node(
+													mv_nodes[i].get_movement_id(),
+													true,
+													i
+													)
+												)
+	#inventory node data
+	for node in get_inventory_nodes():
+		to_send.append(netUtils.gen_super_state_node(
+													node.get_movement_id(),
+													false,
+													-1
+													)
+												)
+	#we send 3 end packets for redundecny
+	for i in range(0,3):
+		to_send.append(netUtils.gen_super_node_state_start(false))
+	
+	return to_send
+	
 #WE DO NOT do UI
 func display_circleUI(arg):
 	pass
@@ -163,3 +200,11 @@ func overload_physics_process(delta):
 						)
 				
 	.overload_physics_process(delta)
+
+
+
+
+func _input(event):
+	if event is InputEventKey:
+		if event.scancode == KEY_L and event.pressed:
+			send_super_state_packets()

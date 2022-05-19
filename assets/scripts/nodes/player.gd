@@ -13,6 +13,26 @@ export(int) var collision_window : int = int(1e+6/15)
 
 func get_entity_type()->int:
 	return NetworkUtils.EntityType.PLAYER
+
+func purge_node_from_movements(node)->void:
+	node.queue_free()
+func purge_node_from_inventory(idx : int)->void:
+	movement_inventory.remove(idx)
+
+#purges any node anywhere with the given id
+#returns true if the node was succesfully deleted
+func purge_node_id(id : int)->bool:
+	for node in get_movement_nodes():
+		if node.get_movement_id() == id:
+			purge_node_from_movements(node)
+			return true
+	for i in range(0,len(movement_inventory)):
+		if movement_inventory[i].get_movment_id() == id:
+			purge_node_from_inventory(i)
+			return true
+	return false
+
+
 #posotive integers indicate the node is equiped at a given 
 #index
 #A node reference indicates its in the inventory

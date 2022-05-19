@@ -66,13 +66,14 @@ func gen_client_equip_node(node_id : int)->PoolByteArray:
 #designed for use on the server
 func get_client_node_id(pack : PoolByteArray):
 	return pack[1]
+
 #takes the node_id of the node type, weather the not the node is equiped 
 func gen_super_state_node(node_id : int, node_equiped : bool,idx : int)->PoolByteArray:
 	var ret_val : PoolByteArray
 	ret_val.append(PacketType.SUPER_STATE_NODE) #we are telling you about a node
 	ret_val.append(node_id) #this is the node
-	ret_val.append_array(encode_bool(node_equiped)) #is it equipd or not?
-	ret_val.append_array(encode_int_64(idx))
+	ret_val.append_array(encode_bool(node_equiped)) #is it equipd or not? in other words "in movement nodes?"
+	ret_val.append_array(encode_int_64(idx)) #the child idx that the node is equiped at
 	return ret_val
 func get_super_state_node_id(pack : PoolByteArray)->int:
 	return pack[1]
@@ -88,6 +89,10 @@ func gen_super_node_state_start(start : bool)->PoolByteArray:
 	ret_val.append(PacketType.SUPER_STATE_NODE_DELIMITER)
 	ret_val.append_array(encode_bool(start))
 	return ret_val
+
+func get_super_node_delimiter(pack : PoolByteArray)->bool:
+	return decode_bool(pack.subarray(1,-1))
+
 func gen_time_sync()->PoolByteArray:
 	var ret_val : PoolByteArray
 	ret_val.append(PacketType.TIME_SYNC)
