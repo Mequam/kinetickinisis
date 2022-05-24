@@ -141,6 +141,9 @@ func move_node_into_movements(node):
 		)
 #ask for a dequip
 func move_node_into_inventory(node):
+	print()
+	print("CALLING OVERLOADED MOVE INTO INVENTORY FUNCTION")
+	print()
 	udp.put_packet(
 		netUtils.gen_client_dequip_node(
 			node.get_movement_id()
@@ -221,6 +224,7 @@ func overload_physics_process(delta):
 						print("SUPER SYNCING NODE STATE")
 						super_sync_node_state(sync_arr)
 					do_node_sync = server_will
+					print("node sync " + str(do_node_sync))
 				
 				netUtils.PacketType.SUPER_STATE_NODE:
 					
@@ -231,8 +235,10 @@ func overload_physics_process(delta):
 					var node_destination = netUtils.get_super_state_equiped(packet)
 					#the idx of the node
 					var node_idx : int = netUtils.get_super_state_idx(packet)
+					
 					#we are not COMPLETELY syncing nodes, just updating
 					if not do_node_sync:
+						print("normal state update")
 						sync_node_state(movement_node_id,
 										node_destination,
 										node_idx)
@@ -250,50 +256,74 @@ func node_in_sync(node_id : int,sync_arr):
 		if val[0] == node_id:
 			return [true,val]
 	return [false]
-
+	
+#updates a nodes position based on the sync array and its current status
+func update_node_to_sync_array(node,sync_arr):
+	var node_inventory_state = node_in_sync(node.get_movement_id(),sync_arr)
+	if node_inventory_state[0]:
+		sync_node_state(node_inventory_state[1][0],
+							node_inventory_state[1][1],
+							node_inventory_state[1][2])
+	else:
+		purge_node_id(node.get_movement_id())
 #syncs the node state AND removes any nodes not mentioned in the state
 #basically a more restrictive form of sync_node_state
 func super_sync_node_state(sync_arr):
+	print()
+	print("DISPLAY SYNC ARR")
+	for i in sync_arr:
+		print(i)
+	print("END DISPLAY")
+	print()
+	
 	for node in get_movement_nodes():
-		print("in inventory " + str(node.get_movement_id()))
-		var node_inventory_state = node_in_sync(node.get_movement_id(),sync_arr)
-		if node_inventory_state[0]:
-			print("syncing inventory state")
-			sync_node_state(node_inventory_state[1][0],
-							node_inventory_state[1][1],
-							node_inventory_state[1][2])
-		else:
-			print("PURGIN NODE *^*")
-			purge_node_id(node.get_movement_id())
+		update_node_to_sync_array(node,sync_arr)
+
+	for node in movement_inventory:
+		update_node_to_sync_array(node,sync_arr)
+			
+	print()
+
+#moves the node into active inventory at the given index
+func move_node_into_movements_at(node : Node, idx : int)->void:
+	.move_node_into_movements(node)
+	get_node(movement_node_manager_node).move_child(node,idx)
 
 #ensures that a node is in the inventory or active at the given idx
 func sync_node_state(movement_node_id : int,node_destination : bool,idx : int):
 	#TODO: this code could do with some good cleaning
-	
+	print("\nentering sync_node_state \n\n---\n")
 	var equip_state  = node_inventory_state(movement_node_id)
 	if equip_state is Node: #its in the inventory, equip it
+		print("the node is in the inventory")
 		if node_destination:
-			.move_node_into_movements(equip_state)
+			move_node_into_movements(equip_state)
 			get_node(movement_node_manager_node).move_child(equip_state,idx)
 		#else:
 			#if we need to move the node into inactive and it is ALREADy incactive we do nothing in this case
 	elif equip_state >= 0: #it is active
+		print("node is active")
 		if node_destination: #we want it active at a specific spot
-			.move_node_into_movements_at(
+			print("we want it in the movements")
+			move_node_into_movements_at(
 				get_node(movement_node_manager_node).get_child(equip_state),
 				idx
 				)
 		else: #we want it in the inventory
+			print("we want it in the inventory")
 			.move_node_into_inventory(
 				get_node(movement_node_manager_node).get_child(equip_state)
 				)
 	else: #the node is non existent
+		print("node does not exist")
 		#a new node instance to add to the child
 		var to_add : Node = MovementNodeUtils.get_movment_node_instance(movement_node_id)
 		if node_destination: #we are active
-			.move_node_into_movements_at(to_add,idx)
+			move_node_into_movements_at(to_add,idx)
 		else: #we are inactive
 			.move_node_into_inventory(to_add)
+	print("end sync state")
+	print()
 
 func _ready():
 	for node in get_node(movement_node_manager_node).get_children():

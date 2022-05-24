@@ -176,9 +176,9 @@ func overload_physics_process(delta):
 				#this is the connection delta not the time delta between games
 				time_delta = abs(netUtils.get_time_sync(packet) - con_time)
 			elif pk_type == netUtils.PacketType.CLIENT_DEQUIP_NODE or pk_type == netUtils.PacketType.CLIENT_EQUIP_NODE:
-				
-				print("updating equiped node status with node id " + str(netUtils.get_client_node_id(packet)))
-				print("movement nodes")
+				print()
+				print("CLIENT requests that we move a node!")
+				print()
 				for node in get_movement_nodes():
 					print("\t"+ node.get_display_name())
 				print("inventory nodes")
@@ -207,4 +207,6 @@ func overload_physics_process(delta):
 func _input(event):
 	if event is InputEventKey:
 		if event.scancode == KEY_L and event.pressed:
+			#move gravity flip into inventory for testing
+			.move_node_into_inventory(get_node(movement_node_manager_node).get_child(2))
 			send_super_state_packets()

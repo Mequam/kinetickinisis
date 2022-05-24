@@ -130,14 +130,19 @@ func move_node_into_movements_at(node : Node, idx : int)->void:
 	get_node(movement_node_manager_node).move_child(node,idx)
 #moves a node into the active inventory
 func move_node_into_movements(node : Node)->void:
-	if node.get_parent():
+	print()
+	print("moving into movements!")
+	print("moving " + node.get_display_name() + " into inventory")
+	if node.get_parent() and node.get_parent() != get_node(movement_node_manager_node):
 		node.get_parent().remove_child(node)
 #		node.set_process(true)
 #		node.set_process_input(true)
 	if node in movement_inventory:
 		movement_inventory.erase(node)
-	get_node(movement_node_manager_node).add_child(node)
-	pass
+		
+	if node.get_parent() != get_node(movement_node_manager_node):
+		get_node(movement_node_manager_node).add_child(node)
+	print()
 #moves the node into inactive inventory
 func move_node_into_inventory(node : Node):
 	if node.get_parent():
