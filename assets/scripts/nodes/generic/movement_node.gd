@@ -122,6 +122,8 @@ func subscribe_to_inputs()->void:
 	pass
 
 func generate_movment_id()->int:
+	print("generating id for")
+	print(get_script().get_path())
 	var movUtils = MovementNodeUtils.new()
 	return movUtils.get_movement_node_paths().find(get_script().get_path())
 # Called when the node enters the scene tree for the first time.

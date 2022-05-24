@@ -121,7 +121,7 @@ func _send_state():
 #re-syncing the inventory
 #it should only be called when an error is detected for bandwidth sake
 func _get_node_super_state_packets():
-	
+	print("---------------------")
 	var to_send = []
 	
 	#we send 3 start packets over for redundancy
@@ -131,6 +131,8 @@ func _get_node_super_state_packets():
 	#the movement node data
 	var mv_nodes = get_movement_nodes()
 	for i in range(0,len(mv_nodes)):
+		print(mv_nodes[i].get_display_name())
+		print("movement node id : " + str(mv_nodes[i].get_movement_id()))
 		to_send.append(netUtils.gen_super_state_node(
 													mv_nodes[i].get_movement_id(),
 													true,
@@ -139,6 +141,8 @@ func _get_node_super_state_packets():
 												)
 	#inventory node data
 	for node in get_inventory_nodes():
+		print(node.get_display_name())
+		print("inventory node id : " + str(node.get_movement_id()))
 		to_send.append(netUtils.gen_super_state_node(
 													node.get_movement_id(),
 													false,
@@ -149,6 +153,8 @@ func _get_node_super_state_packets():
 	for i in range(0,3):
 		to_send.append(netUtils.gen_super_node_state_start(false))
 	
+	
+	print("-----------------------")
 	return to_send
 	
 #WE DO NOT do UI
@@ -208,5 +214,5 @@ func _input(event):
 	if event is InputEventKey:
 		if event.scancode == KEY_L and event.pressed:
 			#move gravity flip into inventory for testing
-			.move_node_into_inventory(get_node(movement_node_manager_node).get_child(2))
+			.move_node_into_inventory(get_node(movement_node_manager_node).get_child(1))
 			send_super_state_packets()

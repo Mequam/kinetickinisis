@@ -289,7 +289,7 @@ func sync_node_state(movement_node_id : int,node_destination : bool,idx : int):
 	if equip_state is Node: #its in the inventory, equip it
 		print("the node is in the inventory")
 		if node_destination:
-			move_node_into_movements(equip_state)
+			.move_node_into_movements(equip_state)
 			get_node(movement_node_manager_node).move_child(equip_state,idx)
 		#else:
 			#if we need to move the node into inactive and it is ALREADy incactive we do nothing in this case
@@ -320,6 +320,7 @@ func sync_node_state(movement_node_id : int,node_destination : bool,idx : int):
 func _ready():
 	for node in get_node(movement_node_manager_node).get_children():
 		print(node.get_display_name() + " " + str(node.get_movement_id()))
+	.move_node_into_inventory(get_movement_node(0))
 #test function for a checkpoint
 #this will be multithreaded in the future
 func sync_state(state_dict):

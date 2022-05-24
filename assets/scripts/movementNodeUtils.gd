@@ -26,6 +26,8 @@ static func get_movement_node_paths(ret_val = [],path : String = "res://assets/s
 		else:
 			ret_val.append(path + mov_node_path)
 		mov_node_path = dir.get_next()
+	print("movement node paths")
+	print(ret_val)
 	return ret_val
 static func get_movment_node_instance(id : int):
 	var ret_val = load(get_movement_node_paths()[id]).new()
