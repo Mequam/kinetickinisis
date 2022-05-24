@@ -254,35 +254,27 @@ func overload_physics_process(delta):
 func node_in_sync(node_id : int,sync_arr):
 	for val in sync_arr:
 		if val[0] == node_id:
-			return [true,val]
-	return [false]
+			return true
+	return false
 	
 #updates a nodes position based on the sync array and its current status
-func update_node_to_sync_array(node,sync_arr):
+func purge_bad_node(node,sync_arr):
 	var node_inventory_state = node_in_sync(node.get_movement_id(),sync_arr)
-	if node_inventory_state[0]:
-		sync_node_state(node_inventory_state[1][0],
-							node_inventory_state[1][1],
-							node_inventory_state[1][2])
-	else:
+	if not node_inventory_state:
 		purge_node_id(node.get_movement_id())
 #syncs the node state AND removes any nodes not mentioned in the state
 #basically a more restrictive form of sync_node_state
 func super_sync_node_state(sync_arr):
-	print()
-	print("DISPLAY SYNC ARR")
-	for i in sync_arr:
-		print(i)
-	print("END DISPLAY")
-	print()
-	
+	#delete all nodes that we do not have
 	for node in get_movement_nodes():
-		update_node_to_sync_array(node,sync_arr)
-
+		purge_bad_node(node,sync_arr)
 	for node in movement_inventory:
-		update_node_to_sync_array(node,sync_arr)
-			
-	print()
+		purge_bad_node(node,sync_arr)
+	
+	for entry in sync_arr:
+		sync_node_state(entry[0],
+			entry[1],
+			entry[2])
 
 #moves the node into active inventory at the given index
 func move_node_into_movements_at(node : Node, idx : int)->void:
